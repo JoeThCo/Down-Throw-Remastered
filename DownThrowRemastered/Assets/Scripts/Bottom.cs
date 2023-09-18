@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BottomEdge : MonoBehaviour
+public class Bottom : MonoBehaviour
 {
     public delegate void BottomEdgeCollision();
     public static event BottomEdgeCollision bottomEdgeCollision;

@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         playerShootBall += OnShootBall;
-        BottomEdge.bottomEdgeCollision += OnBottemEdgeCollision;
+        Bottom.bottomEdgeCollision += OnBottemEdgeCollision;
     }
 
     private void OnBottemEdgeCollision()

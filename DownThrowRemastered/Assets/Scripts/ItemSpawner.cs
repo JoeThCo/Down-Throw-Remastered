@@ -40,4 +40,16 @@ public static class ItemSpawner
 
         return go;
     }
+
+    public static GameObject SpawnGame(string name, Vector3 position, Transform parent)
+    {
+        GameObject go = null;
+        GameObject prefab = GetGameObjectPrefab(name);
+        if (prefab)
+        {
+            go = Object.Instantiate(prefab, position, Quaternion.identity, parent);
+        }
+
+        return go;
+    }
 }

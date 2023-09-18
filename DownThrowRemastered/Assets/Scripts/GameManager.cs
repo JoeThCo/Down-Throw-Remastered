@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] PegBoard pegSpawner;
+
     private void Start()
     {
         ItemSpawner.Load();
+        pegSpawner.SpawnBoard();
     }
 }
