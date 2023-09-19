@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class AimController : MonoBehaviour
 {
-    [SerializeField] bool canShoot = true;
-    [Space(10)]
     [SerializeField] float throwPower = 5f;
     [SerializeField] Transform firePoint;
 
-    public delegate void PlayerShootBall();
+    [HideInInspector] public bool canShoot = true;
 
+    public delegate void PlayerShootBall();
     public static event PlayerShootBall playerShootBall;
 
     private void Start()

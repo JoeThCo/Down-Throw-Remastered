@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class Aim : MonoBehaviour
 {
-    [SerializeField] Transform fixedPoint;
-    [Space(10)]
-    [SerializeField] [Range(1, 5)] float aimSensitivty;
+    [SerializeField] [Range(5, 10)] float aimSensitivty;
     [SerializeField] float rotationLimit = 75f;
 
     private Camera cam;

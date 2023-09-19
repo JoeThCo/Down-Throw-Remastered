@@ -32,6 +32,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8824579671885292175, guid: ee0a9470fae31a54dadff74f167fd37a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 8824579671885292175, guid: ee0a9470fae31a54dadff74f167fd37a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 8824579671885292175, guid: ee0a9470fae31a54dadff74f167fd37a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 8824579671885292175, guid: ee0a9470fae31a54dadff74f167fd37a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -73,3 +85,37 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee0a9470fae31a54dadff74f167fd37a, type: 3}
+--- !u!1 &810429707364362669 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8824579671885292172, guid: ee0a9470fae31a54dadff74f167fd37a, type: 3}
+  m_PrefabInstance: {fileID: 8162789660263402273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &7835933463154093549
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810429707364362669}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.75
+--- !u!114 &8851900202752354582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810429707364362669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ddce5ed732809d4e8724c97a5c38a58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pegDestroyTime: 1.5
