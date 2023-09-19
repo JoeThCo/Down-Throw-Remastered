@@ -11,11 +11,37 @@ public class Peg : MonoBehaviour
     bool hasBallTriggered = false;
     bool hasDeathCalled = false;
 
+    delegate void PegHit();
+    event PegHit onPegHit;
+
+    delegate void PegDeath();
+    event PegDeath onPegDeath;
+
+    private void Awake()
+    {
+        onPegHit += Peg_OnPegHit;
+        onPegDeath += Peg_onPegDeath;
+    }
+
+    private void Peg_OnPegHit()
+    {
+        hasBallCollided = true;
+    }
+
+    private void Peg_onPegDeath()
+    {
+        if (hasDeathCalled) return;
+        hasDeathCalled = true;
+
+        Destroy(gameObject);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (isBall(collision.gameObject))
         {
-            hasBallCollided = true;
+            onPegHit?.Invoke();
+            EventManager.Invoke(CustomEvent.PegHit);
         }
     }
 
@@ -37,7 +63,7 @@ public class Peg : MonoBehaviour
             }
             else
             {
-                OnPegDeath();
+                onPegDeath?.Invoke();
             }
         }
     }
@@ -48,7 +74,8 @@ public class Peg : MonoBehaviour
         {
             if (isBall(collision.gameObject) && hasBallTriggeredAndCollided())
             {
-                OnPegDeath();
+                EventManager.Invoke(CustomEvent.PegDestroy);
+                onPegDeath?.Invoke();
             }
             else
             {
@@ -71,13 +98,5 @@ public class Peg : MonoBehaviour
     bool isBall(GameObject obj)
     {
         return obj.CompareTag("Ball");
-    }
-
-    void OnPegDeath()
-    {
-        if (hasDeathCalled) return;
-        hasDeathCalled = true;
-
-        Destroy(gameObject);
     }
 }

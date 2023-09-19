@@ -9,18 +9,20 @@ public class AimController : MonoBehaviour
 
     [HideInInspector] public bool canShoot = true;
 
-    public delegate void PlayerShootBall();
-    public static event PlayerShootBall playerShootBall;
-
     private void Start()
     {
-        playerShootBall += OnShootBall;
-        Bottom.bottomEdgeCollision += OnBottemEdgeCollision;
+        EventManager.OnPlayerShoot += EventManager_onPlayerShoot;
+        EventManager.OnBallBottoms += EventManager_OnBallBottoms;
     }
 
-    private void OnBottemEdgeCollision()
+    private void EventManager_OnBallBottoms()
     {
         canShoot = true;
+    }
+
+    private void EventManager_onPlayerShoot()
+    {
+        OnShootBall();
     }
 
     private void OnShootBall()
@@ -35,7 +37,7 @@ public class AimController : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0) && canShoot)
         {
-            playerShootBall.Invoke();
+            EventManager.Invoke(CustomEvent.PlayerShoot);
         }
     }
 }

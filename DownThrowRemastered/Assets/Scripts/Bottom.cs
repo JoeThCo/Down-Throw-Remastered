@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class Bottom : MonoBehaviour
 {
-    public delegate void BottomEdgeCollision();
-    public static event BottomEdgeCollision bottomEdgeCollision;
-
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Ball"))
         {
-            bottomEdgeCollision.Invoke();
+            EventManager.Invoke(CustomEvent.BallBottoms);
             Destroy(collision.gameObject);
         }
     }
