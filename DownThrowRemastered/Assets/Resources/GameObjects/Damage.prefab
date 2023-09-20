@@ -67,6 +67,14 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.8490566
       objectReference: {fileID: 0}
+    - target: {fileID: 6153367508204415148, guid: 5c5f3c32b139c124a9280be759d1cc79, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8522982697874991221, guid: 5c5f3c32b139c124a9280be759d1cc79, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c5f3c32b139c124a9280be759d1cc79, type: 3}
 --- !u!1 &8036056385458713259 stripped
@@ -84,5 +92,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51c67fd1931c1f4489fca596148990cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageText: {fileID: 8504707630755628062}
+--- !u!114 &8504707630755628062 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1350021836122398488, guid: 5c5f3c32b139c124a9280be759d1cc79, type: 3}
+  m_PrefabInstance: {fileID: 7258385547014888198}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
