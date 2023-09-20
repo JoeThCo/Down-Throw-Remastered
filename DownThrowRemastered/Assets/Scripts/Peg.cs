@@ -4,34 +4,42 @@ using UnityEngine;
 
 public class Peg : MonoBehaviour
 {
-    [SerializeField] float pegDestroyTime = 1.5f;
+    public const float DESTROY_TIME = 1.5f;
     float currentDestroyTime = 0;
 
     bool hasBallCollided = false;
     bool hasBallTriggered = false;
     bool hasDeathCalled = false;
 
-    delegate void PegHit();
+    delegate void PegHit(Ball ball);
     event PegHit onPegHit;
 
     delegate void PegDeath();
     event PegDeath onPegDeath;
 
-    private void Awake()
+    public virtual void Awake()
     {
         onPegHit += Peg_OnPegHit;
         onPegDeath += Peg_onPegDeath;
     }
 
-    private void Peg_OnPegHit()
+    public virtual void OnPegHit(Ball ball) { }
+
+    void Peg_OnPegHit(Ball ball)
     {
         hasBallCollided = true;
+
+        OnPegHit(ball);
     }
 
-    private void Peg_onPegDeath()
+    public virtual void OnPegDeath() { }
+
+    void Peg_onPegDeath()
     {
         if (hasDeathCalled) return;
         hasDeathCalled = true;
+
+        OnPegDeath();
 
         Destroy(gameObject);
     }
@@ -40,7 +48,9 @@ public class Peg : MonoBehaviour
     {
         if (isBall(collision.gameObject))
         {
-            onPegHit?.Invoke();
+            Ball ball = collision.gameObject.GetComponent<Ball>();
+
+            onPegHit?.Invoke(ball);
             EventManager.Invoke(CustomEvent.PegHit);
         }
     }
@@ -57,7 +67,7 @@ public class Peg : MonoBehaviour
     {
         if (isBall(collision.gameObject))
         {
-            if (currentDestroyTime < pegDestroyTime)
+            if (currentDestroyTime < DESTROY_TIME)
             {
                 currentDestroyTime += Time.deltaTime;
             }
@@ -70,17 +80,14 @@ public class Peg : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (isBall(collision.gameObject))
+        if (isBall(collision.gameObject) && hasBallTriggeredAndCollided())
         {
-            if (isBall(collision.gameObject) && hasBallTriggeredAndCollided())
-            {
-                EventManager.Invoke(CustomEvent.PegDestroy);
-                onPegDeath?.Invoke();
-            }
-            else
-            {
-                ResetBools();
-            }
+            EventManager.Invoke(CustomEvent.PegDestroy);
+            onPegDeath?.Invoke();
+        }
+        else
+        {
+            ResetBools();
         }
     }
 

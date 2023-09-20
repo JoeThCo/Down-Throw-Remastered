@@ -26,7 +26,15 @@ public class PegBoard : MonoBehaviour
                 float currentY = (y * scale);
 
                 Vector3 current = (topRight.position - new Vector3(currentX, currentY) + Vector3.right * scale * .5f);
-                ItemSpawner.SpawnGame("Peg", current, pegParent);
+
+                if (Random.value < .25f)
+                {
+                    ItemSpawner.SpawnGame("Damage", current, pegParent);
+                }
+                else 
+                {
+                    ItemSpawner.SpawnGame("Neutral", current, pegParent);
+                }
             }
         }
     }

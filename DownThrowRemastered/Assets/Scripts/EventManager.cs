@@ -13,7 +13,7 @@ public class EventManager : MonoBehaviour
     public delegate void PlayerShoot();
     public static event PlayerShoot OnPlayerShoot;
 
-    public delegate void BallBottoms();
+    public delegate void BallBottoms(Ball ball);
     public static event BallBottoms OnBallBottoms;
 
     public delegate void MonsterDamage();
@@ -22,9 +22,8 @@ public class EventManager : MonoBehaviour
     public delegate void MonsterDeath();
     public static event MonsterDeath OnMonsterDeath;
 
-    public static void Invoke(CustomEvent customEvent)
+    public static void Invoke(CustomEvent customEvent, Ball ball = null)
     {
-        //Debug.Log(customEvent.ToString() + " called!");
         switch (customEvent)
         {
             case CustomEvent.PegHit:
@@ -48,7 +47,7 @@ public class EventManager : MonoBehaviour
                 break;
 
             case CustomEvent.BallBottoms:
-                OnBallBottoms?.Invoke();
+                OnBallBottoms?.Invoke(ball);
                 break;
 
             default:

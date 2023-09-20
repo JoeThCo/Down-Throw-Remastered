@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int damage;
 
-    // Update is called once per frame
-    void Update()
+    public void ChangeDamage(int change) 
     {
-        
+        damage += change;
     }
 }

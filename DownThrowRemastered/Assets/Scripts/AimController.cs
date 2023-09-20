@@ -15,7 +15,7 @@ public class AimController : MonoBehaviour
         EventManager.OnBallBottoms += EventManager_OnBallBottoms;
     }
 
-    private void EventManager_OnBallBottoms()
+    private void EventManager_OnBallBottoms(Ball ball)
     {
         canShoot = true;
     }
