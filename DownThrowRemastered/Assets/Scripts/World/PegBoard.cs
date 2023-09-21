@@ -10,11 +10,34 @@ public class PegBoard : MonoBehaviour
     [SerializeField] Transform pegParent;
     [SerializeField] float scale = .75f;
 
-    public void SpawnBoard()
+    private void Awake()
+    {
+        EventManager.OnNewMonster += EventManager_OnNewMonster;
+    }
+
+    private void EventManager_OnNewMonster(Monster monster)
+    {
+        NewBoard();
+    }
+
+    public void NewBoard()
+    {
+        DeletePegs();
+        SpawnPegBoard();
+    }
+
+    void DeletePegs()
+    {
+        foreach (Transform t in pegParent)
+        {
+            Destroy(t.gameObject);
+        }
+    }
+
+    void SpawnPegBoard()
     {
         int rowCount = (int)(Mathf.Abs(topRight.position.x - botLeft.position.x) / scale);
         int colCount = (int)(Mathf.Abs(topRight.position.y - botLeft.position.y) / scale);
-        Debug.Log(rowCount + "," + colCount);
 
         for (int y = 0; y <= colCount; y++)
         {
@@ -31,7 +54,7 @@ public class PegBoard : MonoBehaviour
                 {
                     ItemSpawner.SpawnGame("Damage", current, pegParent);
                 }
-                else 
+                else
                 {
                     ItemSpawner.SpawnGame("Neutral", current, pegParent);
                 }

@@ -562,7 +562,7 @@ GameObject:
   - component: {fileID: 326838118}
   - component: {fileID: 326838119}
   m_Layer: 0
-  m_Name: Arena
+  m_Name: Peg Board
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

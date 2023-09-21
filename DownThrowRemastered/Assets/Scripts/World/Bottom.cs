@@ -12,7 +12,6 @@ public class Bottom : MonoBehaviour
     private void EventManager_OnBallBottoms(Ball ball)
     {
         if (ball == null) return;
-        Debug.Log("Damage: " + ball.damage);
         EventManager.Invoke(CustomEvent.MonsterDamage, ball);
     }
 

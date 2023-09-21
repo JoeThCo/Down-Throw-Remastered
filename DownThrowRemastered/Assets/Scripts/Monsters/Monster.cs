@@ -26,7 +26,6 @@ public class Monster : Being
     public override void OnDeath()
     {
         base.OnDeath();
-        Debug.Log(GetDebugString() + " is Dead!");
         EventManager.Invoke(CustomEvent.MonsterDead, this);
     }
 }

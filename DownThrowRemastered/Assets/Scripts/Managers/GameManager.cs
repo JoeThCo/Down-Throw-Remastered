@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
         Load();
         Init();
 
-        pegSpawner.SpawnBoard();
+        pegSpawner.NewBoard();
 
         EventManager.OnAreaClear += EventManager_OnAreaClear;
         EventManager.OnYouWin += EventManager_OnYouWin;
