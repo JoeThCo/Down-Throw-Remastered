@@ -8,6 +8,8 @@ public class Being
     protected string beingName;
     [SerializeField] protected int health;
 
+    public int GetHealth() { return health; }
+
     public Being()
     {
         health = 1;

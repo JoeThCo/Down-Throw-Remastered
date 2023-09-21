@@ -5,13 +5,13 @@ using UnityEngine;
 [System.Serializable]
 public class Player : Being
 {
-    public Player() : base()
-    {
-
-    }
-
     public Player(int health) : base(health)
     {
+        EventManager.OnPlayerShoot += EventManager_OnPlayerShoot;
+    }
 
+    private void EventManager_OnPlayerShoot()
+    {
+        ChangeHeath(1);
     }
 }

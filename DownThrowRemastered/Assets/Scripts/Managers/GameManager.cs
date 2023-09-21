@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] TextMeshProUGUI ballsLeft;
+    [Space(10)]
     [SerializeField] PegBoard pegSpawner;
 
     static Player player;
@@ -21,6 +24,12 @@ public class GameManager : MonoBehaviour
         pegSpawner.SpawnBoard();
 
         EventManager.OnAreaClear += EventManager_OnAreaClear;
+        EventManager.OnPlayerShoot += EventManager_OnPlayerShoot;
+    }
+
+    private void EventManager_OnPlayerShoot()
+    {
+        ballsLeft.SetText(player.GetHealth().ToString());
     }
 
     private void EventManager_OnAreaClear()
@@ -42,6 +51,7 @@ public class GameManager : MonoBehaviour
     void PlayerInit()
     {
         player = new Player(15);
+        ballsLeft.SetText(player.GetHealth().ToString());
     }
 
     void CurrentMonsterInit()
