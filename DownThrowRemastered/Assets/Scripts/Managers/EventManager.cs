@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class EventManager : MonoBehaviour
 {
@@ -30,6 +31,12 @@ public class EventManager : MonoBehaviour
 
     public delegate void AreaClear();
     public static event AreaClear OnAreaClear;
+
+    public delegate void ScoreChange(int change);
+    public static event ScoreChange OnScoreChange;
+
+    public delegate void HighScoreChange();
+    public static event HighScoreChange OnHighScoreChange;
 
     public delegate void GameOver();
     public static event AreaClear OnGameOver;
@@ -79,6 +86,15 @@ public class EventManager : MonoBehaviour
 
             case CustomEvent.AreaClear:
                 OnAreaClear?.Invoke();
+                break;
+
+            //Game
+            case CustomEvent.HighScoreChange:
+                OnHighScoreChange?.Invoke();
+                break;
+
+            case CustomEvent.ScoreChange:
+                OnScoreChange?.Invoke(Convert.ToInt32(parameter));
                 break;
 
             case CustomEvent.GameOver:

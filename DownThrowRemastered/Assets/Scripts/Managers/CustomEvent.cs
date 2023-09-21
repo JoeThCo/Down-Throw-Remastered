@@ -18,6 +18,9 @@ public enum CustomEvent
 
     AreaClear,
 
+    ScoreChange,
+    HighScoreChange,
+
     GameOver,
     YouWin
 }

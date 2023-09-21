@@ -32,7 +32,10 @@ public class Peg : MonoBehaviour
         OnPegHit(ball);
     }
 
-    public virtual void OnPegDeath() { }
+    public virtual void OnPegDeath()
+    {
+        EventManager.Invoke(CustomEvent.ScoreChange, 1);
+    }
 
     void Peg_onPegDeath()
     {

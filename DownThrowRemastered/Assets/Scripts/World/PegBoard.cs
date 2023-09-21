@@ -28,6 +28,8 @@ public class PegBoard : MonoBehaviour
 
     void DeletePegs()
     {
+        if (pegParent.childCount <= 0) return;
+
         foreach (Transform t in pegParent)
         {
             Destroy(t.gameObject);

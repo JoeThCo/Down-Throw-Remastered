@@ -28,8 +28,12 @@ public class CurrentMonsters
 
     private void EventManager_OnMonsterDamage(Ball ball)
     {
-        GetTopMonster().ChangeHealth(ball.damage);
+        int damage = Mathf.Min(ball.damage, GetTopMonster().GetHealth());
+
+        GetTopMonster().ChangeHealth(damage);
         CurrentMonsterUI.Instance.UpdateCurrentMonsterUI(GetTopMonster());
+
+        EventManager.Invoke(CustomEvent.ScoreChange, damage);
 
         if (!GetTopMonster().isDead()) return;
 
