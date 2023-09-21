@@ -7,7 +7,11 @@ public enum CustomEvent
     PegHit,
     PegDestroy,
     PlayerShoot,
+
     MonsterDamage,
-    MonsterDeath,
-    BallBottoms
+    MonsterDead,
+
+    BallBottoms,
+
+    AreaClear
 }

@@ -5,7 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class Being
 {
-    int health;
+    protected string beingName;
+    [SerializeField] protected int health;
 
     public Being()
     {
@@ -17,7 +18,12 @@ public class Being
         this.health = health;
     }
 
-    void ChangeHeath(int change)
+    public bool isDead() 
+    {
+        return health <= 0;
+    }
+
+    public void ChangeHeath(int change)
     {
         health -= change;
 

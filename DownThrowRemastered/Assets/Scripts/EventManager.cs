@@ -16,11 +16,14 @@ public class EventManager : MonoBehaviour
     public delegate void BallBottoms(Ball ball);
     public static event BallBottoms OnBallBottoms;
 
-    public delegate void MonsterDamage();
+    public delegate void MonsterDamage(Ball ball);
     public static event MonsterDamage OnMonsterDamage;
 
-    public delegate void MonsterDeath();
-    public static event MonsterDeath OnMonsterDeath;
+    public delegate void MonsterDead();
+    public static event MonsterDead OnMonsterDead;
+
+    public delegate void AreaClear();
+    public static event AreaClear OnAreaClear;
 
     public static void Invoke(CustomEvent customEvent, Ball ball = null)
     {
@@ -39,15 +42,19 @@ public class EventManager : MonoBehaviour
                 break;
 
             case CustomEvent.MonsterDamage:
-                OnMonsterDamage?.Invoke();
+                OnMonsterDamage?.Invoke(ball);
                 break;
 
-            case CustomEvent.MonsterDeath:
-                OnMonsterDeath?.Invoke();
+            case CustomEvent.MonsterDead:
+                OnMonsterDead?.Invoke();
                 break;
 
             case CustomEvent.BallBottoms:
                 OnBallBottoms?.Invoke(ball);
+                break;
+
+            case CustomEvent.AreaClear:
+                OnAreaClear?.Invoke();
                 break;
 
             default:
