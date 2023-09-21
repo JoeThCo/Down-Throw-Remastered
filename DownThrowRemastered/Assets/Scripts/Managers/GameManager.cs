@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
 
     void PlayerInit()
     {
-        player = new Player(1);
+        player = new Player(10);
         AimerUI.Instance.SetBallsLeftText(player);
     }
 
