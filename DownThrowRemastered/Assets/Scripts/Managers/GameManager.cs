@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     private int highScore;
 
     const int SCORE_MULTIPLIER = 10;
+    public const int MONSTER_DEFEAT_MULTIPLIER = 3;
+
     const string HIGHSCORE_ID = "HighScore";
 
     static MonsterSO[] allMonsters;
@@ -133,7 +135,7 @@ public class GameManager : MonoBehaviour
 
     void CurrentMonsterInit()
     {
-        currentMonsters = new CurrentMonsters(1);
+        currentMonsters = new CurrentMonsters(6);
     }
 
     public static MonsterSO GetRandomMonster()

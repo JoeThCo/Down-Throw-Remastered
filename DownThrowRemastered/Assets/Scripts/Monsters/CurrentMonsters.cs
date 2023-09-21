@@ -41,6 +41,7 @@ public class CurrentMonsters
         EventManager.Invoke(CustomEvent.ScoreChange, damage);
 
         if (!GetTopMonster().isDead()) return;
+        EventManager.Invoke(CustomEvent.ScoreChange, GetTopMonster().GetMaxHealth() * GameManager.MONSTER_DEFEAT_MULTIPLIER);
 
         if (isAnotherMonster())
         {
