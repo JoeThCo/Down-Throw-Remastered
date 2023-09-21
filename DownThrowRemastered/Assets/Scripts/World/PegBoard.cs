@@ -10,9 +10,14 @@ public class PegBoard : MonoBehaviour
     [SerializeField] Transform pegParent;
     [SerializeField] float scale = .75f;
 
-    private void Awake()
+    private void OnEnable()
     {
         EventManager.OnNewMonster += EventManager_OnNewMonster;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnNewMonster -= EventManager_OnNewMonster;
     }
 
     private void EventManager_OnNewMonster(Monster monster)
@@ -28,10 +33,9 @@ public class PegBoard : MonoBehaviour
 
     void DeletePegs()
     {
-        if (pegParent.childCount <= 0) return;
-
         foreach (Transform t in pegParent)
         {
+            if (t == null) continue;
             Destroy(t.gameObject);
         }
     }

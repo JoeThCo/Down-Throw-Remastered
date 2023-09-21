@@ -9,10 +9,16 @@ public class AimController : MonoBehaviour
 
     [HideInInspector] public bool canShoot = true;
 
-    private void Start()
+    private void OnEnable()
     {
         EventManager.OnPlayerShoot += EventManager_onPlayerShoot;
         EventManager.OnBallBottoms += EventManager_OnBallBottoms;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnPlayerShoot -= EventManager_onPlayerShoot;
+        EventManager.OnBallBottoms -= EventManager_OnBallBottoms;
     }
 
     private void EventManager_OnBallBottoms(Ball ball)

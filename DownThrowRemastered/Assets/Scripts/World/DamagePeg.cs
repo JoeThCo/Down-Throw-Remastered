@@ -8,9 +8,8 @@ public class DamagePeg : Peg
     [SerializeField] TextMeshProUGUI damageText;
     int damage;
 
-    public override void Awake()
+    private void Awake()
     {
-        base.Awake();
         SetDamage(Random.Range(1, 6));
     }
 

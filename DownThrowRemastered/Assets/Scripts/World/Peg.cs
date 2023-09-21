@@ -17,10 +17,16 @@ public class Peg : MonoBehaviour
     delegate void PegDeath();
     event PegDeath onPegDeath;
 
-    public virtual void Awake()
+    private void OnEnable()
     {
         onPegHit += Peg_OnPegHit;
         onPegDeath += Peg_onPegDeath;
+    }
+
+    private void OnDisable()
+    {
+        onPegHit -= Peg_OnPegHit;
+        onPegDeath -= Peg_onPegDeath;
     }
 
     public virtual void OnPegHit(Ball ball) { }
@@ -28,7 +34,6 @@ public class Peg : MonoBehaviour
     void Peg_OnPegHit(Ball ball)
     {
         hasBallCollided = true;
-
         OnPegHit(ball);
     }
 

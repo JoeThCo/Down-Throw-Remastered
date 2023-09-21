@@ -13,12 +13,18 @@ public class CurrentMonsterUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI healthText;
 
     public static CurrentMonsterUI Instance;
-
-    private void Awake()
+    private void OnEnable()
     {
         Instance = this;
+
         EventManager.OnNewMonster += EventManager_OnNewMonster;
         EventManager.OnAreaClear += EventManager_OnAreaClear;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnNewMonster -= EventManager_OnNewMonster;
+        EventManager.OnAreaClear -= EventManager_OnAreaClear;
     }
 
     private void EventManager_OnAreaClear()

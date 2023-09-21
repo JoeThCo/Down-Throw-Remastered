@@ -8,7 +8,7 @@ public class AimerUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI ballsLeftText;
     public static AimerUI Instance;
 
-    public void Init() 
+    public void Init()
     {
         Instance = this;
     }

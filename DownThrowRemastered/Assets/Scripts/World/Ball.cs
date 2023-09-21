@@ -6,7 +6,7 @@ public class Ball : MonoBehaviour
 {
     public int damage;
 
-    public void ChangeDamage(int change) 
+    public void ChangeDamage(int change)
     {
         damage += change;
     }

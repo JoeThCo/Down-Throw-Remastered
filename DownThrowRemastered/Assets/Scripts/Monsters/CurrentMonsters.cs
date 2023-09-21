@@ -14,6 +14,11 @@ public class CurrentMonsters
         EventManager.OnMonsterDamage += EventManager_OnMonsterDamage;
     }
 
+    ~CurrentMonsters()
+    {
+        EventManager.OnMonsterDamage -= EventManager_OnMonsterDamage;
+    }
+
     public void MakeMonsterList(int count)
     {
         monsters = new List<Monster>();

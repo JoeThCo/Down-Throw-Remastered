@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class Bottom : MonoBehaviour
 {
-    private void Start()
+    private void OnEnable()
     {
         EventManager.OnBallBottoms += EventManager_OnBallBottoms;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnBallBottoms -= EventManager_OnBallBottoms;
     }
 
     private void EventManager_OnBallBottoms(Ball ball)

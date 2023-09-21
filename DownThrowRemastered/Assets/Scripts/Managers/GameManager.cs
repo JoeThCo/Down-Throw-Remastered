@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] AimerUI aimerUI;
     [SerializeField] ScoreUI scoreUI;
 
-    static Player player;
-    static CurrentMonsters currentMonsters;
+    Player player;
+    CurrentMonsters currentMonsters;
 
     private int currentScore;
     private int highScore;
@@ -26,7 +26,10 @@ public class GameManager : MonoBehaviour
         Init();
 
         pegSpawner.NewBoard();
+    }
 
+    private void OnEnable()
+    {
         EventManager.OnAreaClear += EventManager_OnAreaClear;
 
         EventManager.OnYouWin += EventManager_OnYouWin;
@@ -34,6 +37,17 @@ public class GameManager : MonoBehaviour
 
         EventManager.OnScoreChange += EventManager_OnScoreChange;
         EventManager.OnHighScoreChange += EventManager_OnHighScoreChange;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnAreaClear -= EventManager_OnAreaClear;
+
+        EventManager.OnYouWin -= EventManager_OnYouWin;
+        EventManager.OnGameOver -= EventManager_OnGameOver;
+
+        EventManager.OnScoreChange -= EventManager_OnScoreChange;
+        EventManager.OnHighScoreChange -= EventManager_OnHighScoreChange;
     }
 
     #region Score
@@ -119,7 +133,7 @@ public class GameManager : MonoBehaviour
 
     void CurrentMonsterInit()
     {
-        currentMonsters = new CurrentMonsters(3);
+        currentMonsters = new CurrentMonsters(1);
     }
 
     public static MonsterSO GetRandomMonster()

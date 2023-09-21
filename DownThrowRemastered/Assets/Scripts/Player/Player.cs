@@ -14,6 +14,13 @@ public class Player : Being
         EventManager.OnMonsterDead += EventManager_OnMonsterDead;
     }
 
+    ~Player()
+    {
+        EventManager.OnPlayerShoot -= EventManager_OnPlayerShootStart;
+        EventManager.OnPlayerShootEnd -= EventManager_OnPlayerShootEnd;
+        EventManager.OnMonsterDead -= EventManager_OnMonsterDead;
+    }
+
     private void EventManager_OnPlayerShootEnd()
     {
         if (!isDead()) return;
