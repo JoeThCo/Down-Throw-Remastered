@@ -72,3 +72,4 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 *.log
 DownThrowRemastered/Logs/shadercompiler-UnityShaderCompiler.exe0.log
+DownThrowRemastered/UserSettings/EditorUserSettings.asset
