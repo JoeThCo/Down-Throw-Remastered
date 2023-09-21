@@ -6,12 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    [SerializeField] string startMenu;
     [SerializeField] Menu[] allMenus;
     public static MenuManager Instance;
 
     private void Start()
     {
         Instance = this;
+        DisplayMenus(startMenu);
     }
 
     public void DisplayMenus(string searchID)

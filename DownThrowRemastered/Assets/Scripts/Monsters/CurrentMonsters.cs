@@ -22,23 +22,26 @@ public class CurrentMonsters
         {
             monsters.Add(new Monster(GameManager.GetRandomMonster()));
         }
+
+        EventManager.Invoke(CustomEvent.NewMonster, GetTopMonster());
     }
 
     private void EventManager_OnMonsterDamage(Ball ball)
     {
-        GetTopMonster().ChangeHeath(ball.damage);
+        GetTopMonster().ChangeHealth(ball.damage);
+        CurrentMonsterUI.Instance.UpdateCurrentMonsterUI(GetTopMonster());
 
         if (!GetTopMonster().isDead()) return;
 
-        Debug.Log(GetTopMonster().GetDebugString() + " is Dead!");
-        EventManager.Invoke(CustomEvent.MonsterDead);
         if (isAnotherMonster())
         {
             RemoveTopMonster();
+            EventManager.Invoke(CustomEvent.NewMonster, GetTopMonster());
         }
         else
         {
             EventManager.Invoke(CustomEvent.AreaClear);
+            EventManager.Invoke(CustomEvent.YouWin);
         }
     }
 
@@ -56,6 +59,7 @@ public class CurrentMonsters
     {
         return monsters.Count > 1;
     }
+
     public void PrintMonsters()
     {
         foreach (Monster current in monsters)

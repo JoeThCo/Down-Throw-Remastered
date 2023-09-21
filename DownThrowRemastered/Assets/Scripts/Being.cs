@@ -10,8 +10,7 @@ public class Being
     [SerializeField] protected int health;
 
     public int GetHealth() { return health; }
-    public Sprite GetSprite() { return icon; }
-
+    public Sprite GetIcon() { return icon; }
     public string GetName() { return beingName; }
 
     public Being()
@@ -29,7 +28,7 @@ public class Being
         return health <= 0;
     }
 
-    public void ChangeHeath(int change)
+    public void ChangeHealth(int change)
     {
         health -= change;
 

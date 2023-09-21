@@ -5,9 +5,8 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI ballsLeft;
-    [Space(10)]
     [SerializeField] PegBoard pegSpawner;
+    [SerializeField] AimerUI aimerUI;
 
     static Player player;
     static CurrentMonsters currentMonsters;
@@ -17,30 +16,29 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Load();
-
-        PlayerInit();
-        CurrentMonsterInit();
+        Init();
 
         pegSpawner.SpawnBoard();
-
         EventManager.OnAreaClear += EventManager_OnAreaClear;
-        EventManager.OnPlayerShoot += EventManager_OnPlayerShoot;
-    }
-
-    private void EventManager_OnPlayerShoot()
-    {
-        ballsLeft.SetText(player.GetHealth().ToString());
     }
 
     private void EventManager_OnAreaClear()
     {
         Debug.Log("Area clear!");
+        MenuManager.Instance.DisplayMenus("YouWin");
     }
 
     void Load()
     {
         ItemSpawner.Load();
         LoadMonsters();
+    }
+
+    void Init()
+    {
+        aimerUI.Init();
+        PlayerInit();
+        CurrentMonsterInit();
     }
 
     void LoadMonsters()
@@ -51,12 +49,12 @@ public class GameManager : MonoBehaviour
     void PlayerInit()
     {
         player = new Player(15);
-        ballsLeft.SetText(player.GetHealth().ToString());
+        AimerUI.Instance.SetBallsLeftText(player);
     }
 
     void CurrentMonsterInit()
     {
-        currentMonsters = new CurrentMonsters(1);
+        currentMonsters = new CurrentMonsters(3);
     }
 
     public static MonsterSO GetRandomMonster()

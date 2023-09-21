@@ -5,16 +5,18 @@ using UnityEngine;
 [System.Serializable]
 public class Monster : Being
 {
+    protected int maxHealth;
+
     public Monster(MonsterSO monsterSO)
     {
         this.health = monsterSO.monster.health;
         this.beingName = monsterSO.name;
+        this.icon = monsterSO.monster.icon;
+
+        maxHealth = health;
     }
 
-    public Monster(int health) : base(health)
-    {
-
-    }
+    public int GetMaxHealth() { return maxHealth; }
 
     public string GetDebugString()
     {
@@ -24,6 +26,7 @@ public class Monster : Being
     public override void OnDeath()
     {
         base.OnDeath();
-        EventManager.Invoke(CustomEvent.MonsterDead);
+        Debug.Log(GetDebugString() + " is Dead!");
+        EventManager.Invoke(CustomEvent.MonsterDead, this);
     }
 }

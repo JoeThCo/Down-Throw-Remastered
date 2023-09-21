@@ -8,10 +8,14 @@ public enum CustomEvent
     PegDestroy,
     PlayerShoot,
 
+    NewMonster,
     MonsterDamage,
     MonsterDead,
 
     BallBottoms,
 
-    AreaClear
+    AreaClear,
+
+    GameOver,
+    YouWin
 }
