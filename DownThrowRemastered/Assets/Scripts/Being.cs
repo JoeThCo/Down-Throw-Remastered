@@ -5,10 +5,14 @@ using UnityEngine;
 [System.Serializable]
 public class Being
 {
+    [SerializeField] protected Sprite icon;
     protected string beingName;
     [SerializeField] protected int health;
 
     public int GetHealth() { return health; }
+    public Sprite GetSprite() { return icon; }
+
+    public string GetName() { return beingName; }
 
     public Being()
     {
@@ -20,7 +24,7 @@ public class Being
         this.health = health;
     }
 
-    public bool isDead() 
+    public bool isDead()
     {
         return health <= 0;
     }

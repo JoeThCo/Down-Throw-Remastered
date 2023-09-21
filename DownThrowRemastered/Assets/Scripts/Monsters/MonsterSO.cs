@@ -6,4 +6,5 @@ using UnityEngine;
 public class MonsterSO : ScriptableObject
 {
     public Monster monster;
+    public Sprite GetSprite() { return monster.GetSprite(); }
 }
