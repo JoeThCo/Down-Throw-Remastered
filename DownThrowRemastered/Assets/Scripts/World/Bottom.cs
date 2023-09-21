@@ -22,6 +22,7 @@ public class Bottom : MonoBehaviour
         {
             Ball ball = collision.gameObject.GetComponent<Ball>();
             EventManager.Invoke(CustomEvent.BallBottoms, ball);
+            EventManager.Invoke(CustomEvent.PlayerShootEnd);
 
             Destroy(collision.gameObject);
         }

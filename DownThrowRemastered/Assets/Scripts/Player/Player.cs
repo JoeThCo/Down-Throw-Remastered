@@ -9,8 +9,15 @@ public class Player : Being
 
     public Player(int health) : base(health)
     {
-        EventManager.OnPlayerShoot += EventManager_OnPlayerShoot;
+        EventManager.OnPlayerShoot += EventManager_OnPlayerShootStart;
+        EventManager.OnPlayerShootEnd += EventManager_OnPlayerShootEnd;
         EventManager.OnMonsterDead += EventManager_OnMonsterDead;
+    }
+
+    private void EventManager_OnPlayerShootEnd()
+    {
+        if (!isDead()) return;
+        EventManager.Invoke(CustomEvent.GameOver);
     }
 
     private void EventManager_OnMonsterDead(Monster monster)
@@ -19,15 +26,9 @@ public class Player : Being
         AimerUI.Instance.SetBallsLeftText(this);
     }
 
-    private void EventManager_OnPlayerShoot()
+    private void EventManager_OnPlayerShootStart()
     {
         ChangeHealth(1);
         AimerUI.Instance.SetBallsLeftText(this);
-    }
-
-    public override void OnDeath()
-    {
-        base.OnDeath();
-        EventManager.Invoke(CustomEvent.GameOver);
     }
 }

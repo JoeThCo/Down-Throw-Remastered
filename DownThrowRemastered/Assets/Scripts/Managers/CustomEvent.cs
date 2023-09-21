@@ -6,7 +6,9 @@ public enum CustomEvent
 {
     PegHit,
     PegDestroy,
-    PlayerShoot,
+
+    PlayerShootStart,
+    PlayerShootEnd,
 
     NewMonster,
     MonsterDamage,

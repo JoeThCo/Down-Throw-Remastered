@@ -37,7 +37,7 @@ public class AimController : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0) && canShoot)
         {
-            EventManager.Invoke(CustomEvent.PlayerShoot);
+            EventManager.Invoke(CustomEvent.PlayerShootStart);
         }
     }
 }

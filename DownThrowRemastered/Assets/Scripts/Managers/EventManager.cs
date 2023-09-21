@@ -10,8 +10,11 @@ public class EventManager : MonoBehaviour
     public delegate void PegDestroy();
     public static event PegDestroy OnPegDestroy;
 
-    public delegate void PlayerShoot();
-    public static event PlayerShoot OnPlayerShoot;
+    public delegate void PlayerShootStart();
+    public static event PlayerShootStart OnPlayerShoot;
+
+    public delegate void PlayerShootEnd();
+    public static event PlayerShootEnd OnPlayerShootEnd;
 
     public delegate void BallBottoms(Ball ball);
     public static event BallBottoms OnBallBottoms;
@@ -48,8 +51,12 @@ public class EventManager : MonoBehaviour
                 break;
 
             //Player
-            case CustomEvent.PlayerShoot:
+            case CustomEvent.PlayerShootStart:
                 OnPlayerShoot?.Invoke();
+                break;
+
+            case CustomEvent.PlayerShootEnd:
+                OnPlayerShootEnd?.Invoke();
                 break;
 
             //Monsters

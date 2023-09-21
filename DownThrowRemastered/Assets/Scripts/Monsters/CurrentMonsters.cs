@@ -30,7 +30,7 @@ public class CurrentMonsters
     {
         GetTopMonster().ChangeHealth(ball.damage);
         CurrentMonsterUI.Instance.UpdateCurrentMonsterUI(GetTopMonster());
-
+        
         if (!GetTopMonster().isDead()) return;
 
         if (isAnotherMonster())
