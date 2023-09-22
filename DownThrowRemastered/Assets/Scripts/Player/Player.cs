@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class Player : Being
@@ -12,9 +13,10 @@ public class Player : Being
         EventManager.OnPlayerShoot += EventManager_OnPlayerShootStart;
         EventManager.OnPlayerShootEnd += EventManager_OnPlayerShootEnd;
         EventManager.OnMonsterDead += EventManager_OnMonsterDead;
+        SceneManager.sceneUnloaded += SceneManager_sceneUnloaded;
     }
 
-    ~Player()
+    private void SceneManager_sceneUnloaded(Scene arg0)
     {
         EventManager.OnPlayerShoot -= EventManager_OnPlayerShootStart;
         EventManager.OnPlayerShootEnd -= EventManager_OnPlayerShootEnd;
