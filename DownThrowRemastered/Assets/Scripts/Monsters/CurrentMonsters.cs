@@ -19,7 +19,7 @@ public class CurrentMonsters
         EventManager.OnMonsterDamage -= EventManager_OnMonsterDamage;
     }
 
-    public void MakeMonsterList(int count)
+    void MakeMonsterList(int count)
     {
         monsters = new List<Monster>();
 
@@ -34,7 +34,6 @@ public class CurrentMonsters
     private void EventManager_OnMonsterDamage(Ball ball)
     {
         int damage = Mathf.Min(ball.damage, GetTopMonster().GetHealth());
-
         GetTopMonster().ChangeHealth(damage);
         CurrentMonsterUI.Instance.UpdateCurrentMonsterUI(GetTopMonster());
 

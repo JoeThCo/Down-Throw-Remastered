@@ -106,36 +106,22 @@ public class GameManager : MonoBehaviour
     void Load()
     {
         ItemSpawner.Load();
-        LoadMonsters();
+        allMonsters = Resources.LoadAll<MonsterSO>("Monsters");
     }
 
     void Init()
     {
         aimerUI.Init();
-        PlayerInit();
-        CurrentMonsterInit();
+
+        player = new Player(10);
+        AimerUI.Instance.SetBallsLeftText(player);
+        currentMonsters = new CurrentMonsters(3);
 
         currentScore = 0;
         highScore = GetHighScore();
 
         scoreUI.SetHighScoreText(highScore);
         scoreUI.SetCurrentScoreText(currentScore);
-    }
-
-    void LoadMonsters()
-    {
-        allMonsters = Resources.LoadAll<MonsterSO>("Monsters");
-    }
-
-    void PlayerInit()
-    {
-        player = new Player(10);
-        AimerUI.Instance.SetBallsLeftText(player);
-    }
-
-    void CurrentMonsterInit()
-    {
-        currentMonsters = new CurrentMonsters(6);
     }
 
     public static MonsterSO GetRandomMonster()
