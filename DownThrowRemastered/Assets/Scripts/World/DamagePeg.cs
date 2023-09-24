@@ -23,6 +23,7 @@ public class DamagePeg : Peg
     {
         base.OnPegHit(ball, collision);
         ball.ChangeDamage(damage);
+        ItemSpawner.SpawnUI("TextObject", collision.GetContact(0).point, ball.damage.ToString());
     }
 
     public override void OnPegDeath()

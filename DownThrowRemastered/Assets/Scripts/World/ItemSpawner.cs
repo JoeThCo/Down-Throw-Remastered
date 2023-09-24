@@ -63,7 +63,7 @@ public static class ItemSpawner
 
     #endregion
 
-    public static GameObject SpawnText(string name, Vector3 position, string info)
+    public static GameObject SpawnUI(string name, Vector3 position, string info)
     {
         GameObject go = null;
         GameObject ui = GetUIPrefab(name);
@@ -76,7 +76,7 @@ public static class ItemSpawner
         return go;
     }
 
-    public static GameObject SpawnText(string name, Vector3 position, string info, float destroyTime)
+    public static GameObject SpawnUI(string name, Vector3 position, string info, float destroyTime)
     {
         GameObject go = null;
         GameObject ui = GetUIPrefab(name);

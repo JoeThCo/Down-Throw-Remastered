@@ -7,7 +7,7 @@ public class TextObject : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI text;
 
-    private const float DEFAULT_DESTROY_TIME = 1;
+    private const float DEFAULT_DESTROY_TIME = .5f;
 
     public void Init(string info, float destoryTime = DEFAULT_DESTROY_TIME)
     {
