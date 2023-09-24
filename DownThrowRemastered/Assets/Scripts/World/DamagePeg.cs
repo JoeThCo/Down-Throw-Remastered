@@ -8,8 +8,13 @@ public class DamagePeg : Peg
     [SerializeField] TextMeshProUGUI damageText;
     int damage;
 
+    const int MAX_DAMAGE = 5;
+    const float DAMAGE_PEG_BIAS = .90f;
+
     private void Awake()
     {
+        SetDamage(Mathf.CeilToInt(Helpers.GetBiasNumber(DAMAGE_PEG_BIAS) * MAX_DAMAGE));
+
         SetDamage(Random.Range(1, 6));
     }
 
