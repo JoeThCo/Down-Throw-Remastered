@@ -19,9 +19,9 @@ public class DamagePeg : Peg
         damageText.SetText(damage.ToString());
     }
 
-    public override void OnPegHit(Ball ball)
+    public override void OnPegHit(Ball ball, Collision2D collision)
     {
-        base.OnPegHit(ball);
+        base.OnPegHit(ball, collision);
         ball.ChangeDamage(damage);
     }
 

@@ -11,7 +11,7 @@ public class Peg : MonoBehaviour
     bool hasBallTriggered = false;
     bool hasDeathCalled = false;
 
-    delegate void PegHit(Ball ball);
+    delegate void PegHit(Ball ball, Collision2D collision);
     event PegHit onPegHit;
 
     delegate void PegDeath();
@@ -29,12 +29,12 @@ public class Peg : MonoBehaviour
         onPegDeath -= Peg_onPegDeath;
     }
 
-    public virtual void OnPegHit(Ball ball) { }
+    public virtual void OnPegHit(Ball ball, Collision2D collision) { }
 
-    void Peg_OnPegHit(Ball ball)
+    void Peg_OnPegHit(Ball ball, Collision2D collision)
     {
         hasBallCollided = true;
-        OnPegHit(ball);
+        OnPegHit(ball, collision);
     }
 
     public virtual void OnPegDeath()
@@ -58,7 +58,7 @@ public class Peg : MonoBehaviour
         {
             Ball ball = collision.gameObject.GetComponent<Ball>();
 
-            onPegHit?.Invoke(ball);
+            onPegHit?.Invoke(ball, collision);
             EventManager.Invoke(CustomEvent.PegHit);
         }
     }
