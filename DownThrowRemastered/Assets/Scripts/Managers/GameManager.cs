@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     Player player;
     CurrentMonsters currentMonsters;
 
+    public static float CurrentDifficulty = 1;
+    private const float AREA_COMPLETE_INCREMENT = .33f;
+
     private int currentScore;
     private int highScore;
 
@@ -33,7 +36,6 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         EventManager.OnAreaClear += EventManager_OnAreaClear;
-
         EventManager.OnGameOver += EventManager_OnGameOver;
 
         EventManager.OnScoreChange += EventManager_OnScoreChange;
@@ -43,7 +45,6 @@ public class GameManager : MonoBehaviour
     private void OnDisable()
     {
         EventManager.OnAreaClear -= EventManager_OnAreaClear;
-
         EventManager.OnGameOver -= EventManager_OnGameOver;
 
         EventManager.OnScoreChange -= EventManager_OnScoreChange;
@@ -93,6 +94,8 @@ public class GameManager : MonoBehaviour
     private void EventManager_OnAreaClear()
     {
         Debug.Log("Area clear!");
+        CurrentDifficulty += AREA_COMPLETE_INCREMENT;
+
         MenuManager.Instance.DisplayMenus("AreaClear");
         currentMonsters = new CurrentMonsters(3);
     }
@@ -107,7 +110,7 @@ public class GameManager : MonoBehaviour
     {
         aimerUI.Init();
 
-        player = new Player(1);
+        player = new Player(10);
         AimerUI.Instance.SetBallsLeftText(player);
         currentMonsters = new CurrentMonsters(3);
 

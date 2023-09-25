@@ -9,7 +9,7 @@ public class Monster : Being
 
     public Monster(MonsterSO monsterSO)
     {
-        this.health = monsterSO.monster.health;
+        this.health = Mathf.FloorToInt(monsterSO.monster.health * GameManager.CurrentDifficulty);
         this.beingName = monsterSO.name;
         this.icon = monsterSO.monster.icon;
 
