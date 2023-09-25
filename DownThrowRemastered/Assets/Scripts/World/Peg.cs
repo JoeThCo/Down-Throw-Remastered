@@ -29,7 +29,10 @@ public class Peg : MonoBehaviour
         onPegDeath -= Peg_onPegDeath;
     }
 
-    public virtual void OnPegHit(Ball ball, Collision2D collision) { }
+    public virtual void OnPegHit(Ball ball, Collision2D collision) 
+    {
+        ItemSpawner.PlaySFX("pegHit");
+    }
 
     void Peg_OnPegHit(Ball ball, Collision2D collision)
     {

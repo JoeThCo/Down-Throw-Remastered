@@ -7,6 +7,9 @@ public class PegBoard : MonoBehaviour
     [SerializeField] Transform topRight;
     [SerializeField] Transform botLeft;
     [Space(10)]
+    [SerializeField] [Range(0f, 1f)] float pegSpawningRate;
+    [SerializeField] [Range(0f, 1f)] float damagePegSpawningRate;
+    [Space(10)]
     [SerializeField] Transform pegParent;
     [SerializeField] float scale = .75f;
 
@@ -56,13 +59,16 @@ public class PegBoard : MonoBehaviour
 
                 Vector3 current = (topRight.position - new Vector3(currentX, currentY) + Vector3.right * scale * .5f);
 
-                if (Random.value < .25f)
+                if (Random.value < pegSpawningRate) 
                 {
-                    ItemSpawner.SpawnGame("Damage", current, pegParent);
-                }
-                else
-                {
-                    ItemSpawner.SpawnGame("Neutral", current, pegParent);
+                    if (Random.value < damagePegSpawningRate)
+                    {
+                        ItemSpawner.SpawnGame("Damage", current, pegParent);
+                    }
+                    else
+                    {
+                        ItemSpawner.SpawnGame("Neutral", current, pegParent);
+                    }
                 }
             }
         }

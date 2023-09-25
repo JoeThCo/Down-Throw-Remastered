@@ -9,8 +9,8 @@ public class CurrentMonsters
     public CurrentMonsters(int count)
     {
         monsters = MakeMonsterList(count);
-        EventManager.Invoke(CustomEvent.NewMonster, GetTopMonster());
         PrintMonsters();
+        EventManager.Invoke(CustomEvent.NewMonster, GetTopMonster());
 
         EventManager.OnMonsterDamage += EventManager_OnMonsterDamage;
         SceneManager.sceneUnloaded += SceneManager_sceneUnloaded;
@@ -23,44 +23,49 @@ public class CurrentMonsters
 
     List<Monster> MakeMonsterList(int count)
     {
-        List<Monster> temp = new List<Monster>();
+        List<Monster> monsterList = new List<Monster>();
 
         for (int i = 0; i < count; i++)
         {
-            temp.Add(new Monster(GameManager.GetRandomMonster()));
+            monsterList.Add(new Monster(GameManager.GetRandomMonster()));
         }
 
-        return temp;
-    }
-
-    public void DebugMonsterSize()
-    {
-        Debug.Log("Monsters left: " + monsters.Count);
+        return monsterList;
     }
 
     private void EventManager_OnMonsterDamage(Ball ball)
     {
         int damage = Mathf.Min(ball.damage, GetTopMonster().GetHealth());
+
+        if (damage == 0)
+        {
+            ItemSpawner.PlaySFX("noMonsterDamage");
+        }
+
         GetTopMonster().ChangeHealth(damage);
         CurrentMonsterUI.Instance.UpdateCurrentMonsterUI(GetTopMonster());
 
         EventManager.Invoke(CustomEvent.ScoreChange, damage);
 
-        if (!GetTopMonster().isDead()) return;
+        if (!GetTopMonster().isDead())
+        {
+            ItemSpawner.PlaySFX("monsterDamage");
+            return;
+        }
+
         EventManager.Invoke(CustomEvent.ScoreChange, GetTopMonster().GetMaxHealth() * GameManager.MONSTER_DEFEAT_MULTIPLIER);
 
-        Debug.Log("Top Removed");
         RemoveTopMonster();
-        DebugMonsterSize();
 
         if (isAnotherMonster())
         {
+            ItemSpawner.PlaySFX("monsterDefeat");
             EventManager.Invoke(CustomEvent.NewMonster, GetTopMonster());
         }
         else
         {
+            EventManager.OnMonsterDamage -= EventManager_OnMonsterDamage;
             EventManager.Invoke(CustomEvent.AreaClear);
-            EventManager.Invoke(CustomEvent.YouWin);
         }
     }
 
@@ -81,6 +86,7 @@ public class CurrentMonsters
 
     public void PrintMonsters()
     {
+        Debug.LogWarning("Current Monsters");
         foreach (Monster current in monsters)
         {
             Debug.Log(current.GetDebugString());

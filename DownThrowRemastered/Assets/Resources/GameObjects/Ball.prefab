@@ -9,15 +9,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4894929864361195023, guid: ee0a9470fae31a54dadff74f167fd37a, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4894929864361195023, guid: ee0a9470fae31a54dadff74f167fd37a, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4894929864361195023, guid: ee0a9470fae31a54dadff74f167fd37a, type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5262574579820647151, guid: ee0a9470fae31a54dadff74f167fd37a, type: 3}
       propertyPath: m_BodyType
@@ -106,3 +106,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bc97265ac951b14bab7ddbeef81c5c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
