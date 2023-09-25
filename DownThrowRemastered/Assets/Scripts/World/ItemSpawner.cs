@@ -7,10 +7,27 @@ public static class ItemSpawner
     static GameObject[] allGameObjects;
     static GameObject[] allUI;
 
+    static AudioSO[] allAudioSO;
+
     public static void Load()
     {
         allGameObjects = Resources.LoadAll<GameObject>("GameObjects");
         allUI = Resources.LoadAll<GameObject>("UI");
+
+        allAudioSO = Resources.LoadAll<AudioSO>("Audio");
+    }
+
+    static AudioSO GetAudioSO(AudioSO[] input, string name)
+    {
+        foreach (AudioSO current in input)
+        {
+            if (current.name.Equals(name))
+            {
+                return current;
+            }
+        }
+
+        throw new System.Exception(name + " is not found!");
     }
 
     static GameObject GetPrefab(GameObject[] input, string name)
@@ -62,6 +79,12 @@ public static class ItemSpawner
     }
 
     #endregion
+
+    public static void PlaySFX(string name)
+    {
+        SoundEffect sfx = Object.Instantiate(GetGameObjectPrefab("SFX"), Vector3.zero, Quaternion.identity).GetComponent<SoundEffect>();
+        sfx.Init(GetAudioSO(allAudioSO, name));
+    }
 
     public static GameObject SpawnUI(string name, Vector3 position, string info)
     {

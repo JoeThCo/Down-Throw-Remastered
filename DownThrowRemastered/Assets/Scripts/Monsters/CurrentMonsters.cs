@@ -41,7 +41,9 @@ public class CurrentMonsters
     private void EventManager_OnMonsterDamage(Ball ball)
     {
         int damage = Mathf.Min(ball.damage, GetTopMonster().GetHealth());
+
         GetTopMonster().ChangeHealth(damage);
+        ItemSpawner.PlaySFX("monsterDamage");
         CurrentMonsterUI.Instance.UpdateCurrentMonsterUI(GetTopMonster());
 
         EventManager.Invoke(CustomEvent.ScoreChange, damage);
