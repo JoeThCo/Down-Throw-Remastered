@@ -26,7 +26,6 @@ public class Aim : MonoBehaviour
     private void FixedUpdate()
     {
         float angle = GetShooterAngle(cam.ScreenToWorldPoint(Input.mousePosition));
-        //transform.rotation = Quaternion.Euler(Quaternion.AngleAxis(angle, Vector3.forward).eulerAngles);
         transform.RotateAround(rotatePoint.position, Vector3.forward, -(lastAngle - angle));
 
         lastAngle = angle;

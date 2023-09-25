@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour
     {
         aimerUI.Init();
 
-        player = new Player(5);
+        player = new Player(10);
         AimerUI.Instance.SetBallsLeftText(player);
         currentMonsters = new CurrentMonsters(6);
 
