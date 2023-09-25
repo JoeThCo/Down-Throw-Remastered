@@ -16,7 +16,12 @@ public class Bottom : MonoBehaviour
 
     private void EventManager_OnBallBottoms(Ball ball)
     {
-        if (ball == null) return;
+        if (ball == null)
+        {
+            Debug.LogError("Ball is null!");
+            return;
+        }
+
         EventManager.Invoke(CustomEvent.MonsterDamage, ball);
     }
 

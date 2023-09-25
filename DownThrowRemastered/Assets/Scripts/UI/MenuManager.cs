@@ -26,6 +26,6 @@ public class MenuManager : MonoBehaviour
 
     public void LoadAScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 }

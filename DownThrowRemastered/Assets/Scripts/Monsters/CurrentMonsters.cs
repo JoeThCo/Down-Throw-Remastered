@@ -1,40 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class CurrentMonsters
 {
-    List<Monster> monsters;
+    List<Monster> monsters = new List<Monster>();
 
     public CurrentMonsters(int count)
     {
-        MakeMonsterList(count);
+        monsters = MakeMonsterList(count);
+        EventManager.Invoke(CustomEvent.NewMonster, GetTopMonster());
         PrintMonsters();
 
         EventManager.OnMonsterDamage += EventManager_OnMonsterDamage;
+        SceneManager.sceneUnloaded += SceneManager_sceneUnloaded;
     }
 
-    ~CurrentMonsters()
+    private void SceneManager_sceneUnloaded(Scene arg0)
     {
         EventManager.OnMonsterDamage -= EventManager_OnMonsterDamage;
     }
 
-    public void MakeMonsterList(int count)
+    List<Monster> MakeMonsterList(int count)
     {
-        monsters = new List<Monster>();
+        List<Monster> temp = new List<Monster>();
 
         for (int i = 0; i < count; i++)
         {
-            monsters.Add(new Monster(GameManager.GetRandomMonster()));
+            temp.Add(new Monster(GameManager.GetRandomMonster()));
         }
 
-        EventManager.Invoke(CustomEvent.NewMonster, GetTopMonster());
+        return temp;
+    }
+
+    public void DebugMonsterSize()
+    {
+        Debug.Log("Monsters left: " + monsters.Count);
     }
 
     private void EventManager_OnMonsterDamage(Ball ball)
     {
         int damage = Mathf.Min(ball.damage, GetTopMonster().GetHealth());
-
         GetTopMonster().ChangeHealth(damage);
         CurrentMonsterUI.Instance.UpdateCurrentMonsterUI(GetTopMonster());
 
@@ -43,9 +49,12 @@ public class CurrentMonsters
         if (!GetTopMonster().isDead()) return;
         EventManager.Invoke(CustomEvent.ScoreChange, GetTopMonster().GetMaxHealth() * GameManager.MONSTER_DEFEAT_MULTIPLIER);
 
+        Debug.Log("Top Removed");
+        RemoveTopMonster();
+        DebugMonsterSize();
+
         if (isAnotherMonster())
         {
-            RemoveTopMonster();
             EventManager.Invoke(CustomEvent.NewMonster, GetTopMonster());
         }
         else
@@ -67,7 +76,7 @@ public class CurrentMonsters
 
     bool isAnotherMonster()
     {
-        return monsters.Count > 1;
+        return monsters.Count > 0;
     }
 
     public void PrintMonsters()
