@@ -37,19 +37,29 @@ public class CurrentMonsters
     {
         int damage = Mathf.Min(ball.damage, GetTopMonster().GetHealth());
 
+        if (damage == 0)
+        {
+            ItemSpawner.PlaySFX("noMonsterDamage");
+        }
+
         GetTopMonster().ChangeHealth(damage);
-        ItemSpawner.PlaySFX("monsterDamage");
         CurrentMonsterUI.Instance.UpdateCurrentMonsterUI(GetTopMonster());
 
         EventManager.Invoke(CustomEvent.ScoreChange, damage);
 
-        if (!GetTopMonster().isDead()) return;
+        if (!GetTopMonster().isDead())
+        {
+            ItemSpawner.PlaySFX("monsterDamage");
+            return;
+        }
+
         EventManager.Invoke(CustomEvent.ScoreChange, GetTopMonster().GetMaxHealth() * GameManager.MONSTER_DEFEAT_MULTIPLIER);
 
         RemoveTopMonster();
 
         if (isAnotherMonster())
         {
+            ItemSpawner.PlaySFX("monsterDefeat");
             EventManager.Invoke(CustomEvent.NewMonster, GetTopMonster());
         }
         else

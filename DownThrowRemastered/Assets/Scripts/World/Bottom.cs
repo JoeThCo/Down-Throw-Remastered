@@ -19,7 +19,6 @@ public class Bottom : MonoBehaviour
         if (ball == null) return;
 
         EventManager.Invoke(CustomEvent.MonsterDamage, ball);
-        ItemSpawner.PlaySFX("ballBottoms");
     }
 
     private void OnTriggerExit2D(Collider2D collision)

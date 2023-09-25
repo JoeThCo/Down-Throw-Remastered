@@ -94,6 +94,7 @@ public class GameManager : MonoBehaviour
     private void EventManager_OnAreaClear()
     {
         Debug.Log("Area clear!");
+        ItemSpawner.PlaySFX("areaClear");
         CurrentDifficulty += AREA_COMPLETE_INCREMENT;
 
         MenuManager.Instance.DisplayMenus("AreaClear");
