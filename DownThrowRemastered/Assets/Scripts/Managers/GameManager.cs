@@ -34,7 +34,6 @@ public class GameManager : MonoBehaviour
     {
         EventManager.OnAreaClear += EventManager_OnAreaClear;
 
-        EventManager.OnYouWin += EventManager_OnYouWin;
         EventManager.OnGameOver += EventManager_OnGameOver;
 
         EventManager.OnScoreChange += EventManager_OnScoreChange;
@@ -45,7 +44,6 @@ public class GameManager : MonoBehaviour
     {
         EventManager.OnAreaClear -= EventManager_OnAreaClear;
 
-        EventManager.OnYouWin -= EventManager_OnYouWin;
         EventManager.OnGameOver -= EventManager_OnGameOver;
 
         EventManager.OnScoreChange -= EventManager_OnScoreChange;
@@ -86,12 +84,6 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    private void EventManager_OnYouWin()
-    {
-        CheckNewHighScore();
-        MenuManager.Instance.DisplayMenus("YouWin");
-    }
-
     private void EventManager_OnGameOver()
     {
         CheckNewHighScore();
@@ -101,6 +93,8 @@ public class GameManager : MonoBehaviour
     private void EventManager_OnAreaClear()
     {
         Debug.Log("Area clear!");
+        MenuManager.Instance.DisplayMenus("AreaClear");
+        currentMonsters = new CurrentMonsters(3);
     }
 
     void Load()
@@ -113,9 +107,9 @@ public class GameManager : MonoBehaviour
     {
         aimerUI.Init();
 
-        player = new Player(10);
+        player = new Player(1);
         AimerUI.Instance.SetBallsLeftText(player);
-        currentMonsters = new CurrentMonsters(6);
+        currentMonsters = new CurrentMonsters(3);
 
         currentScore = 0;
         highScore = GetHighScore();

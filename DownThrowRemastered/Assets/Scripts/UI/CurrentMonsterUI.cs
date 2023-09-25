@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CurrentMonsterUI : MonoBehaviour
 {
@@ -19,9 +20,11 @@ public class CurrentMonsterUI : MonoBehaviour
 
         EventManager.OnNewMonster += EventManager_OnNewMonster;
         EventManager.OnAreaClear += EventManager_OnAreaClear;
+
+        SceneManager.sceneUnloaded += SceneManager_sceneUnloaded;
     }
 
-    private void OnDisable()
+    private void SceneManager_sceneUnloaded(Scene arg0)
     {
         EventManager.OnNewMonster -= EventManager_OnNewMonster;
         EventManager.OnAreaClear -= EventManager_OnAreaClear;
