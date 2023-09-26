@@ -7,14 +7,14 @@ public static class ItemSpawner
     static GameObject[] allGameObjects;
     static GameObject[] allUI;
 
-    static AudioSO[] allAudioSO;
+    static AudioSO[] allSFXAudioSO;
 
     public static void Load()
     {
         allGameObjects = Resources.LoadAll<GameObject>("GameObjects");
         allUI = Resources.LoadAll<GameObject>("UI");
 
-        allAudioSO = Resources.LoadAll<AudioSO>("Audio");
+        allSFXAudioSO = Resources.LoadAll<AudioSO>("SFX");
     }
 
     static AudioSO GetAudioSO(AudioSO[] input, string name)
@@ -83,7 +83,7 @@ public static class ItemSpawner
     public static void PlaySFX(string name)
     {
         SoundEffect sfx = Object.Instantiate(GetGameObjectPrefab("SFX"), Vector3.zero, Quaternion.identity).GetComponent<SoundEffect>();
-        sfx.Init(GetAudioSO(allAudioSO, name));
+        sfx.Init(GetAudioSO(allSFXAudioSO, name));
     }
 
     public static GameObject SpawnUI(string name, Vector3 position, string info)
