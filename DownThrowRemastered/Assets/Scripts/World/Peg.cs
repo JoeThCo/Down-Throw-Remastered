@@ -31,7 +31,7 @@ public class Peg : MonoBehaviour
 
     public virtual void OnPegHit()
     {
-
+        ItemSpawner.PlaySFX("pegHit");
     }
 
     void Peg_OnPegHit()

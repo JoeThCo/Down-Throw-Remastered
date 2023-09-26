@@ -89,6 +89,7 @@ public class GameManager : MonoBehaviour
     {
         CheckNewHighScore();
         MenuManager.Instance.DisplayMenus("GameOver");
+        ItemSpawner.PlaySFX("gameOver");
     }
 
     private void EventManager_OnAreaClear()

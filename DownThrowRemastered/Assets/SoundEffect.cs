@@ -6,6 +6,8 @@ public class SoundEffect : MonoBehaviour
 {
     [SerializeField] AudioSource audioSource;
 
+    private const float EXTRA_TIME = .5f;
+
     public void Init(AudioSO audioSO)
     {
         audioSource.clip = audioSO.audioClip;
@@ -13,6 +15,6 @@ public class SoundEffect : MonoBehaviour
 
         audioSource.Play();
 
-        Destroy(gameObject, audioSO.GetClipLength() * 2);
+        Destroy(gameObject, audioSO.GetClipLength() + EXTRA_TIME);
     }
 }
