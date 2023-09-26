@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: monsterDamage
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 3b0bf5f90fcea3049951678df553d663, type: 3}
-  volume: 0.5
+  volume: 0.75

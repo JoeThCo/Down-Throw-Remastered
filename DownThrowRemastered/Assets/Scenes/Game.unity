@@ -1288,8 +1288,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotatePoint: {fileID: 237656145}
-  aimSensitivty: 7.5
-  rotationLimit: 80
+  aimSensitivty: 8
+  rotationLimit: 90
 --- !u!1 &791114772
 GameObject:
   m_ObjectHideFlags: 0
