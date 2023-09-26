@@ -9,13 +9,11 @@ public class DamagePeg : Peg
     int damage;
 
     const int MAX_DAMAGE = 5;
-    const float DAMAGE_PEG_BIAS = .90f;
+    const float DAMAGE_PEG_BIAS = .5f;
 
     private void Awake()
     {
         SetDamage(Mathf.CeilToInt(Helpers.GetBiasNumber(DAMAGE_PEG_BIAS) * MAX_DAMAGE));
-
-        SetDamage(Random.Range(1, 6));
     }
 
     void SetDamage(int damage)
@@ -24,15 +22,15 @@ public class DamagePeg : Peg
         damageText.SetText(damage.ToString());
     }
 
-    public override void OnPegHit(Ball ball, Collision2D collision)
+    public override void OnPegHit()
     {
-        base.OnPegHit(ball, collision);
-        ball.ChangeDamage(damage);
-        ItemSpawner.SpawnUI("TextObject", transform.position, ball.damage.ToString());
+        base.OnPegHit();
     }
 
-    public override void OnPegDeath()
+    public override void OnPegDeath(Ball ball)
     {
-        base.OnPegDeath();
+        base.OnPegDeath(ball);
+        ball.ChangeDamage(damage);
+        ItemSpawner.SpawnUI("TextObject", transform.position, ball.damage.ToString());
     }
 }
