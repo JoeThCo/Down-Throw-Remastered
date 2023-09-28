@@ -10,7 +10,7 @@ public class SoundEffect : MonoBehaviour
 
     public void Init(AudioSO audioSO)
     {
-        audioSource.clip = audioSO.audioClip;
+        audioSource.clip = audioSO.GetAudioClip();
         audioSource.volume = audioSO.GetVolume();
 
         audioSource.Play();

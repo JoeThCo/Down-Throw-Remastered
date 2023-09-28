@@ -11,6 +11,9 @@ public class EventManager : MonoBehaviour
     public delegate void PegDestroy();
     public static event PegDestroy OnPegDestroy;
 
+    public delegate void BoardClear();
+    public static event BoardClear OnBoardClear;
+
     public delegate void PlayerShootStart();
     public static event PlayerShootStart OnPlayerShoot;
 
@@ -55,6 +58,10 @@ public class EventManager : MonoBehaviour
 
             case CustomEvent.PegDestroy:
                 OnPegDestroy?.Invoke();
+                break;
+
+            case CustomEvent.BoardClear:
+                OnBoardClear?.Invoke();
                 break;
 
             //Player

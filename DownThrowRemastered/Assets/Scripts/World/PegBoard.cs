@@ -15,14 +15,35 @@ public class PegBoard : MonoBehaviour
 
     static Peg[,] pegBoard;
 
+    int rows;
+    int cols;
+
     private void OnEnable()
     {
         EventManager.OnNewMonster += EventManager_OnNewMonster;
+        EventManager.OnBallBottoms += EventManager_OnBallBottoms;
+        EventManager.OnBoardClear += EventManager_OnBoardClear;
     }
 
     private void OnDisable()
     {
         EventManager.OnNewMonster -= EventManager_OnNewMonster;
+        EventManager.OnBallBottoms -= EventManager_OnBallBottoms;
+        EventManager.OnBoardClear -= EventManager_OnBoardClear;
+    }
+
+    private void EventManager_OnBoardClear()
+    {
+        Debug.Log("Board Clear!");
+        NewBoard();
+    }
+
+    private void EventManager_OnBallBottoms(Ball ball)
+    {
+        Debug.Log("Damage left: " + isDamagePegLeft());
+        if (isDamagePegLeft()) return;
+
+        EventManager.Invoke(CustomEvent.BoardClear);
     }
 
     private void EventManager_OnNewMonster(Monster monster)
@@ -32,6 +53,9 @@ public class PegBoard : MonoBehaviour
 
     public void NewBoard()
     {
+        rows = (int)(Mathf.Abs(topRight.position.x - botLeft.position.x) / scale);
+        cols = (int)(Mathf.Abs(topRight.position.y - botLeft.position.y) / scale);
+
         DeletePegs();
         SpawnPegBoard();
     }
@@ -60,11 +84,26 @@ public class PegBoard : MonoBehaviour
         return pegBoard[x, y];
     }
 
+    bool isDamagePegLeft()
+    {
+        for (int y = 0; y < cols; y++)
+        {
+            for (int x = 0; x < rows; x++)
+            {
+                Peg peg = GetPeg(x, y);
+
+                if (!isPeg(x, y)) continue;
+                if (!peg.GetComponent<DamagePeg>()) continue;
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     void SpawnPegBoard()
     {
-        int rows = (int)(Mathf.Abs(topRight.position.x - botLeft.position.x) / scale);
-        int cols = (int)(Mathf.Abs(topRight.position.y - botLeft.position.y) / scale);
-
         pegBoard = new Peg[rows, cols];
 
         for (int y = 0; y < cols; y++)

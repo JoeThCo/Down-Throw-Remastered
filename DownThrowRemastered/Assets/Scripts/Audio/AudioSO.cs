@@ -5,8 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/New AudioSO")]
 public class AudioSO : ScriptableObject
 {
-    public AudioClip audioClip;
+    [SerializeField] AudioClip audioClip;
     [SerializeField] [Range(0f, 1f)] float volume;
+
+    public AudioClip GetAudioClip()
+    {
+        return audioClip;
+    }
 
     public float GetVolume()
     {

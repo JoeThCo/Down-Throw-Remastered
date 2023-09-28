@@ -5,7 +5,6 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] PegBoard pegSpawner;
     [SerializeField] AimerUI aimerUI;
     [SerializeField] ScoreUI scoreUI;
 
@@ -23,14 +22,14 @@ public class GameManager : MonoBehaviour
 
     const string HIGHSCORE_ID = "HighScore";
 
+    public const int CURRENT_TEST_MONSTERS = 3;
+    public const float MAX_MONSTERS = 6;
     static MonsterSO[] allMonsters;
 
     private void Start()
     {
         Load();
         Init();
-
-        pegSpawner.NewBoard();
     }
 
     private void OnEnable()
@@ -98,8 +97,9 @@ public class GameManager : MonoBehaviour
         ItemSpawner.PlaySFX("areaClear");
         CurrentDifficulty += AREA_COMPLETE_INCREMENT;
 
+        AreaClearUI.Instance.SetScoreText(currentScore);
         MenuManager.Instance.DisplayMenus("AreaClear");
-        currentMonsters = new CurrentMonsters(3);
+        currentMonsters = new CurrentMonsters(CURRENT_TEST_MONSTERS);
     }
 
     void Load()
@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour
 
         player = new Player(10);
         AimerUI.Instance.SetBallsLeftText(player);
-        currentMonsters = new CurrentMonsters(3);
+        currentMonsters = new CurrentMonsters(CURRENT_TEST_MONSTERS);
 
         currentScore = 0;
         highScore = GetHighScore();

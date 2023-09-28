@@ -16,6 +16,8 @@ public class DamagePeg : Peg
         SetDamage(Mathf.CeilToInt(Helpers.GetBiasNumber(DAMAGE_PEG_BIAS) * MAX_DAMAGE));
     }
 
+    public int GetDamage() { return damage; }
+
     void SetDamage(int damage)
     {
         this.damage = damage;
