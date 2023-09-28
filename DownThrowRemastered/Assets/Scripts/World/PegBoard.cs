@@ -34,15 +34,12 @@ public class PegBoard : MonoBehaviour
 
     private void EventManager_OnBoardClear()
     {
-        Debug.Log("Board Clear!");
         NewBoard();
     }
 
     private void EventManager_OnBallBottoms(Ball ball)
     {
-        Debug.Log("Damage left: " + isDamagePegLeft());
         if (isDamagePegLeft()) return;
-
         EventManager.Invoke(CustomEvent.BoardClear);
     }
 

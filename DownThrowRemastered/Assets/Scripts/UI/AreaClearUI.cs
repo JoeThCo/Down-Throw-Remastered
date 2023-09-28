@@ -9,7 +9,7 @@ public class AreaClearUI : MonoBehaviour
 
     public static AreaClearUI Instance;
 
-    private void Start()
+    private void Awake()
     {
         Instance = this;
     }
