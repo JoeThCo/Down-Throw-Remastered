@@ -11,10 +11,10 @@ public class Peg : MonoBehaviour
     bool hasBallTriggered = false;
     bool hasDeathCalled = false;
 
-    delegate void PegHit(Ball ball, Collision2D collision);
+    delegate void PegHit();
     event PegHit onPegHit;
 
-    delegate void PegDeath();
+    delegate void PegDeath(Ball ball);
     event PegDeath onPegDeath;
 
     private void OnEnable()
@@ -29,39 +29,39 @@ public class Peg : MonoBehaviour
         onPegDeath -= Peg_onPegDeath;
     }
 
-    public virtual void OnPegHit(Ball ball, Collision2D collision) 
+    public virtual void OnPegHit()
     {
         ItemSpawner.PlaySFX("pegHit");
     }
 
-    void Peg_OnPegHit(Ball ball, Collision2D collision)
+    void Peg_OnPegHit()
     {
         hasBallCollided = true;
-        OnPegHit(ball, collision);
+        OnPegHit();
     }
 
-    public virtual void OnPegDeath()
+    public virtual void OnPegDeath(Ball ball)
     {
         EventManager.Invoke(CustomEvent.ScoreChange, 1);
+        ItemSpawner.PlaySFX("pegDeath");
     }
 
-    void Peg_onPegDeath()
+    void Peg_onPegDeath(Ball ball)
     {
         if (hasDeathCalled) return;
         hasDeathCalled = true;
 
-        OnPegDeath();
+        OnPegDeath(ball);
 
         Destroy(gameObject);
     }
 
+    #region Collision/Triggers
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (isBall(collision.gameObject))
         {
-            Ball ball = collision.gameObject.GetComponent<Ball>();
-
-            onPegHit?.Invoke(ball, collision);
+            onPegHit?.Invoke();
             EventManager.Invoke(CustomEvent.PegHit);
         }
     }
@@ -84,7 +84,8 @@ public class Peg : MonoBehaviour
             }
             else
             {
-                onPegDeath?.Invoke();
+                Ball ball = collision.gameObject.GetComponent<Ball>();
+                onPegDeath?.Invoke(ball);
             }
         }
     }
@@ -94,14 +95,18 @@ public class Peg : MonoBehaviour
         if (isBall(collision.gameObject) && hasBallTriggeredAndCollided())
         {
             EventManager.Invoke(CustomEvent.PegDestroy);
-            onPegDeath?.Invoke();
+
+            Ball ball = collision.gameObject.GetComponent<Ball>();
+            onPegDeath?.Invoke(ball);
         }
         else
         {
             ResetBools();
         }
     }
+    #endregion
 
+    #region Helpers
     void ResetBools()
     {
         hasBallTriggered = false;
@@ -117,4 +122,5 @@ public class Peg : MonoBehaviour
     {
         return obj.CompareTag("Ball");
     }
+    #endregion
 }

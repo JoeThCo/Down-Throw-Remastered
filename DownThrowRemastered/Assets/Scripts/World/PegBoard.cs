@@ -13,14 +13,37 @@ public class PegBoard : MonoBehaviour
     [SerializeField] Transform pegParent;
     [SerializeField] float scale = .75f;
 
+    static Peg[,] pegBoard;
+
+    int rows;
+    int cols;
+
     private void OnEnable()
     {
         EventManager.OnNewMonster += EventManager_OnNewMonster;
+        EventManager.OnBallBottoms += EventManager_OnBallBottoms;
+        EventManager.OnBoardClear += EventManager_OnBoardClear;
     }
 
     private void OnDisable()
     {
         EventManager.OnNewMonster -= EventManager_OnNewMonster;
+        EventManager.OnBallBottoms -= EventManager_OnBallBottoms;
+        EventManager.OnBoardClear -= EventManager_OnBoardClear;
+    }
+
+    private void EventManager_OnBoardClear()
+    {
+        Debug.Log("Board Clear!");
+        NewBoard();
+    }
+
+    private void EventManager_OnBallBottoms(Ball ball)
+    {
+        Debug.Log("Damage left: " + isDamagePegLeft());
+        if (isDamagePegLeft()) return;
+
+        EventManager.Invoke(CustomEvent.BoardClear);
     }
 
     private void EventManager_OnNewMonster(Monster monster)
@@ -30,6 +53,9 @@ public class PegBoard : MonoBehaviour
 
     public void NewBoard()
     {
+        rows = (int)(Mathf.Abs(topRight.position.x - botLeft.position.x) / scale);
+        cols = (int)(Mathf.Abs(topRight.position.y - botLeft.position.y) / scale);
+
         DeletePegs();
         SpawnPegBoard();
     }
@@ -43,31 +69,62 @@ public class PegBoard : MonoBehaviour
         }
     }
 
+    Peg SpawnPeg(string name, Vector3 position)
+    {
+        return ItemSpawner.SpawnGame(name, position, pegParent).GetComponent<Peg>();
+    }
+
+    bool isPeg(int x, int y)
+    {
+        return pegBoard[x, y] != null;
+    }
+
+    Peg GetPeg(int x, int y)
+    {
+        return pegBoard[x, y];
+    }
+
+    bool isDamagePegLeft()
+    {
+        for (int y = 0; y < cols; y++)
+        {
+            for (int x = 0; x < rows; x++)
+            {
+                Peg peg = GetPeg(x, y);
+
+                if (!isPeg(x, y)) continue;
+                if (!peg.GetComponent<DamagePeg>()) continue;
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     void SpawnPegBoard()
     {
-        int rowCount = (int)(Mathf.Abs(topRight.position.x - botLeft.position.x) / scale);
-        int colCount = (int)(Mathf.Abs(topRight.position.y - botLeft.position.y) / scale);
+        pegBoard = new Peg[rows, cols];
 
-        for (int y = 0; y <= colCount; y++)
+        for (int y = 0; y < cols; y++)
         {
-            for (int x = 0; x < rowCount; x++)
+            for (int x = 0; x < rows; x++)
             {
                 float rowOffset = y % 2 == 0 ? scale * .5f : 0;
-
                 float currentX = ((x * scale) + scale) + rowOffset;
                 float currentY = (y * scale);
 
                 Vector3 current = (topRight.position - new Vector3(currentX, currentY) + Vector3.right * scale * .5f);
 
-                if (Random.value < pegSpawningRate) 
+                if (Random.value < pegSpawningRate)
                 {
                     if (Random.value < damagePegSpawningRate)
                     {
-                        ItemSpawner.SpawnGame("Damage", current, pegParent);
+                        pegBoard[x, y] = SpawnPeg("Damage", current);
                     }
                     else
                     {
-                        ItemSpawner.SpawnGame("Neutral", current, pegParent);
+                        pegBoard[x, y] = SpawnPeg("Neutral", current);
                     }
                 }
             }
