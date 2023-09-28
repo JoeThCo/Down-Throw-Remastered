@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 [System.Serializable]
 public class Player : Being
 {
-    const float BALLS_BACK_RATE = .5f;
+    const float BALLS_BACK_RATE = .33f;
     const int MINIMUM_BALLS_BACK = 1;
 
     public Player(int health) : base(health)
@@ -32,9 +32,12 @@ public class Player : Being
 
     private void EventManager_OnMonsterDead(Monster monster)
     {
-        int ballsBack = Mathf.FloorToInt((float)monster.GetHealth() * BALLS_BACK_RATE) + MINIMUM_BALLS_BACK;
+        float monsterHealthFraction = (float)monster.GetMaxHealth() * BALLS_BACK_RATE;
+        int ballsBack = Mathf.FloorToInt(monsterHealthFraction) + MINIMUM_BALLS_BACK;
+
         ChangeHealth(-ballsBack);
         AimerUI.Instance.SetBallsLeftText(this);
+        
         Debug.Log("+" + ballsBack + " balls back for " + monster.GetName());
     }
 

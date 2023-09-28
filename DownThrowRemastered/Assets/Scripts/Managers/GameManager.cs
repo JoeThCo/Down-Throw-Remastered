@@ -97,8 +97,9 @@ public class GameManager : MonoBehaviour
         ItemSpawner.PlaySFX("areaClear");
         CurrentDifficulty += AREA_COMPLETE_INCREMENT;
 
-        AreaClearUI.Instance.SetScoreText(currentScore);
         MenuManager.Instance.DisplayMenus("AreaClear");
+        AreaClearUI.Instance.SetScoreText(currentScore);
+        
         currentMonsters = new CurrentMonsters(CURRENT_TEST_MONSTERS);
     }
 
