@@ -22,14 +22,40 @@ public class GameManager : MonoBehaviour
 
     const string HIGHSCORE_ID = "HighScore";
 
+    public const int START_PLAYER_BALLS = 10;
     public const int CURRENT_TEST_MONSTERS = 3;
     public const float MAX_MONSTERS = 6;
     static MonsterSO[] allMonsters;
 
     private void Start()
     {
+        Application.targetFrameRate = -1;
+
         Load();
         Init();
+    }
+
+    void Load()
+    {
+        ItemSpawner.Load();
+        allMonsters = Resources.LoadAll<MonsterSO>("Monsters");
+    }
+
+    void Init()
+    {
+        aimerUI.Init();
+
+        player = new Player(START_PLAYER_BALLS);
+        AimerUI.Instance.SetBallsLeftText(player);
+        currentMonsters = new CurrentMonsters(CURRENT_TEST_MONSTERS);
+
+        CurrentDifficulty = 1;
+
+        currentScore = 0;
+        highScore = GetHighScore();
+
+        scoreUI.SetHighScoreText(highScore);
+        scoreUI.SetCurrentScoreText(currentScore);
     }
 
     private void OnEnable()
@@ -99,29 +125,8 @@ public class GameManager : MonoBehaviour
 
         MenuManager.Instance.DisplayMenus("AreaClear");
         AreaClearUI.Instance.SetScoreText(currentScore);
-        
+
         currentMonsters = new CurrentMonsters(CURRENT_TEST_MONSTERS);
-    }
-
-    void Load()
-    {
-        ItemSpawner.Load();
-        allMonsters = Resources.LoadAll<MonsterSO>("Monsters");
-    }
-
-    void Init()
-    {
-        aimerUI.Init();
-
-        player = new Player(10);
-        AimerUI.Instance.SetBallsLeftText(player);
-        currentMonsters = new CurrentMonsters(CURRENT_TEST_MONSTERS);
-
-        currentScore = 0;
-        highScore = GetHighScore();
-
-        scoreUI.SetHighScoreText(highScore);
-        scoreUI.SetCurrentScoreText(currentScore);
     }
 
     public static MonsterSO GetRandomMonster()
