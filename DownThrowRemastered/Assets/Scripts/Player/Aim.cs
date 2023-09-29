@@ -9,7 +9,6 @@ public class Aim : MonoBehaviour
     [SerializeField] float rotationLimit = 75f;
 
     float lastAngle = 0;
-
     private Camera cam;
 
     private void Start()

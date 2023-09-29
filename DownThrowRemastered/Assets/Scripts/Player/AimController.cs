@@ -4,10 +4,22 @@ using UnityEngine;
 
 public class AimController : MonoBehaviour
 {
-    [SerializeField] float throwPower = 5f;
+    [SerializeField] float basePower = 10f;
+    [SerializeField] [Range(1f, 10f)] float playerPowerRange = 7.5f;
+    [Space(10)]
     [SerializeField] Transform firePoint;
 
     [HideInInspector] public bool canShoot = true;
+
+    private const float MIN_POWER_SCALED = .1f;
+    private const float MAX_POWER_SCALED = 1f;
+
+    private Camera cam;
+
+    private void Start()
+    {
+        cam = Camera.main;
+    }
 
     private void OnEnable()
     {
@@ -29,10 +41,16 @@ public class AimController : MonoBehaviour
     private void EventManager_onPlayerShoot()
     {
         Rigidbody2D ball = ItemSpawner.SpawnGame("Ball", firePoint.transform.position).GetComponent<Rigidbody2D>();
-        ball.velocity = -firePoint.transform.up * throwPower;
+        ball.velocity = -firePoint.transform.up * (GetPlayerPower() * basePower);
 
         ItemSpawner.PlaySFX("playerShoot");
         canShoot = false;
+    }
+    float GetPlayerPower()
+    {
+        Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        float power = (firePoint.position.y - mousePos.y) / playerPowerRange;
+        return Mathf.Clamp(power, MIN_POWER_SCALED, MAX_POWER_SCALED);
     }
 
     private void Update()
