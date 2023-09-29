@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Retro Funk
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: b7b8f894845bce64b99ca08dcc9baae6, type: 3}
-  volume: 0.35
+  volume: 0.2

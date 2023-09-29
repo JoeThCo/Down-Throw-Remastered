@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Surf
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 3ec769bc8e60c08489c21c25abf1ddac, type: 3}
-  volume: 0.35
+  volume: 0.2

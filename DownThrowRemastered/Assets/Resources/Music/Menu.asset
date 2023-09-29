@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Menu
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: e8f25670dd29fe54992d9ad736f1d1b6, type: 3}
-  volume: 0.35
+  volume: 0.2

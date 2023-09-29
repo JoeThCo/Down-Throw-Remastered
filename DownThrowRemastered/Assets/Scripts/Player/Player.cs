@@ -14,6 +14,7 @@ public class Player : Being
         EventManager.OnPlayerShoot += EventManager_OnPlayerShootStart;
         EventManager.OnPlayerShootEnd += EventManager_OnPlayerShootEnd;
         EventManager.OnMonsterDead += EventManager_OnMonsterDead;
+
         SceneManager.sceneUnloaded += SceneManager_sceneUnloaded;
     }
 
@@ -22,6 +23,8 @@ public class Player : Being
         EventManager.OnPlayerShoot -= EventManager_OnPlayerShootStart;
         EventManager.OnPlayerShootEnd -= EventManager_OnPlayerShootEnd;
         EventManager.OnMonsterDead -= EventManager_OnMonsterDead;
+
+        SceneManager.sceneUnloaded -= SceneManager_sceneUnloaded;
     }
 
     private void EventManager_OnPlayerShootEnd()

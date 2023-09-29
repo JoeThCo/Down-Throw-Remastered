@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Smooth Presentation
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 63dcb0681bb47f147982b4549fb8121d, type: 3}
-  volume: 0.35
+  volume: 0.2

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Retro Forest
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 620e8e84fe903c849894c1edaeb5717c, type: 3}
-  volume: 0.35
+  volume: 0.2
