@@ -13,7 +13,7 @@ public class AimController : MonoBehaviour
 
     private bool isAngleSet = false;
     private bool isPowerSet = false;
-    private float calculatedPower = 0;
+    private float playerPower = 0;
 
     [SerializeField] AimType aimType;
 
@@ -48,17 +48,7 @@ public class AimController : MonoBehaviour
     private void EventManager_onPlayerShoot()
     {
         Rigidbody2D ball = ItemSpawner.SpawnGame("Ball", firePoint.transform.position).GetComponent<Rigidbody2D>();
-
-        if (aimType == AimType.AllMouse)
-        {
-            Debug.Log(GetPlayerPower());
-            ball.velocity = -firePoint.transform.up * (GetPlayerPower() * basePower);
-        }
-        else if (aimType == AimType.Calculated)
-        {
-            Debug.Log(calculatedPower);
-            ball.velocity = -firePoint.transform.up * (calculatedPower * basePower);
-        }
+        ball.velocity = -firePoint.transform.up * (playerPower * basePower);
 
         ItemSpawner.PlaySFX("playerShoot");
         canShoot = false;
@@ -86,7 +76,7 @@ public class AimController : MonoBehaviour
     {
         isPowerSet = false;
         isAngleSet = false;
-        calculatedPower = 0;
+        playerPower = 0;
     }
 
     void Calculated()
@@ -100,8 +90,8 @@ public class AimController : MonoBehaviour
         {
             if (!isPowerSet)
             {
-                calculatedPower = GetPlayerPower();
-                Debug.Log("Power Set @ " + calculatedPower);
+                playerPower = GetPlayerPower();
+                Debug.Log("Power Set @ " + playerPower);
 
                 isPowerSet = true;
             }
@@ -116,9 +106,17 @@ public class AimController : MonoBehaviour
         }
     }
 
+    void SetPlayerPower()
+    {
+        playerPower = GetPlayerPower();
+        AimerUI.Instance.SetBarPower(playerPower);
+    }
+
     private void Update()
     {
         if (!canShoot) return;
+
+        SetPlayerPower();
 
         if (Input.GetMouseButtonUp(0))
         {
