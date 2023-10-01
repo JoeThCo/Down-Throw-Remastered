@@ -635,6 +635,7 @@ RectTransform:
   m_Children:
   - {fileID: 1584712907}
   - {fileID: 14213710}
+  - {fileID: 1510836827}
   m_Father: {fileID: 1358116790}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -701,6 +702,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b694f5e714c12a34083fcb2b95286570, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextMonsterUI: {fileID: 1510836828}
   aimerUI: {fileID: 1063497943}
   scoreUI: {fileID: 14213711}
 --- !u!114 &310803717
@@ -2099,6 +2101,7 @@ MonoBehaviour:
   basePower: 10
   playerPowerRange: 8.5
   firePoint: {fileID: 1264091594}
+  canShoot: 1
   aimType: 0
 --- !u!114 &1063497943
 MonoBehaviour:
@@ -2924,6 +2927,80 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: GameOver
+--- !u!1 &1510836826
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1510836827}
+  - component: {fileID: 1510836828}
+  - component: {fileID: 1510836829}
+  m_Layer: 5
+  m_Name: NextMonsters
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1510836827
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510836826}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 292480796}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 135, y: -35}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1510836828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510836826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 929b989c87d54ef4299a07e0cce5cb87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1510836829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510836826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 5
+  m_StartCorner: 1
+  m_StartAxis: 1
+  m_CellSize: {x: 30, y: 30}
+  m_Spacing: {x: 10, y: 0}
+  m_Constraint: 1
+  m_ConstraintCount: 6
 --- !u!1001 &1555739563
 PrefabInstance:
   m_ObjectHideFlags: 0

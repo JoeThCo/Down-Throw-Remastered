@@ -86,7 +86,7 @@ public static class ItemSpawner
         sfx.Init(GetAudioSO(allSFXAudioSO, name));
     }
 
-    public static GameObject SpawnUI(string name, Vector3 position, string info)
+    public static GameObject SpawnText(string name, Vector3 position, string info)
     {
         GameObject go = null;
         GameObject ui = GetUIPrefab(name);
@@ -99,7 +99,7 @@ public static class ItemSpawner
         return go;
     }
 
-    public static GameObject SpawnUI(string name, Vector3 position, string info, float destroyTime)
+    public static GameObject SpawnText(string name, Vector3 position, string info, float destroyTime)
     {
         GameObject go = null;
         GameObject ui = GetUIPrefab(name);
@@ -107,6 +107,18 @@ public static class ItemSpawner
         {
             go = Object.Instantiate(ui, position, Quaternion.identity);
             go.GetComponent<TextObject>().Init(info, destroyTime);
+        }
+
+        return go;
+    }
+
+    public static GameObject SpawnUI(string name, Transform parent)
+    {
+        GameObject go = null;
+        GameObject ui = GetUIPrefab(name);
+        if (ui)
+        {
+            go = Object.Instantiate(ui, Vector3.zero, Quaternion.identity, parent);
         }
 
         return go;

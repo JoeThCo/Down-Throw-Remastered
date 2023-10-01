@@ -5,6 +5,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] NextMonsterUI nextMonsterUI;
     [SerializeField] AimUI aimerUI;
     [SerializeField] ScoreUI scoreUI;
 
@@ -22,8 +23,8 @@ public class GameManager : MonoBehaviour
 
     const string HIGHSCORE_ID = "HighScore";
 
-    public const int START_PLAYER_BALLS = 10;
-    public const int CURRENT_TEST_MONSTERS = 3;
+    public const int START_PLAYER_BALLS = 5;
+    public const int CURRENT_TEST_MONSTERS = 6;
     public const float MAX_MONSTERS = 6;
     static MonsterSO[] allMonsters;
 
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviour
 
     void Init()
     {
+        nextMonsterUI.Init();
         aimerUI.Init();
 
         player = new Player(START_PLAYER_BALLS);
