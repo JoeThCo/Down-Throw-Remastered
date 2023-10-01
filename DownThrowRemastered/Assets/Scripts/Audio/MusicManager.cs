@@ -7,9 +7,26 @@ public class MusicManager : MonoBehaviour
     [SerializeField] AudioSource audioSource;
     AudioSO[] allSongs;
 
+    AudioSO currentSong;
+    float currentMusicTime = 0;
+    bool isMusicPlaying = false;
     const int EXTRA_SONG_TIME = 1;
 
     public static MusicManager Instance;
+
+    private void OnApplicationFocus(bool focus)
+    {
+        if (!focus)
+        {
+            Debug.Log("Paused");
+            isMusicPlaying = focus;
+        }
+        else
+        {
+            Debug.Log("Resume");
+            isMusicPlaying = focus;
+        }
+    }
 
     private void Start()
     {
@@ -28,27 +45,30 @@ public class MusicManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
             allSongs = Resources.LoadAll<AudioSO>("Music");
-            StartCoroutine(MusicLoop());
         }
-    }
-
-    IEnumerator MusicLoop()
-    {
-        AudioSO currentMusic = GetRandomSong();
-
-        audioSource.clip = currentMusic.GetAudioClip();
-        audioSource.volume = currentMusic.GetVolume();
-
-        audioSource.Play();
-
-        yield return new WaitForSeconds(currentMusic.GetClipLength() + EXTRA_SONG_TIME);
-        audioSource.Stop();
-
-        StartCoroutine(MusicLoop());
     }
 
     AudioSO GetRandomSong()
     {
         return allSongs[Random.Range(0, allSongs.Length)];
+    }
+
+    private void FixedUpdate()
+    {
+        if (currentMusicTime <= currentSong.GetClipLength() && isMusicPlaying)
+        {
+            currentMusicTime += Time.deltaTime;
+        }
+        else
+        {
+            currentMusicTime = 0;
+
+            currentSong = GetRandomSong();
+
+            audioSource.clip = currentSong.GetAudioClip();
+            audioSource.volume = currentSong.GetVolume();
+
+            audioSource.Play();
+        }
     }
 }

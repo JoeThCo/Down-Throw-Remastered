@@ -55,7 +55,6 @@ public class AimController : MonoBehaviour
         canShoot = false;
     }
 
-
     float GetPlayerPower()
     {
         Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
