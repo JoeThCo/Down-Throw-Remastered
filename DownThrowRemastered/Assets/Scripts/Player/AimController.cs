@@ -9,7 +9,7 @@ public class AimController : MonoBehaviour
     [Space(10)]
     [SerializeField] Transform firePoint;
 
-    private bool canShoot = true;
+    [HideInInspector] public bool canShoot = true;
 
     private bool isAngleSet = false;
     private bool isPowerSet = false;
@@ -25,6 +25,7 @@ public class AimController : MonoBehaviour
     private void Start()
     {
         cam = Camera.main;
+        canShoot = true;
     }
 
     private void OnEnable()
@@ -109,7 +110,7 @@ public class AimController : MonoBehaviour
     void SetPlayerPower()
     {
         playerPower = GetPlayerPower();
-        AimerUI.Instance.SetBarPower(playerPower);
+        AimUI.Instance.SetBarPower(playerPower);
     }
 
     private void Update()

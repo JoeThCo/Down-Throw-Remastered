@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class AimerUI : MonoBehaviour
+public class AimUI : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI ballsLeftText;
     [Space(10)]
     [SerializeField] Image barPower;
     [SerializeField] Gradient barPowerGradient;
 
-    public static AimerUI Instance;
+    public static AimUI Instance;
 
     public void Init()
     {

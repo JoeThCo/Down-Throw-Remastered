@@ -29,6 +29,7 @@ public class Aim : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!aimController.canShoot) return;
         if (!aimController.CanAngleChange()) return;
 
         float angle = GetShooterAngle(cam.ScreenToWorldPoint(Input.mousePosition));

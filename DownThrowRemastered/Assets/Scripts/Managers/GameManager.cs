@@ -5,7 +5,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] AimerUI aimerUI;
+    [SerializeField] AimUI aimerUI;
     [SerializeField] ScoreUI scoreUI;
 
     Player player;
@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
         aimerUI.Init();
 
         player = new Player(START_PLAYER_BALLS);
-        AimerUI.Instance.SetBallsLeftText(player);
+        AimUI.Instance.SetBallsLeftText(player);
         currentMonsters = new CurrentMonsters(CURRENT_TEST_MONSTERS);
 
         CurrentDifficulty = 1;
