@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] AimUI aimerUI;
     [SerializeField] ScoreUI scoreUI;
 
+    public static bool isPlaying;
+
     Player player;
     CurrentMonsters currentMonsters;
 
@@ -32,6 +34,8 @@ public class GameManager : MonoBehaviour
 
         Load();
         Init();
+
+        isPlaying = true;
     }
 
     void Load()
@@ -60,6 +64,8 @@ public class GameManager : MonoBehaviour
 
     private void OnApplicationFocus(bool focus)
     {
+        if (!isPlaying) return;
+
         if (!focus)
         {
             MenuManager.Instance.DisplayMenus("Pause");
@@ -114,6 +120,7 @@ public class GameManager : MonoBehaviour
         CheckNewHighScore();
         MenuManager.Instance.DisplayMenus("GameOver");
         ItemSpawner.PlaySFX("gameOver");
+        isPlaying = false;
     }
 
     private void EventManager_OnAreaClear()

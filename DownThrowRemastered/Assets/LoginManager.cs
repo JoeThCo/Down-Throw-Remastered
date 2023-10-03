@@ -14,6 +14,10 @@ public class LoginManager : MonoBehaviour
     [Header("Login")]
     [SerializeField] TMP_InputField loginEmail;
     [SerializeField] TMP_InputField loginPassword;
+
+    private const string DEV_EMAIL = "yenow22371@klanze.com";
+    private const string DEV_PASSWORD = "mypass123";
+
     public void UserLogin()
     {
         var request = new LoginWithEmailAddressRequest
@@ -22,6 +26,18 @@ public class LoginManager : MonoBehaviour
             Password = loginPassword.text
         };
 
+        PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);
+    }
+
+    public void DevLogin()
+    {
+        var request = new LoginWithEmailAddressRequest
+        {
+            Email = DEV_EMAIL,
+            Password = DEV_PASSWORD
+        };
+
+        if (!Input.GetKey(KeyCode.Q)) return;
         PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);
     }
 
