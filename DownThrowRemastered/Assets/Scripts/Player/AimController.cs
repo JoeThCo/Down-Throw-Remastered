@@ -7,6 +7,7 @@ public class AimController : MonoBehaviour
     [SerializeField] float basePower = 10f;
     [SerializeField] [Range(1f, 10f)] float playerPowerRange = 7.5f;
     [Space(10)]
+    [SerializeField] Transform ballParent;
     [SerializeField] Transform firePoint;
 
     [HideInInspector] public bool canShoot = true;
@@ -48,7 +49,7 @@ public class AimController : MonoBehaviour
 
     private void EventManager_onPlayerShoot()
     {
-        Rigidbody2D ball = ItemSpawner.SpawnGame("Ball", firePoint.transform.position).GetComponent<Rigidbody2D>();
+        Rigidbody2D ball = ItemSpawner.SpawnGame("Ball", firePoint.transform.position, ballParent).GetComponent<Rigidbody2D>();
         ball.velocity = -firePoint.transform.up * (playerPower * basePower);
 
         ItemSpawner.PlaySFX("playerShoot");

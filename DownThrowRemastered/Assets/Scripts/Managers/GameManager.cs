@@ -60,6 +60,14 @@ public class GameManager : MonoBehaviour
         scoreUI.SetCurrentScoreText(currentScore);
     }
 
+    private void OnApplicationFocus(bool focus)
+    {
+        if (!focus)
+        {
+            MenuManager.Instance.DisplayMenus("Pause");
+        }
+    }
+
     private void OnEnable()
     {
         EventManager.OnAreaClear += EventManager_OnAreaClear;

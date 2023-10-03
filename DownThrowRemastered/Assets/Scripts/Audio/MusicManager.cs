@@ -44,6 +44,7 @@ public class MusicManager : MonoBehaviour
 
             allSongs = Resources.LoadAll<AudioSO>("Music");
             NewSong();
+            ResumeSong();
         }
     }
 
@@ -54,15 +55,14 @@ public class MusicManager : MonoBehaviour
 
     void PauseSong()
     {
-        Debug.Log("Pause");
         audioSource.Stop();
         isMusicPlaying = false;
     }
 
     void ResumeSong()
     {
-        Debug.Log("Resume");
         audioSource.Play();
+        audioSource.time = currentMusicTime;
         isMusicPlaying = true;
     }
 
@@ -75,11 +75,11 @@ public class MusicManager : MonoBehaviour
         currentMusicTime = 0;
     }
 
-
-
     private void FixedUpdate()
     {
-        if (currentMusicTime <= currentSong.GetClipLength() && isMusicPlaying)
+        if (!isMusicPlaying) return;
+
+        if (currentMusicTime <= currentSong.GetClipLength())
         {
             currentMusicTime += Time.deltaTime;
         }
