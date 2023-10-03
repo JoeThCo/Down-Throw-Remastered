@@ -9,7 +9,9 @@ public class CurrentMonsters
     public CurrentMonsters(int count)
     {
         monsters = MakeMonsterList(count);
+        NextMonsterUI.Instance.UpdateNextMonsters(this);
         PrintMonsters();
+
         EventManager.Invoke(CustomEvent.NewMonster, GetTopMonster());
 
         EventManager.OnMonsterDamage += EventManager_OnMonsterDamage;
@@ -19,6 +21,14 @@ public class CurrentMonsters
     private void SceneManager_sceneUnloaded(Scene arg0)
     {
         EventManager.OnMonsterDamage -= EventManager_OnMonsterDamage;
+    }
+
+    public List<Monster> GetNextMonsters()
+    {
+        List<Monster> nextMonsters = new List<Monster>(monsters);
+        nextMonsters.RemoveAt(0);
+
+        return nextMonsters;
     }
 
     List<Monster> MakeMonsterList(int count)
@@ -36,7 +46,6 @@ public class CurrentMonsters
     private void EventManager_OnMonsterDamage(Ball ball)
     {
         int damage = Mathf.Min(ball.damage, GetTopMonster().GetHealth());
-
         if (damage == 0)
         {
             ItemSpawner.PlaySFX("noMonsterDamage");
@@ -54,13 +63,13 @@ public class CurrentMonsters
         }
 
         EventManager.Invoke(CustomEvent.ScoreChange, GetTopMonster().GetMaxHealth() * GameManager.MONSTER_DEFEAT_MULTIPLIER);
-
         RemoveTopMonster();
 
         if (isAnotherMonster())
         {
             ItemSpawner.PlaySFX("monsterDefeat");
             EventManager.Invoke(CustomEvent.NewMonster, GetTopMonster());
+            NextMonsterUI.Instance.UpdateNextMonsters(this);
         }
         else
         {

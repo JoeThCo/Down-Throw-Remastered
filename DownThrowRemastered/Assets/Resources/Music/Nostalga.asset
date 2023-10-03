@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Nostalga
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: a4a72070bede90343886291e7576e626, type: 3}
-  volume: 0.35
+  volume: 0.5

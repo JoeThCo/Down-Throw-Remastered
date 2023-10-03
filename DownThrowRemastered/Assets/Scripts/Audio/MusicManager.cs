@@ -7,9 +7,24 @@ public class MusicManager : MonoBehaviour
     [SerializeField] AudioSource audioSource;
     AudioSO[] allSongs;
 
+    AudioSO currentSong;
+    float currentMusicTime = 0;
+    bool isMusicPlaying = false;
     const int EXTRA_SONG_TIME = 1;
 
     public static MusicManager Instance;
+
+    private void OnApplicationFocus(bool focus)
+    {
+        if (!focus)
+        {
+            PauseSong();
+        }
+        else
+        {
+            ResumeSong();
+        }
+    }
 
     private void Start()
     {
@@ -28,27 +43,49 @@ public class MusicManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
             allSongs = Resources.LoadAll<AudioSO>("Music");
-            StartCoroutine(MusicLoop());
+            NewSong();
+            ResumeSong();
         }
-    }
-
-    IEnumerator MusicLoop()
-    {
-        AudioSO currentMusic = GetRandomSong();
-
-        audioSource.clip = currentMusic.GetAudioClip();
-        audioSource.volume = currentMusic.GetVolume();
-
-        audioSource.Play();
-
-        yield return new WaitForSeconds(currentMusic.GetClipLength() + EXTRA_SONG_TIME);
-        audioSource.Stop();
-
-        StartCoroutine(MusicLoop());
     }
 
     AudioSO GetRandomSong()
     {
         return allSongs[Random.Range(0, allSongs.Length)];
+    }
+
+    void PauseSong()
+    {
+        audioSource.Stop();
+        isMusicPlaying = false;
+    }
+
+    void ResumeSong()
+    {
+        audioSource.Play();
+        audioSource.time = currentMusicTime;
+        isMusicPlaying = true;
+    }
+
+    void NewSong()
+    {
+        currentSong = GetRandomSong();
+        audioSource.clip = currentSong.GetAudioClip();
+        audioSource.volume = currentSong.GetVolume();
+
+        currentMusicTime = 0;
+    }
+
+    private void FixedUpdate()
+    {
+        if (!isMusicPlaying) return;
+
+        if (currentMusicTime <= currentSong.GetClipLength())
+        {
+            currentMusicTime += Time.deltaTime;
+        }
+        else
+        {
+            NewSong();
+        }
     }
 }

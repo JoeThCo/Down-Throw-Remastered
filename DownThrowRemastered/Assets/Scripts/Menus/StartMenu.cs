@@ -14,5 +14,7 @@ public class StartMenu : MonoBehaviour
         titleText.SetText(Application.productName);
         versionText.SetText(Application.version);
         companyText.SetText(Application.companyName);
+
+        SaveManager.LoadSave();
     }
 }
