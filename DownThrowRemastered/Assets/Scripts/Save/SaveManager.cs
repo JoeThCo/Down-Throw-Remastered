@@ -21,6 +21,11 @@ public static class SaveManager
         return currentUserSave.GetInfo(key);
     }
 
+    public static void Init() 
+    {
+    
+    }
+
     public static void NewSave()
     {
         Debug.LogWarning("New Save");
