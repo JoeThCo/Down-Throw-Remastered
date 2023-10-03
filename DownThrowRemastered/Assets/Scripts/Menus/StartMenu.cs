@@ -17,4 +17,9 @@ public class StartMenu : MonoBehaviour
 
         SaveManager.LoadSave();
     }
+
+    public void OnApplicationQuit()
+    {
+        PlayerPrefs.Save();
+    }
 }

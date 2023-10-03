@@ -31,9 +31,9 @@ public static class SaveManager
     static void Save()
     {
         Debug.LogWarning("Game Save");
-
+        Debug.LogWarning(JsonUtility.ToJson(currentUserSave));
         PlayerPrefs.SetString(SAVE_KEY, JsonUtility.ToJson(currentUserSave));
-        DebugJson();
+        PlayerPrefs.Save();
     }
 
     public static void LoadSave()
@@ -45,15 +45,9 @@ public static class SaveManager
         }
 
         Debug.LogWarning("Game Loaded");
-
+        Debug.LogWarning(JsonUtility.ToJson(currentUserSave));
         currentUserSave = JsonUtility.FromJson<UserSave>(PlayerPrefs.GetString(SAVE_KEY));
-        DebugJson();
 
         isSaveLoaded = true;
-    }
-
-    static void DebugJson()
-    {
-        Debug.LogWarning(PlayerPrefs.GetString(SAVE_KEY));
     }
 }
