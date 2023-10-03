@@ -68,11 +68,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void OnApplicationQuit()
-    {
-        PlayerPrefs.Save();
-    }
-
     private void OnEnable()
     {
         EventManager.OnAreaClear += EventManager_OnAreaClear;

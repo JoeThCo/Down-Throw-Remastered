@@ -11,9 +11,9 @@ public static class SaveManager
 
     public static void SetInfo(SaveInfo key, object value)
     {
-        Debug.LogWarning("Set " + key.ToString() + " to " + value);
         currentUserSave.SetInfo(key, value);
         Save();
+        Debug.LogWarning("Set " + key.ToString() + " to " + value);
     }
 
     public static object GetInfo(SaveInfo key)
