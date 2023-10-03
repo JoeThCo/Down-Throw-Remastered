@@ -18,13 +18,11 @@ public class MusicManager : MonoBehaviour
     {
         if (!focus)
         {
-            Debug.Log("Paused");
-            isMusicPlaying = focus;
+            PauseSong();
         }
         else
         {
-            Debug.Log("Resume");
-            isMusicPlaying = focus;
+            ResumeSong();
         }
     }
 
@@ -45,6 +43,7 @@ public class MusicManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
             allSongs = Resources.LoadAll<AudioSO>("Music");
+            NewSong();
         }
     }
 
@@ -52,6 +51,31 @@ public class MusicManager : MonoBehaviour
     {
         return allSongs[Random.Range(0, allSongs.Length)];
     }
+
+    void PauseSong()
+    {
+        Debug.Log("Pause");
+        audioSource.Stop();
+        isMusicPlaying = false;
+    }
+
+    void ResumeSong()
+    {
+        Debug.Log("Resume");
+        audioSource.Play();
+        isMusicPlaying = true;
+    }
+
+    void NewSong()
+    {
+        currentSong = GetRandomSong();
+        audioSource.clip = currentSong.GetAudioClip();
+        audioSource.volume = currentSong.GetVolume();
+
+        currentMusicTime = 0;
+    }
+
+
 
     private void FixedUpdate()
     {
@@ -61,14 +85,7 @@ public class MusicManager : MonoBehaviour
         }
         else
         {
-            currentMusicTime = 0;
-
-            currentSong = GetRandomSong();
-
-            audioSource.clip = currentSong.GetAudioClip();
-            audioSource.volume = currentSong.GetVolume();
-
-            audioSource.Play();
+            NewSong();
         }
     }
 }
