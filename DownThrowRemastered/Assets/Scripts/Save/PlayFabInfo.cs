@@ -68,6 +68,7 @@ public static class PlayFabInfo
     public static void SetHighScore(int highScore)
     {
         playerInfo.highScore = highScore;
+        SavePlayerInfo();
     }
 
     public static int GetHighScore()
