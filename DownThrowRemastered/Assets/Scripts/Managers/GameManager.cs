@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] AimUI aimerUI;
     [SerializeField] ScoreUI scoreUI;
 
+    public static bool isPlaying;
+
     Player player;
     CurrentMonsters currentMonsters;
 
@@ -32,12 +34,12 @@ public class GameManager : MonoBehaviour
 
         Load();
         Init();
+
+        isPlaying = true;
     }
 
     void Load()
     {
-        SaveManager.LoadSave();
-
         ItemSpawner.Load();
         allMonsters = Resources.LoadAll<MonsterSO>("Monsters");
     }
@@ -54,7 +56,7 @@ public class GameManager : MonoBehaviour
         currentMonsters = new CurrentMonsters(CURRENT_TEST_MONSTERS);
 
         currentScore = 0;
-        highScore = (int)(SaveManager.GetInfo(SaveInfo.HighScore));
+        highScore = PlayFabInfo.GetHighScore();
 
         scoreUI.SetHighScoreText(highScore);
         scoreUI.SetCurrentScoreText(currentScore);
@@ -62,6 +64,8 @@ public class GameManager : MonoBehaviour
 
     private void OnApplicationFocus(bool focus)
     {
+        if (!isPlaying) return;
+
         if (!focus)
         {
             MenuManager.Instance.DisplayMenus("Pause");
@@ -90,7 +94,7 @@ public class GameManager : MonoBehaviour
     private void EventManager_OnHighScoreChange()
     {
         Debug.Log("New highscore from " + highScore + " -> " + currentScore);
-        SetNewHighScore();
+        PlayFabInfo.SetHighScore(currentScore);
     }
 
     private void EventManager_OnScoreChange(int change)
@@ -102,11 +106,6 @@ public class GameManager : MonoBehaviour
     bool isNewHighScore()
     {
         return currentScore > highScore;
-    }
-
-    public void SetNewHighScore()
-    {
-        SaveManager.SetInfo(SaveInfo.HighScore, currentScore);
     }
 
     void CheckNewHighScore()
@@ -121,6 +120,7 @@ public class GameManager : MonoBehaviour
         CheckNewHighScore();
         MenuManager.Instance.DisplayMenus("GameOver");
         ItemSpawner.PlaySFX("gameOver");
+        isPlaying = false;
     }
 
     private void EventManager_OnAreaClear()
