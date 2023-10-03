@@ -4,12 +4,14 @@ using UnityEngine;
 
 public static class SaveManager
 {
-    static UserSave currentUserSave = new UserSave();
+    static UserSave currentUserSave;
     private const string SAVE_KEY = "userSaveInfo";
+
+    public static bool isSaveLoaded = false;
 
     public static void SetInfo(SaveInfo key, object value)
     {
-        Debug.Log("Set " + key.ToString() + " to " + value);
+        Debug.LogWarning("Set " + key.ToString() + " to " + value);
         currentUserSave.SetInfo(key, value);
         Save();
     }
@@ -36,14 +38,22 @@ public static class SaveManager
 
     public static void LoadSave()
     {
+        if (isSaveLoaded)
+        {
+            Debug.LogWarning("Game already loaded!");
+            return;
+        }
+
         Debug.LogWarning("Game Loaded");
 
         currentUserSave = JsonUtility.FromJson<UserSave>(PlayerPrefs.GetString(SAVE_KEY));
         DebugJson();
+
+        isSaveLoaded = true;
     }
 
     static void DebugJson()
     {
-        Debug.Log(PlayerPrefs.GetString(SAVE_KEY));
+        Debug.LogWarning(PlayerPrefs.GetString(SAVE_KEY));
     }
 }
