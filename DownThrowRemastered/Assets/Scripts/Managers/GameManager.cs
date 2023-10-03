@@ -21,8 +21,6 @@ public class GameManager : MonoBehaviour
     const int SCORE_MULTIPLIER = 10;
     public const int MONSTER_DEFEAT_MULTIPLIER = 3;
 
-    const string HIGHSCORE_ID = "HighScore";
-
     public const int START_PLAYER_BALLS = 5;
     public const int CURRENT_TEST_MONSTERS = 6;
     public const float MAX_MONSTERS = 6;
@@ -38,6 +36,8 @@ public class GameManager : MonoBehaviour
 
     void Load()
     {
+        SaveManager.LoadSave();
+
         ItemSpawner.Load();
         allMonsters = Resources.LoadAll<MonsterSO>("Monsters");
     }
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
         currentMonsters = new CurrentMonsters(CURRENT_TEST_MONSTERS);
 
         currentScore = 0;
-        highScore = GetHighScore();
+        highScore = (int)(SaveManager.GetInfo(SaveInfo.HighScore));
 
         scoreUI.SetHighScoreText(highScore);
         scoreUI.SetCurrentScoreText(currentScore);
@@ -89,7 +89,14 @@ public class GameManager : MonoBehaviour
     #region Score
     private void EventManager_OnHighScoreChange()
     {
-        SetNewHighScore(currentScore);
+        Debug.Log("New highscore from " + highScore + " -> " + currentScore);
+        SetNewHighScore();
+    }
+
+    private void EventManager_OnScoreChange(int change)
+    {
+        currentScore += change * SCORE_MULTIPLIER;
+        scoreUI.SetCurrentScoreText(currentScore);
     }
 
     bool isNewHighScore()
@@ -97,20 +104,9 @@ public class GameManager : MonoBehaviour
         return currentScore > highScore;
     }
 
-    public int GetHighScore()
+    public void SetNewHighScore()
     {
-        return PlayerPrefs.GetInt(HIGHSCORE_ID);
-    }
-
-    public void SetNewHighScore(int highscore)
-    {
-        PlayerPrefs.SetInt(HIGHSCORE_ID, highscore);
-    }
-
-    private void EventManager_OnScoreChange(int change)
-    {
-        currentScore += change * SCORE_MULTIPLIER;
-        scoreUI.SetCurrentScoreText(currentScore);
+        SaveManager.SetInfo(SaveInfo.HighScore, currentScore);
     }
 
     void CheckNewHighScore()
