@@ -60,7 +60,7 @@ public class AimController : MonoBehaviour
     float GetPlayerPower()
     {
         Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-        float power = (firePoint.position.y - mousePos.y) / playerPowerRange;
+        float power = Vector2.Distance(firePoint.position, mousePos) / playerPowerRange;
         return Mathf.Clamp(power, MIN_POWER_SCALED, MAX_POWER_SCALED);
     }
 

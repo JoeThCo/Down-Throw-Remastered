@@ -9,7 +9,7 @@ public static class SaveManager
 
     public static void SetInfo(SaveInfo key, object value)
     {
-        Debug.Log("Set " + key.ToString());
+        Debug.Log("Set " + key.ToString() + " to " + value);
         currentUserSave.SetInfo(key, value);
         Save();
     }
@@ -29,14 +29,21 @@ public static class SaveManager
     static void Save()
     {
         Debug.LogWarning("Game Save");
-        //Debug.Log(JsonUtility.ToJson(currentUserSave));
+
         PlayerPrefs.SetString(SAVE_KEY, JsonUtility.ToJson(currentUserSave));
+        DebugJson();
     }
 
     public static void LoadSave()
     {
         Debug.LogWarning("Game Loaded");
-        //Debug.Log(PlayerPrefs.GetString(SAVE_KEY));
+
         currentUserSave = JsonUtility.FromJson<UserSave>(PlayerPrefs.GetString(SAVE_KEY));
+        DebugJson();
+    }
+
+    static void DebugJson()
+    {
+        Debug.Log(PlayerPrefs.GetString(SAVE_KEY));
     }
 }
