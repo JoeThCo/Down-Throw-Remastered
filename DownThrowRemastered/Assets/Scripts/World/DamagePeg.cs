@@ -37,6 +37,6 @@ public class DamagePeg : Peg
     {
         base.OnPegDeath(ball);
         ball.ChangeDamage(damage);
-        ItemSpawner.SpawnText("TextObject", transform.position, ball.damage.ToString());
+        ItemSpawner.SpawnText(transform.position, ball.damage.ToString());
     }
 }

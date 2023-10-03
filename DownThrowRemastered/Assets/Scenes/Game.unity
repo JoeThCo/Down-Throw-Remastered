@@ -486,6 +486,7 @@ Transform:
   m_Children:
   - {fileID: 237656145}
   - {fileID: 1063497941}
+  - {fileID: 715933339}
   m_Father: {fileID: 2139184259}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1721,6 +1722,37 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 560610249705156246, guid: 287c7bee07a25074fa7c5e4a7e045272, type: 3}
   m_PrefabInstance: {fileID: 704519926}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &715933338
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 715933339}
+  m_Layer: 0
+  m_Name: Aim Text Transform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &715933339
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715933338}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 120879686}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &791114772
 GameObject:
   m_ObjectHideFlags: 0
@@ -2308,6 +2340,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basePower: 10
   playerPowerRange: 8.5
+  aimText: {fileID: 715933339}
+  ballParent: {fileID: 2139184259}
   firePoint: {fileID: 1264091594}
   canShoot: 1
   aimType: 0

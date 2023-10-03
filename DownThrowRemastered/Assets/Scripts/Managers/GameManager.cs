@@ -49,9 +49,9 @@ public class GameManager : MonoBehaviour
 
         player = new Player(START_PLAYER_BALLS);
         AimUI.Instance.SetBallsLeftText(player);
-        currentMonsters = new CurrentMonsters(CURRENT_TEST_MONSTERS);
 
         CurrentDifficulty = 1;
+        currentMonsters = new CurrentMonsters(CURRENT_TEST_MONSTERS);
 
         currentScore = 0;
         highScore = GetHighScore();

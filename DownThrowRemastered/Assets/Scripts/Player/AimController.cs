@@ -7,6 +7,7 @@ public class AimController : MonoBehaviour
     [SerializeField] float basePower = 10f;
     [SerializeField] [Range(1f, 10f)] float playerPowerRange = 7.5f;
     [Space(10)]
+    [SerializeField] Transform aimText;
     [SerializeField] Transform ballParent;
     [SerializeField] Transform firePoint;
 
@@ -84,7 +85,7 @@ public class AimController : MonoBehaviour
     {
         if (!isAngleSet)
         {
-            Debug.Log("Angle Set!");
+            ItemSpawner.SpawnText(aimText.transform.position, "Angle Set!");
             isAngleSet = true;
         }
         else
@@ -92,7 +93,8 @@ public class AimController : MonoBehaviour
             if (!isPowerSet)
             {
                 playerPower = GetPlayerPower();
-                Debug.Log("Power Set @ " + playerPower);
+
+                ItemSpawner.SpawnText(aimText.transform.position, "Power Set!");
 
                 isPowerSet = true;
             }
@@ -100,7 +102,6 @@ public class AimController : MonoBehaviour
             {
                 if (isPowerSet && isAngleSet)
                 {
-                    Debug.Log("Fire!");
                     EventManager.Invoke(CustomEvent.PlayerShootStart);
                 }
             }
@@ -135,7 +136,7 @@ public class AimController : MonoBehaviour
         {
             if (aimType == AimType.Calculated)
             {
-                Debug.Log("Reset!");
+                ItemSpawner.SpawnText(aimText.transform.position, "Shot Reset!");
                 ResetCalculated();
             }
         }
