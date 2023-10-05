@@ -1566,8 +1566,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotatePoint: {fileID: 237656145}
   aimController: {fileID: 1063497942}
-  aimSensitivty: 10
   rotationLimit: 90
+  rotateSpeed: 150
 --- !u!1001 &704519926
 PrefabInstance:
   m_ObjectHideFlags: 0
