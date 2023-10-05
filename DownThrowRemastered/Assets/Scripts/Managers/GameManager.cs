@@ -91,6 +91,11 @@ public class GameManager : MonoBehaviour
         EventManager.OnHighScoreChange -= EventManager_OnHighScoreChange;
     }
 
+    public void SetIsPlaying(bool state)
+    {
+        isPlaying = state;
+    }
+
     #region Score
     private void EventManager_OnHighScoreChange()
     {
