@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        PlayFabInfo.OfflinePlay();
         Application.targetFrameRate = -1;
 
         Load();

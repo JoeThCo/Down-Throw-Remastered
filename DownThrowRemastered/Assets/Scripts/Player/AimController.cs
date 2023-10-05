@@ -11,6 +11,8 @@ public class AimController : MonoBehaviour
     [SerializeField] Transform ballParent;
     [SerializeField] Transform firePoint;
 
+    private float angle = 0;
+    private float power = 0;
     [HideInInspector] public bool canShoot = true;
 
     private bool isAngleSet = false;

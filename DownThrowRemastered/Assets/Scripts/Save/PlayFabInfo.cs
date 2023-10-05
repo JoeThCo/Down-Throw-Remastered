@@ -7,7 +7,6 @@ using PlayFab.ClientModels;
 public static class PlayFabInfo
 {
     static PlayerInfo playerInfo;
-
     private const string PLAYER_INFO_KEY = "PLAYER_INFO";
 
     public static void SavePlayerInfo()
@@ -74,6 +73,14 @@ public static class PlayFabInfo
     public static int GetHighScore()
     {
         return playerInfo.highScore;
+    }
+
+    public static void OfflinePlay()
+    {
+        if (playerInfo != null) return;
+
+        Debug.LogWarning("You are not connected to Playfab!");
+        playerInfo = new PlayerInfo();
     }
 }
 
