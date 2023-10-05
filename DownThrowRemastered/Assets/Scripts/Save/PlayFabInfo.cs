@@ -72,7 +72,6 @@ public static class PlayFabInfo
         return playerInfo.name;
     }
 
-
     public static void SetHighScore(int highScore)
     {
         playerInfo.highScore = highScore;

@@ -5,6 +5,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] BackgroundManager backgroundManager;
     [SerializeField] NextMonsterUI nextMonsterUI;
     [SerializeField] AimUI aimerUI;
     [SerializeField] ScoreUI scoreUI;
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
 
     void Init()
     {
+        backgroundManager.Init();
         nextMonsterUI.Init();
         aimerUI.Init();
 

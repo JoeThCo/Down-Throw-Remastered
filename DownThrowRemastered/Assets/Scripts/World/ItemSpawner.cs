@@ -8,6 +8,7 @@ public static class ItemSpawner
     static GameObject[] allUI;
 
     static AudioSO[] allSFXAudioSO;
+    static BackgroundSO[] allBackgroundSO;
 
     public static void Load()
     {
@@ -15,11 +16,12 @@ public static class ItemSpawner
         allUI = Resources.LoadAll<GameObject>("UI");
 
         allSFXAudioSO = Resources.LoadAll<AudioSO>("SFX");
+        allBackgroundSO = Resources.LoadAll<BackgroundSO>("Backgrounds");
     }
 
-    static AudioSO GetAudioSO(AudioSO[] input, string name)
+    static ScriptableObject GetScriptableObject(ScriptableObject[] input, string name)
     {
-        foreach (AudioSO current in input)
+        foreach (ScriptableObject current in input)
         {
             if (current.name.Equals(name))
             {
@@ -80,10 +82,15 @@ public static class ItemSpawner
 
     #endregion
 
+    public static BackgroundSO GetBackgroundSO(string name)
+    {
+        return GetScriptableObject(allBackgroundSO, name) as BackgroundSO;
+    }
+
     public static void PlaySFX(string name)
     {
         SoundEffect sfx = Object.Instantiate(GetGameObjectPrefab("SFX"), Vector3.zero, Quaternion.identity).GetComponent<SoundEffect>();
-        sfx.Init(GetAudioSO(allSFXAudioSO, name));
+        sfx.Init(GetScriptableObject(allSFXAudioSO, name) as AudioSO);
     }
 
     public static GameObject SpawnText(Vector3 position, string info)
