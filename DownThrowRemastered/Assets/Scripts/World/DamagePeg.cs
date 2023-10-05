@@ -5,6 +5,7 @@ using TMPro;
 
 public class DamagePeg : Peg
 {
+    [SerializeField] SpriteRenderer sprite;
     [SerializeField] TextMeshProUGUI damageText;
     int damage;
 
@@ -37,6 +38,8 @@ public class DamagePeg : Peg
     {
         base.OnPegDeath(ball);
         ball.ChangeDamage(damage);
-        ItemSpawner.SpawnText(transform.position, ball.damage.ToString());
+
+        TextObject textObject = ItemSpawner.SpawnText(transform.position, ball.damage.ToString()).GetComponent<TextObject>();
+        textObject.SetColor(sprite.color);
     }
 }

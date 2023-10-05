@@ -5,24 +5,21 @@ using UnityEngine;
 public class AimController : MonoBehaviour
 {
     [SerializeField] float basePower = 10f;
-    [SerializeField] [Range(1f, 10f)] float playerPowerRange = 7.5f;
     [Space(10)]
     [SerializeField] Transform aimText;
     [SerializeField] Transform ballParent;
     [SerializeField] Transform firePoint;
 
     [HideInInspector] public bool canShoot = true;
-    private float playerPower = 0;
+    private float playerPower = HALF_POWER;
 
     private const float MIN_POWER = .1f;
+    private const float HALF_POWER = .5f;
     private const float MAX_POWER = 1f;
-
-    private Camera cam;
 
     private void Start()
     {
-        cam = Camera.main;
-        canShoot = true;
+        AimUI.Instance.SetBarPower(playerPower);
     }
 
     private void OnEnable()
@@ -51,11 +48,6 @@ public class AimController : MonoBehaviour
         canShoot = false;
     }
 
-    void SetPlayerPower()
-    {
-        AimUI.Instance.SetBarPower(playerPower);
-    }
-
     private void FixedUpdate()
     {
         if (!canShoot) return;
@@ -73,7 +65,7 @@ public class AimController : MonoBehaviour
         }
 
         playerPower = Mathf.Clamp(playerPower, MIN_POWER, MAX_POWER);
-        SetPlayerPower();
+        AimUI.Instance.SetBarPower(playerPower);
     }
 
     private void Update()
