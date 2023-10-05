@@ -14,4 +14,9 @@ public class TextObject : MonoBehaviour
         text.SetText(info);
         Destroy(gameObject, destoryTime);
     }
+
+    public void SetColor(Color color)
+    {
+        text.color = color;
+    }
 }

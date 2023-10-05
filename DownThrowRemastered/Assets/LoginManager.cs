@@ -26,7 +26,7 @@ public class LoginManager : MonoBehaviour
             Password = loginPassword.text
         };
 
-        PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);
+        PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnPlayFabError);
     }
 
     public void DevLogin()
@@ -38,19 +38,13 @@ public class LoginManager : MonoBehaviour
         };
 
         if (!Input.GetKey(KeyCode.Q)) return;
-        PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);
+        PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnPlayFabError);
     }
 
     private void OnLoginSuccess(LoginResult result)
     {
         Debug.Log("Logged in successfully");
         PlayFabInfo.LoadPlayerInfo();
-        MenuManager.Instance.LoadAScene("MainMenu");
-    }
-
-    private void OnLoginFailure(PlayFabError error)
-    {
-        Debug.LogWarning("Error logging in user with PlayFab: " + error.GenerateErrorReport());
     }
 
     public void NewUser()
@@ -62,17 +56,35 @@ public class LoginManager : MonoBehaviour
             Password = registerPassword.text,
         };
 
-        PlayFabClientAPI.RegisterPlayFabUser(registerRequest, OnRegisterSuccess, OnRegisterFailure);
+        PlayFabClientAPI.RegisterPlayFabUser(registerRequest, OnRegisterSuccess, OnPlayFabError);
     }
 
     private void OnRegisterSuccess(RegisterPlayFabUserResult result)
     {
         Debug.Log("Successfully registered user");
+
+        UpdateDisplayName(registerUserName.text);
         MenuManager.Instance.DisplayMenus("Login");
     }
 
-    private void OnRegisterFailure(PlayFabError error)
+    void UpdateDisplayName(string name)
     {
-        Debug.LogError("Error registering user: " + error.GenerateErrorReport());
+        var request = new UpdateUserTitleDisplayNameRequest
+        {
+            DisplayName = name
+        };
+
+        PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnDisplayNameUpdated, OnPlayFabError);
+    }
+
+    private void OnDisplayNameUpdated(UpdateUserTitleDisplayNameResult result)
+    {
+        Debug.Log($"Updated display name to: {result.DisplayName}");
+        PlayFabInfo.SetName(result.DisplayName);
+    }
+
+    private void OnPlayFabError(PlayFabError error)
+    {
+        Debug.LogError("Playfab Error: " + error.GenerateErrorReport());
     }
 }

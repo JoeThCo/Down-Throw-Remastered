@@ -5,29 +5,21 @@ using UnityEngine;
 public class AimController : MonoBehaviour
 {
     [SerializeField] float basePower = 10f;
-    [SerializeField] [Range(1f, 10f)] float playerPowerRange = 7.5f;
     [Space(10)]
     [SerializeField] Transform aimText;
     [SerializeField] Transform ballParent;
     [SerializeField] Transform firePoint;
 
     [HideInInspector] public bool canShoot = true;
+    private float playerPower = HALF_POWER;
 
-    private bool isAngleSet = false;
-    private bool isPowerSet = false;
-    private float playerPower = 0;
-
-    [SerializeField] AimType aimType;
-
-    private const float MIN_POWER_SCALED = .1f;
-    private const float MAX_POWER_SCALED = 1f;
-
-    private Camera cam;
+    private const float MIN_POWER = .1f;
+    private const float HALF_POWER = .5f;
+    private const float MAX_POWER = 1f;
 
     private void Start()
     {
-        cam = Camera.main;
-        canShoot = true;
+        AimUI.Instance.SetBarPower(playerPower);
     }
 
     private void OnEnable()
@@ -45,7 +37,6 @@ public class AimController : MonoBehaviour
     private void EventManager_OnBallBottoms(Ball ball)
     {
         canShoot = true;
-        ResetCalculated();
     }
 
     private void EventManager_onPlayerShoot()
@@ -57,60 +48,23 @@ public class AimController : MonoBehaviour
         canShoot = false;
     }
 
-    float GetPlayerPower()
+    private void FixedUpdate()
     {
-        Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-        float power = Vector2.Distance(firePoint.position, mousePos) / playerPowerRange;
-        return Mathf.Clamp(power, MIN_POWER_SCALED, MAX_POWER_SCALED);
-    }
+        if (!canShoot) return;
 
-    public bool CanAngleChange()
-    {
-        return aimType == AimType.AllMouse || aimType == AimType.Calculated && !isAngleSet;
-    }
+        float vert = Input.GetAxisRaw("Vertical");
 
-    public bool CanPowerChange()
-    {
-        return aimType == AimType.AllMouse || aimType == AimType.Calculated && !isPowerSet;
-    }
-
-    void ResetCalculated()
-    {
-        isPowerSet = false;
-        isAngleSet = false;
-        playerPower = 0;
-    }
-
-    void Calculated()
-    {
-        if (!isAngleSet)
+        if (vert == 0) return;
+        if (vert > 0)
         {
-            ItemSpawner.SpawnText(aimText.transform.position, "Angle Set!");
-            isAngleSet = true;
+            playerPower += Time.deltaTime;
         }
         else
         {
-            if (!isPowerSet)
-            {
-                playerPower = GetPlayerPower();
-
-                ItemSpawner.SpawnText(aimText.transform.position, "Power Set!");
-
-                isPowerSet = true;
-            }
-            else
-            {
-                if (isPowerSet && isAngleSet)
-                {
-                    EventManager.Invoke(CustomEvent.PlayerShootStart);
-                }
-            }
+            playerPower -= Time.deltaTime;
         }
-    }
 
-    void SetPlayerPower()
-    {
-        playerPower = GetPlayerPower();
+        playerPower = Mathf.Clamp(playerPower, MIN_POWER, MAX_POWER);
         AimUI.Instance.SetBarPower(playerPower);
     }
 
@@ -118,27 +72,9 @@ public class AimController : MonoBehaviour
     {
         if (!canShoot) return;
 
-        SetPlayerPower();
-
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (aimType == AimType.AllMouse)
-            {
-                EventManager.Invoke(CustomEvent.PlayerShootStart);
-            }
-            else if (aimType == AimType.Calculated)
-            {
-                Calculated();
-            }
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            if (aimType == AimType.Calculated)
-            {
-                ItemSpawner.SpawnText(aimText.transform.position, "Shot Reset!");
-                ResetCalculated();
-            }
+            EventManager.Invoke(CustomEvent.PlayerShootStart);
         }
     }
 }
