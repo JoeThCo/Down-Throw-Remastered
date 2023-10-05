@@ -19,7 +19,7 @@ public static class PlayFabInfo
             }
         };
 
-        PlayFabClientAPI.UpdateUserData(request, OnScoreUpdateSuccess, OnScoreUpdateFailure);
+        PlayFabClientAPI.UpdateUserData(request, OnScoreUpdateSuccess, OnPlayFabError);
     }
 
     private static void OnScoreUpdateSuccess(UpdateUserDataResult result)
@@ -27,9 +27,9 @@ public static class PlayFabInfo
         Debug.Log("Successfully updated player score");
     }
 
-    private static void OnScoreUpdateFailure(PlayFabError error)
+    private static void OnPlayFabError(PlayFabError error)
     {
-        Debug.LogError("Error updating player score: " + error.GenerateErrorReport());
+        Debug.LogError("Playfab Error: " + error.GenerateErrorReport());
     }
 
     public static void LoadPlayerInfo()
@@ -39,7 +39,7 @@ public static class PlayFabInfo
             Keys = new List<string> { PLAYER_INFO_KEY }
         };
 
-        PlayFabClientAPI.GetUserData(request, OnDataLoadSuccess, OnDataLoadFailure);
+        PlayFabClientAPI.GetUserData(request, OnDataLoadSuccess, OnPlayFabError);
     }
 
     static void OnDataLoadSuccess(GetUserDataResult result)
@@ -57,12 +57,21 @@ public static class PlayFabInfo
             playerInfo = JsonUtility.FromJson<PlayerInfo>(jsonData);
             playerInfo.DebugInfo();
         }
+
+        MenuManager.Instance.LoadAScene("MainMenu");
     }
 
-    static void OnDataLoadFailure(PlayFabError error)
+    public static void SetName(string name)
     {
-        Debug.LogError("Error loading player data: " + error.GenerateErrorReport());
+        playerInfo.name = name;
+        SavePlayerInfo();
     }
+
+    public static string GetName()
+    {
+        return playerInfo.name;
+    }
+
 
     public static void SetHighScore(int highScore)
     {
@@ -86,10 +95,12 @@ public static class PlayFabInfo
 
 public class PlayerInfo
 {
+    public string name;
     public int highScore;
 
     public PlayerInfo()
     {
+        name = "Offline";
         highScore = 0;
     }
 
@@ -100,6 +111,7 @@ public class PlayerInfo
 
     public void DebugInfo()
     {
+        Debug.Log(name);
         Debug.Log("Highscore: " + highScore);
     }
 }
