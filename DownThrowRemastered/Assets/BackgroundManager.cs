@@ -12,13 +12,19 @@ public class BackgroundManager : MonoBehaviour
     public void Init()
     {
         Instance = this;
-
-        SetBackGround("Field");
     }
 
-    public void SetBackGround(string name)
+    public void SetBackground(string name)
     {
         BackgroundSO backgroundSO = ItemSpawner.GetBackgroundSO(name);
+
+        backgroundSR.sprite = backgroundSO.GetSprite();
+        backgroundSR.transform.localScale = (Vector3.right + Vector3.up) * backgroundSO.GetScale();
+    }
+
+    public void SetBackground()
+    {
+        BackgroundSO backgroundSO = ItemSpawner.GetBackgroundSO();
 
         backgroundSR.sprite = backgroundSO.GetSprite();
         backgroundSR.transform.localScale = (Vector3.right + Vector3.up) * backgroundSO.GetScale();

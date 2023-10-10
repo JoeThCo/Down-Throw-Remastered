@@ -1437,5 +1437,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: BackgroundManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4619095745592929482, guid: 212575818ce8ac14fbe5d2fa8ef46035, type: 3}
+      propertyPath: testString
+      value: School
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 212575818ce8ac14fbe5d2fa8ef46035, type: 3}

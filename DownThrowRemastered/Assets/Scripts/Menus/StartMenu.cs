@@ -26,5 +26,6 @@ public class StartMenu : MonoBehaviour
         usernameText.SetText(PlayFabInfo.GetName());
 
         backgroundManager.Init();
+        backgroundManager.SetBackground();
     }
 }

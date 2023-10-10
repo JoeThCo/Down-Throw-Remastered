@@ -87,6 +87,11 @@ public static class ItemSpawner
         return GetScriptableObject(allBackgroundSO, name) as BackgroundSO;
     }
 
+    public static BackgroundSO GetBackgroundSO()
+    {
+        return allBackgroundSO[Random.Range(0, allBackgroundSO.Length)];
+    }
+
     public static void PlaySFX(string name)
     {
         SoundEffect sfx = Object.Instantiate(GetGameObjectPrefab("SFX"), Vector3.zero, Quaternion.identity).GetComponent<SoundEffect>();

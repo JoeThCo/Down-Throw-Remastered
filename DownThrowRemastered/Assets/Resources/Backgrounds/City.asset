@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: City
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 582469adbc7e26f44881f00bcbc1f99c, type: 3}
-  scale: 3.5
+  scale: 4

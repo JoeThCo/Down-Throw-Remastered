@@ -63,6 +63,8 @@ public class GameManager : MonoBehaviour
 
         scoreUI.SetHighScoreText(highScore);
         scoreUI.SetCurrentScoreText(currentScore);
+
+        backgroundManager.SetBackground();
     }
 
     private void OnApplicationFocus(bool focus)
@@ -141,6 +143,7 @@ public class GameManager : MonoBehaviour
         AreaClearUI.Instance.SetScoreText(currentScore);
 
         currentMonsters = new CurrentMonsters(CURRENT_TEST_MONSTERS);
+        backgroundManager.SetBackground();
     }
 
     public static MonsterSO GetRandomMonster()
