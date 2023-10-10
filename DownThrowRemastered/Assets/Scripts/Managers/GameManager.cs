@@ -5,6 +5,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] BackgroundManager backgroundManager;
     [SerializeField] NextMonsterUI nextMonsterUI;
     [SerializeField] AimUI aimerUI;
     [SerializeField] ScoreUI scoreUI;
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
 
     void Init()
     {
+        backgroundManager.Init();
         nextMonsterUI.Init();
         aimerUI.Init();
 
@@ -61,6 +63,8 @@ public class GameManager : MonoBehaviour
 
         scoreUI.SetHighScoreText(highScore);
         scoreUI.SetCurrentScoreText(currentScore);
+
+        backgroundManager.SetBackground();
     }
 
     private void OnApplicationFocus(bool focus)
@@ -91,10 +95,16 @@ public class GameManager : MonoBehaviour
         EventManager.OnHighScoreChange -= EventManager_OnHighScoreChange;
     }
 
+    public void SetIsPlaying(bool state)
+    {
+        isPlaying = state;
+    }
+
     #region Score
     private void EventManager_OnHighScoreChange()
     {
         Debug.Log("New highscore from " + highScore + " -> " + currentScore);
+        GameOverUI.Instance.SetHighscoreText(isNewHighScore(), currentScore, highScore);
         PlayFabInfo.SetHighScore(currentScore);
     }
 
@@ -134,6 +144,7 @@ public class GameManager : MonoBehaviour
         AreaClearUI.Instance.SetScoreText(currentScore);
 
         currentMonsters = new CurrentMonsters(CURRENT_TEST_MONSTERS);
+        backgroundManager.SetBackground();
     }
 
     public static MonsterSO GetRandomMonster()

@@ -9,8 +9,12 @@ public static class PlayFabInfo
     static PlayerInfo playerInfo;
     private const string PLAYER_INFO_KEY = "PLAYER_INFO";
 
+    public static bool isLoggedIn = false;
+
     public static void SavePlayerInfo()
     {
+        if (!isLoggedIn) return;
+
         var request = new UpdateUserDataRequest
         {
             Data = new Dictionary<string, string>
@@ -29,7 +33,7 @@ public static class PlayFabInfo
 
     private static void OnPlayFabError(PlayFabError error)
     {
-        Debug.LogError("Playfab Error: " + error.GenerateErrorReport());
+        MessageUI.Instance.OnError(error.Error.ToString());
     }
 
     public static void LoadPlayerInfo()
@@ -44,21 +48,24 @@ public static class PlayFabInfo
 
     static void OnDataLoadSuccess(GetUserDataResult result)
     {
-        if (result.Data == null || !result.Data.ContainsKey(PLAYER_INFO_KEY))
-        {
-            Debug.Log("No Player Info, creating...");
-            playerInfo = new PlayerInfo();
-            SavePlayerInfo();
-        }
-        else
+        if (result.Data != null && result.Data.ContainsKey(PLAYER_INFO_KEY))
         {
             Debug.Log("Successfully loaded player data");
             string jsonData = result.Data[PLAYER_INFO_KEY].Value;
             playerInfo = JsonUtility.FromJson<PlayerInfo>(jsonData);
             playerInfo.DebugInfo();
-        }
 
-        MenuManager.Instance.LoadAScene("MainMenu");
+
+            MenuManager.Instance.LoadAScene("MainMenu");
+            isLoggedIn = true;
+        }
+    }
+
+    public static void NewPlayer()
+    {
+        Debug.Log("No Player Info, creating...");
+        playerInfo = new PlayerInfo();
+        SavePlayerInfo();
     }
 
     public static void SetName(string name)
@@ -71,7 +78,6 @@ public static class PlayFabInfo
     {
         return playerInfo.name;
     }
-
 
     public static void SetHighScore(int highScore)
     {
