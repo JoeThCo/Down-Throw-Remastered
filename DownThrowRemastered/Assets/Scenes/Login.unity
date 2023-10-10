@@ -988,6 +988,18 @@ PrefabInstance:
       propertyPath: m_text
       value: Email...
       objectReference: {fileID: 0}
+    - target: {fileID: 8153400840065147578, guid: 1c92c0d17fa78404fbcdc121b6b6515e, type: 3}
+      propertyPath: m_ContentType
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8153400840065147578, guid: 1c92c0d17fa78404fbcdc121b6b6515e, type: 3}
+      propertyPath: m_KeyboardType
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8153400840065147578, guid: 1c92c0d17fa78404fbcdc121b6b6515e, type: 3}
+      propertyPath: m_CharacterValidation
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c92c0d17fa78404fbcdc121b6b6515e, type: 3}
 --- !u!1001 &925103090
@@ -1211,6 +1223,14 @@ PrefabInstance:
       propertyPath: m_text
       value: Password...
       objectReference: {fileID: 0}
+    - target: {fileID: 8153400840065147578, guid: 1c92c0d17fa78404fbcdc121b6b6515e, type: 3}
+      propertyPath: m_InputType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8153400840065147578, guid: 1c92c0d17fa78404fbcdc121b6b6515e, type: 3}
+      propertyPath: m_ContentType
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c92c0d17fa78404fbcdc121b6b6515e, type: 3}
 --- !u!1001 &1085669120
@@ -1335,6 +1355,14 @@ PrefabInstance:
     - target: {fileID: 7001347521114423869, guid: 1c92c0d17fa78404fbcdc121b6b6515e, type: 3}
       propertyPath: m_SizeDelta.y
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8153400840065147578, guid: 1c92c0d17fa78404fbcdc121b6b6515e, type: 3}
+      propertyPath: m_InputType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8153400840065147578, guid: 1c92c0d17fa78404fbcdc121b6b6515e, type: 3}
+      propertyPath: m_ContentType
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c92c0d17fa78404fbcdc121b6b6515e, type: 3}
@@ -2550,5 +2578,17 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 8153400840065147578, guid: 1c92c0d17fa78404fbcdc121b6b6515e, type: 3}
+      propertyPath: m_ContentType
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8153400840065147578, guid: 1c92c0d17fa78404fbcdc121b6b6515e, type: 3}
+      propertyPath: m_KeyboardType
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8153400840065147578, guid: 1c92c0d17fa78404fbcdc121b6b6515e, type: 3}
+      propertyPath: m_CharacterValidation
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c92c0d17fa78404fbcdc121b6b6515e, type: 3}

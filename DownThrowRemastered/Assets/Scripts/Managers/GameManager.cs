@@ -104,6 +104,7 @@ public class GameManager : MonoBehaviour
     private void EventManager_OnHighScoreChange()
     {
         Debug.Log("New highscore from " + highScore + " -> " + currentScore);
+        GameOverUI.Instance.SetHighscoreText(isNewHighScore(), currentScore, highScore);
         PlayFabInfo.SetHighScore(currentScore);
     }
 

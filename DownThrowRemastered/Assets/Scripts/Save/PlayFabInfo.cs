@@ -9,8 +9,12 @@ public static class PlayFabInfo
     static PlayerInfo playerInfo;
     private const string PLAYER_INFO_KEY = "PLAYER_INFO";
 
+    public static bool isLoggedIn = false;
+
     public static void SavePlayerInfo()
     {
+        if (!isLoggedIn) return;
+
         var request = new UpdateUserDataRequest
         {
             Data = new Dictionary<string, string>
@@ -59,6 +63,7 @@ public static class PlayFabInfo
         }
 
         MenuManager.Instance.LoadAScene("MainMenu");
+        isLoggedIn = true;
     }
 
     public static void SetName(string name)
