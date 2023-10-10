@@ -18,6 +18,17 @@ public class LoginManager : MonoBehaviour
     private const string DEV_EMAIL = "yenow22371@klanze.com";
     private const string DEV_PASSWORD = "mypass123";
 
+    public void UserLogin(string email, string password)
+    {
+        var request = new LoginWithEmailAddressRequest
+        {
+            Email = email,
+            Password = password
+        };
+
+        PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnPlayFabError);
+    }
+
     public void UserLogin()
     {
         var request = new LoginWithEmailAddressRequest
@@ -44,7 +55,11 @@ public class LoginManager : MonoBehaviour
     private void OnLoginSuccess(LoginResult result)
     {
         Debug.Log("Logged in successfully");
+
         PlayFabInfo.LoadPlayerInfo();
+        MenuManager.Instance.LoadAScene("MainMenu");
+
+        PlayFabInfo.isLoggedIn = true;
     }
 
     public void NewUser()
@@ -63,8 +78,10 @@ public class LoginManager : MonoBehaviour
     {
         Debug.Log("Successfully registered user");
 
+        PlayFabInfo.NewPlayer();
         UpdateDisplayName(registerUserName.text);
-        MenuManager.Instance.DisplayMenus("Login");
+
+        UserLogin(registerEmail.text, registerPassword.text);
     }
 
     void UpdateDisplayName(string name)
