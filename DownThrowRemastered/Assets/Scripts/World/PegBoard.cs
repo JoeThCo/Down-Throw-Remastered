@@ -9,6 +9,7 @@ public class PegBoard : MonoBehaviour
     [Space(10)]
     [SerializeField] [Range(0f, 1f)] float pegSpawningRate;
     [SerializeField] [Range(0f, 1f)] float damagePegSpawningRate;
+    [SerializeField] [Range(0f, 1f)] float cashPegSpawningRate;
     [Space(10)]
     [SerializeField] Transform pegParent;
     [SerializeField] float scale = .75f;
@@ -113,6 +114,7 @@ public class PegBoard : MonoBehaviour
 
                 Vector3 current = (topRight.position - new Vector3(currentX, currentY) + Vector3.right * scale * .5f);
 
+                //rate to spawn any peg
                 if (Random.value < pegSpawningRate)
                 {
                     if (Random.value < damagePegSpawningRate)
@@ -121,7 +123,14 @@ public class PegBoard : MonoBehaviour
                     }
                     else
                     {
-                        pegBoard[x, y] = SpawnPeg("Neutral", current);
+                        if (Random.value > cashPegSpawningRate)
+                        {
+                            pegBoard[x, y] = SpawnPeg("Neutral", current);
+                        }
+                        else
+                        {
+                            pegBoard[x, y] = SpawnPeg("Cash", current);
+                        }
                     }
                 }
             }

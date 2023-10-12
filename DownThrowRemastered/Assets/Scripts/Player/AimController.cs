@@ -6,7 +6,6 @@ public class AimController : MonoBehaviour
 {
     [SerializeField] float basePower = 10f;
     [Space(10)]
-    [SerializeField] Transform aimText;
     [SerializeField] Transform ballParent;
     [SerializeField] Transform firePoint;
 
@@ -48,24 +47,29 @@ public class AimController : MonoBehaviour
         canShoot = false;
     }
 
-    private void FixedUpdate()
+    void PlayerPower() 
     {
-        if (!canShoot) return;
-
         float vert = Input.GetAxisRaw("Vertical");
 
         if (vert == 0) return;
         if (vert > 0)
         {
-            playerPower += Time.deltaTime;
+            playerPower += Time.deltaTime * SettingsManager.GetPowerSensitivity();
         }
         else
         {
-            playerPower -= Time.deltaTime;
+            playerPower -= Time.deltaTime * SettingsManager.GetPowerSensitivity();
         }
 
         playerPower = Mathf.Clamp(playerPower, MIN_POWER, MAX_POWER);
         AimUI.Instance.SetBarPower(playerPower);
+    }
+
+    private void FixedUpdate()
+    {
+        if (!canShoot) return;
+
+        PlayerPower();
     }
 
     private void Update()

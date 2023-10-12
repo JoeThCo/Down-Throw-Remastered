@@ -47,6 +47,9 @@ public class EventManager : MonoBehaviour
     public delegate void YouWin();
     public static event AreaClear OnYouWin;
 
+    public delegate void GoldChange(int change);
+    public static event GoldChange OnCashChange;
+
     public static void Invoke(CustomEvent customEvent, object parameter = null)
     {
         switch (customEvent)
@@ -110,6 +113,10 @@ public class EventManager : MonoBehaviour
 
             case CustomEvent.YouWin:
                 OnYouWin?.Invoke();
+                break;
+
+            case CustomEvent.CashChange:
+                OnCashChange?.Invoke(Convert.ToInt32(parameter));
                 break;
 
             default:

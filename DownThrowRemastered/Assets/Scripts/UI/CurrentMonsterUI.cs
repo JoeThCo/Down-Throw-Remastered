@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class CurrentMonsterUI : MonoBehaviour
+public class CurrentMonsterUI : MonoBehaviour, IUIInit
 {
     [SerializeField] CanvasGroup canvasGroup;
     [SerializeField] TextMeshProUGUI nameText;
@@ -14,25 +14,18 @@ public class CurrentMonsterUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI healthText;
 
     public static CurrentMonsterUI Instance;
-    private void OnEnable()
+
+    public void Init()
     {
         Instance = this;
 
         EventManager.OnNewMonster += EventManager_OnNewMonster;
-        EventManager.OnAreaClear += EventManager_OnAreaClear;
-
         SceneManager.sceneUnloaded += SceneManager_sceneUnloaded;
     }
 
     private void SceneManager_sceneUnloaded(Scene arg0)
     {
         EventManager.OnNewMonster -= EventManager_OnNewMonster;
-        EventManager.OnAreaClear -= EventManager_OnAreaClear;
-    }
-
-    private void EventManager_OnAreaClear()
-    {
-        //SetVisablity(false);
     }
 
     private void EventManager_OnNewMonster(Monster monster)

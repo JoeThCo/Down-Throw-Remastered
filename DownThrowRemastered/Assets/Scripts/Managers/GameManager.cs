@@ -6,6 +6,10 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] BackgroundManager backgroundManager;
+    [Space(10)]
+    [SerializeField] CurrencyUI currencyUI;
+    [SerializeField] CurrentMonsterUI currentMonsterUI;
+    [SerializeField] GameOverUI gameOverUI;
     [SerializeField] NextMonsterUI nextMonsterUI;
     [SerializeField] AimUI aimerUI;
     [SerializeField] ScoreUI scoreUI;
@@ -29,8 +33,12 @@ public class GameManager : MonoBehaviour
     public const float MAX_MONSTERS = 6;
     static MonsterSO[] allMonsters;
 
+    public static Camera Cam;
+
     private void Start()
     {
+        Cam = Camera.main;
+
         PlayFabInfo.OfflinePlay();
         Application.targetFrameRate = -1;
 
@@ -48,6 +56,12 @@ public class GameManager : MonoBehaviour
 
     void Init()
     {
+        //Application.targetFrameRate = Screen.currentResolution.refreshRate;
+        QualitySettings.vSyncCount = 1;
+
+        currencyUI.Init();
+        currentMonsterUI.Init();
+        gameOverUI.Init();
         backgroundManager.Init();
         nextMonsterUI.Init();
         aimerUI.Init();
@@ -104,7 +118,6 @@ public class GameManager : MonoBehaviour
     private void EventManager_OnHighScoreChange()
     {
         Debug.Log("New highscore from " + highScore + " -> " + currentScore);
-        GameOverUI.Instance.SetHighscoreText(isNewHighScore(), currentScore, highScore);
         PlayFabInfo.SetHighScore(currentScore);
     }
 
@@ -129,6 +142,9 @@ public class GameManager : MonoBehaviour
     private void EventManager_OnGameOver()
     {
         CheckNewHighScore();
+
+        gameOverUI.SetGameOverUI(currentScore, highScore);
+
         MenuManager.Instance.DisplayMenus("GameOver");
         ItemSpawner.PlaySFX("gameOver");
         isPlaying = false;
@@ -146,7 +162,6 @@ public class GameManager : MonoBehaviour
         currentMonsters = new CurrentMonsters(CURRENT_TEST_MONSTERS);
         backgroundManager.SetBackground();
     }
-
     public static MonsterSO GetRandomMonster()
     {
         return allMonsters[Random.Range(0, allMonsters.Length)];

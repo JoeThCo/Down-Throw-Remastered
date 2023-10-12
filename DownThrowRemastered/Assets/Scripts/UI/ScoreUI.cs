@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class ScoreUI : MonoBehaviour
+public class ScoreUI : MonoBehaviour, IUIInit
 {
     [SerializeField] TextMeshProUGUI highScoreText;
     [SerializeField] TextMeshProUGUI currentScoreText;
 
     public static ScoreUI Instance;
 
-    private void Awake()
+    public void Init()
     {
         Instance = this;
     }

@@ -14,6 +14,8 @@ public static class PlayFabInfo
     public static void SavePlayerInfo()
     {
         if (!isLoggedIn) return;
+        //Debug.Log(playerInfo.ToJson());
+        //if (SettingsManager.ComparePlayerSettings(playerInfo.playerSettings)) return;
 
         var request = new UpdateUserDataRequest
         {
@@ -23,12 +25,12 @@ public static class PlayFabInfo
             }
         };
 
-        PlayFabClientAPI.UpdateUserData(request, OnScoreUpdateSuccess, OnPlayFabError);
+        PlayFabClientAPI.UpdateUserData(request, OnPlayerInfoSuccess, OnPlayFabError);
     }
 
-    private static void OnScoreUpdateSuccess(UpdateUserDataResult result)
+    private static void OnPlayerInfoSuccess(UpdateUserDataResult result)
     {
-        Debug.Log("Successfully updated player score");
+        Debug.LogWarning("Successfully updated player info");
     }
 
     private static void OnPlayFabError(PlayFabError error)
@@ -52,9 +54,11 @@ public static class PlayFabInfo
         {
             Debug.Log("Successfully loaded player data");
             string jsonData = result.Data[PLAYER_INFO_KEY].Value;
-            playerInfo = JsonUtility.FromJson<PlayerInfo>(jsonData);
-            playerInfo.DebugInfo();
 
+            playerInfo = JsonUtility.FromJson<PlayerInfo>(jsonData);
+            SettingsManager.SetPlayerSettings(playerInfo.playerSettings);
+
+            Debug.Log(jsonData);
 
             MenuManager.Instance.LoadAScene("MainMenu");
             isLoggedIn = true;
@@ -90,34 +94,19 @@ public static class PlayFabInfo
         return playerInfo.highScore;
     }
 
+    public static void ChangeGold(int change)
+    {
+        playerInfo.gems += change;
+    }
+
+    public static int GetGold() { return playerInfo.gems; }
+
     public static void OfflinePlay()
     {
         if (playerInfo != null) return;
 
         Debug.LogWarning("You are not connected to Playfab!");
         playerInfo = new PlayerInfo();
-    }
-}
-
-public class PlayerInfo
-{
-    public string name;
-    public int highScore;
-
-    public PlayerInfo()
-    {
-        name = "Offline";
-        highScore = 0;
-    }
-
-    public string ToJson()
-    {
-        return JsonUtility.ToJson(this);
-    }
-
-    public void DebugInfo()
-    {
-        Debug.Log(name);
-        Debug.Log("Highscore: " + highScore);
+        SettingsManager.SetPlayerSettings(null);
     }
 }
