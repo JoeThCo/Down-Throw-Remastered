@@ -70,6 +70,7 @@ MonoBehaviour:
   sfx: {fileID: 1440319365742662506}
   powerSensitivity: {fileID: 2190835828367751491}
   aimSensitivtiy: {fileID: 4794352649195908815}
+  aimType: {fileID: 88957602185291699}
 --- !u!1 &6997366367929411569
 GameObject:
   m_ObjectHideFlags: 0
@@ -1095,7 +1096,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3606210560183346264, guid: 28bf8637688a79247a50b0bb94f324f2, type: 3}
       propertyPath: m_Size
-      value: 1
+      value: 0.81333333
       objectReference: {fileID: 0}
     - target: {fileID: 3606210560552885256, guid: 28bf8637688a79247a50b0bb94f324f2, type: 3}
       propertyPath: m_AnchorMax.y

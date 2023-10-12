@@ -11,6 +11,8 @@ public class SettingsUI : MonoBehaviour, IUIInit
     [Space(10)]
     [SerializeField] SettingSliderUI powerSensitivity;
     [SerializeField] SettingSliderUI aimSensitivtiy;
+    [Space(10)]
+    [SerializeField] SettingDropDownUI aimType;
 
     public void Init()
     {
@@ -19,6 +21,8 @@ public class SettingsUI : MonoBehaviour, IUIInit
 
         powerSensitivity.Init(SettingsManager.GetPowerSensitivity());
         aimSensitivtiy.Init(SettingsManager.GetAimSensitivity());
+
+        aimType.Init(SettingsManager.GetAimType());
     }
 
     private void Awake()
