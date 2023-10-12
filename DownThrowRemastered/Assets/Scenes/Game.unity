@@ -6800,6 +6800,14 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4281965631
       objectReference: {fileID: 0}
+    - target: {fileID: 3241032328507825508, guid: 10b8a5844c03d4e4b91e9e69e7086e24, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 8192
+      objectReference: {fileID: 0}
+    - target: {fileID: 3241032328507825508, guid: 10b8a5844c03d4e4b91e9e69e7086e24, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 32
+      objectReference: {fileID: 0}
     - target: {fileID: 3241032328507825510, guid: 10b8a5844c03d4e4b91e9e69e7086e24, type: 3}
       propertyPath: m_Name
       value: Cash
@@ -6870,11 +6878,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3241032328507825511, guid: 10b8a5844c03d4e4b91e9e69e7086e24, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 170
+      value: -350
       objectReference: {fileID: 0}
     - target: {fileID: 3241032328507825511, guid: 10b8a5844c03d4e4b91e9e69e7086e24, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 265.1941
+      value: 265
       objectReference: {fileID: 0}
     - target: {fileID: 3241032328507825511, guid: 10b8a5844c03d4e4b91e9e69e7086e24, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
