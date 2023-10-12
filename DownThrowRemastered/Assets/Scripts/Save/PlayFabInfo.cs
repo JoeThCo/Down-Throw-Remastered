@@ -99,6 +99,7 @@ public static class PlayFabInfo
 
         Debug.LogWarning("You are not connected to Playfab!");
         playerInfo = new PlayerInfo();
+        SettingsManager.SetPlayerSettings(null);
     }
 }
 
@@ -114,6 +115,7 @@ public class PlayerInfo
     {
         name = "Offline";
         highScore = 0;
+        playerSettings = new PlayerSettings();
     }
 
     public string ToJson()

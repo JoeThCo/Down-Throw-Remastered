@@ -16,7 +16,7 @@ public class Aim : MonoBehaviour
         if (!aimController.canShoot) return;
 
         float horizontal = Input.GetAxis("Horizontal");
-        float change = rotateSpeed * horizontal * Time.deltaTime;
+        float change = rotateSpeed * horizontal * Time.deltaTime * SettingsManager.GetAimSensitivity();
 
         if (currentAngle + change > rotationLimit || currentAngle + change < -rotationLimit) return;
 

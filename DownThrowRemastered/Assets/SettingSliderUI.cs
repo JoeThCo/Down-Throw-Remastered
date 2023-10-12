@@ -27,6 +27,19 @@ public class SettingSliderUI : MonoBehaviour
         SetText(SettingsManager.GetSFXVolume());
     }
 
+    public void SetPower() 
+    {
+        SettingsManager.SetPowerSensitvity(slider.value);
+        SetText(SettingsManager.GetPowerSensitivity());
+    }
+
+    public void SetAimsensitivty() 
+    {
+        SettingsManager.SetAimSensitvity(slider.value);
+        SetText(SettingsManager.GetAimSensitivity());
+    }
+
+
     void SetSlider(float value)
     {
         slider.value = value;

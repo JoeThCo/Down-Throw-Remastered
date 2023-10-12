@@ -27,6 +27,26 @@ public static class SettingsManager
         return playerSettings.sfxVolume;
     }
 
+    public static float GetAimSensitivity()
+    {
+        return playerSettings.aimSensitivity;
+    }
+
+    public static float GetPowerSensitivity()
+    {
+        return playerSettings.powerSensitivity;
+    }
+
+    public static void SetPowerSensitvity(float value)
+    {
+        playerSettings.powerSensitivity = value;
+    }
+
+    public static void SetAimSensitvity(float value)
+    {
+        playerSettings.aimSensitivity = value;
+    }
+
     public static void SetMusicVolume(float volume)
     {
         playerSettings.musicVolume = volume;
@@ -44,9 +64,15 @@ public class PlayerSettings
     public float musicVolume = .5f;
     public float sfxVolume = .5f;
 
+    public float powerSensitivity;
+    public float aimSensitivity;
+
     public PlayerSettings()
     {
         musicVolume = .25f;
         sfxVolume = .75f;
+
+        powerSensitivity = 1f;
+        aimSensitivity = 1f;
     }
 }
