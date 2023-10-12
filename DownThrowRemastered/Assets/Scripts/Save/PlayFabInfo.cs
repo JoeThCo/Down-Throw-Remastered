@@ -14,9 +14,8 @@ public static class PlayFabInfo
     public static void SavePlayerInfo()
     {
         if (!isLoggedIn) return;
-        if (SettingsManager.ComparePlayerSettings(playerInfo.playerSettings)) return;
-
-        Debug.Log(playerInfo.ToJson());
+        //Debug.Log(playerInfo.ToJson());
+        //if (SettingsManager.ComparePlayerSettings(playerInfo.playerSettings)) return;
 
         var request = new UpdateUserDataRequest
         {

@@ -24,11 +24,13 @@ public class Aim : MonoBehaviour
     {
         switch (SettingsManager.GetAimType())
         {
-            case AimType.Keys:
+            //Keys
+            case 0:
                 AimKeys();
                 break;
 
-            case AimType.Mouse:
+            //Mouse
+            case 1:
                 AimMouse();
                 break;
 

@@ -2099,11 +2099,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2533224208553632336, guid: f8f174b2d22a29b40acbe3a1a19af37a, type: 3}
       propertyPath: m_Spacing.y
-      value: 25
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2533224208553632336, guid: f8f174b2d22a29b40acbe3a1a19af37a, type: 3}
       propertyPath: m_CellSize.y
-      value: 100
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 2533224208553632337, guid: f8f174b2d22a29b40acbe3a1a19af37a, type: 3}
       propertyPath: m_Pivot.x

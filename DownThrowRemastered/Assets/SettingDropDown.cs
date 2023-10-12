@@ -9,6 +9,6 @@ public class SettingDropDown : MonoBehaviour
 
     public void SetAimType()
     {
-        SettingsManager.SetAimType((AimType)dropDown.value);
+        SettingsManager.SetAimType(dropDown.value);
     }
 }

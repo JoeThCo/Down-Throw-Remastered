@@ -18,9 +18,9 @@ public static class SettingsManager
         }
     }
 
-    public static bool ComparePlayerSettings(PlayerSettings playerSettings)
+    public static bool ComparePlayerSettings(PlayerSettings input)
     {
-        return playerSettings.Equals(playerSettings);
+        return playerSettings.Equals(input);
     }
 
     public static float GetMusicVolume()
@@ -42,12 +42,12 @@ public static class SettingsManager
         return playerSettings.powerSensitivity;
     }
 
-    public static AimType GetAimType()
+    public static int GetAimType()
     {
         return playerSettings.aimType;
     }
 
-    public static void SetAimType(AimType aimType)
+    public static void SetAimType(int aimType)
     {
         playerSettings.aimType = aimType;
     }
@@ -82,7 +82,7 @@ public class PlayerSettings
     public float powerSensitivity;
     public float aimSensitivity;
 
-    public AimType aimType = 0;
+    public int aimType = 0;
 
     public PlayerSettings()
     {
@@ -92,5 +92,24 @@ public class PlayerSettings
         powerSensitivity = 1f;
         aimSensitivity = 1f;
         aimType = 0;
+    }
+
+    public override bool Equals(object obj)
+    {
+        if (obj == null) return false;
+        PlayerSettings other = (PlayerSettings)obj;
+
+        return other.musicVolume.Equals(musicVolume) &&
+            other.sfxVolume.Equals(sfxVolume) &&
+
+            other.powerSensitivity.Equals(powerSensitivity) &&
+            other.aimSensitivity.Equals(aimSensitivity) &&
+
+            other.aimType.Equals(aimType);
+    }
+
+    public override int GetHashCode()
+    {
+        return base.GetHashCode();
     }
 }
