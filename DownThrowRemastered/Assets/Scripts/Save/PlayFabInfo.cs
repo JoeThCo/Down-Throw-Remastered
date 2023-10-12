@@ -94,6 +94,13 @@ public static class PlayFabInfo
         return playerInfo.highScore;
     }
 
+    public static void ChangeGold(int change)
+    {
+        playerInfo.gems += change;
+    }
+
+    public static int GetGold() { return playerInfo.gems; }
+
     public static void OfflinePlay()
     {
         if (playerInfo != null) return;
@@ -101,26 +108,5 @@ public static class PlayFabInfo
         Debug.LogWarning("You are not connected to Playfab!");
         playerInfo = new PlayerInfo();
         SettingsManager.SetPlayerSettings(null);
-    }
-}
-
-[System.Serializable]
-public class PlayerInfo
-{
-    public string name;
-    public int highScore;
-
-    public PlayerSettings playerSettings;
-
-    public PlayerInfo()
-    {
-        name = "Offline";
-        highScore = 0;
-        playerSettings = new PlayerSettings();
-    }
-
-    public string ToJson()
-    {
-        return JsonUtility.ToJson(this);
     }
 }

@@ -23,5 +23,7 @@ public enum CustomEvent
     HighScoreChange,
 
     GameOver,
-    YouWin
+    YouWin,
+
+    CashChange
 }

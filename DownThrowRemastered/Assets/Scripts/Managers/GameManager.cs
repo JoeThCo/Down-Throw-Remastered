@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] BackgroundManager backgroundManager;
     [Space(10)]
+    [SerializeField] CurrencyUI currencyUI;
     [SerializeField] CurrentMonsterUI currentMonsterUI;
     [SerializeField] GameOverUI gameOverUI;
     [SerializeField] NextMonsterUI nextMonsterUI;
@@ -58,6 +59,7 @@ public class GameManager : MonoBehaviour
         //Application.targetFrameRate = Screen.currentResolution.refreshRate;
         QualitySettings.vSyncCount = 1;
 
+        currencyUI.Init();
         currentMonsterUI.Init();
         gameOverUI.Init();
         backgroundManager.Init();
@@ -160,7 +162,6 @@ public class GameManager : MonoBehaviour
         currentMonsters = new CurrentMonsters(CURRENT_TEST_MONSTERS);
         backgroundManager.SetBackground();
     }
-
     public static MonsterSO GetRandomMonster()
     {
         return allMonsters[Random.Range(0, allMonsters.Length)];

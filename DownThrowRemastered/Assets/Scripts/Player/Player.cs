@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 [System.Serializable]
 public class Player : Being
 {
+    public int cash = 0;
+
     const float BALLS_BACK_RATE = .33f;
     const int MINIMUM_BALLS_BACK = 1;
 
@@ -15,7 +17,14 @@ public class Player : Being
         EventManager.OnPlayerShootEnd += EventManager_OnPlayerShootEnd;
         EventManager.OnMonsterDead += EventManager_OnMonsterDead;
 
+        EventManager.OnCashChange += EventManager_OnCashChange;
         SceneManager.sceneUnloaded += SceneManager_sceneUnloaded;
+    }
+
+    private void EventManager_OnCashChange(int change)
+    {
+        cash += change;
+        CurrencyUI.Instance.SetCashText(cash);
     }
 
     private void SceneManager_sceneUnloaded(Scene arg0)
@@ -40,7 +49,7 @@ public class Player : Being
 
         ChangeHealth(-ballsBack);
         AimUI.Instance.SetBallsLeftText(this);
-        
+
         Debug.Log("+" + ballsBack + " balls back for " + monster.GetName());
     }
 
