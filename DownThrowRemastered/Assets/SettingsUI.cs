@@ -21,7 +21,7 @@ public class SettingsUI : MonoBehaviour, IUIInit
         aimSensitivtiy.Init(SettingsManager.GetAimSensitivity());
     }
 
-    private void Awake()
+    public void OnEnable()
     {
         Init();
     }
