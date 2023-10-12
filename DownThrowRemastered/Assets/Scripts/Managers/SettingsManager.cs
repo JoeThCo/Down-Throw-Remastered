@@ -4,10 +4,28 @@ using UnityEngine;
 
 public static class SettingsManager
 {
-    static PlayerSettings playerSettings = new PlayerSettings();
+    static PlayerSettings playerSettings;
 
-    public static float GetMusicVolume() { return playerSettings.musicVolume; }
-    public static float GetSFXVolume() { return playerSettings.sfxVolume; }
+    public static void SetPlayerSettings(PlayerSettings input)
+    {
+        if (input == null)
+        {
+            playerSettings = new PlayerSettings();
+        }
+        else
+        {
+            playerSettings = input;
+        }
+    }
+
+    public static float GetMusicVolume()
+    {
+        return playerSettings.musicVolume;
+    }
+    public static float GetSFXVolume()
+    {
+        return playerSettings.sfxVolume;
+    }
 
     public static void SetMusicVolume(float volume)
     {
@@ -20,10 +38,11 @@ public static class SettingsManager
     }
 }
 
+[System.Serializable]
 public class PlayerSettings
 {
-    public float musicVolume = 1f;
-    public float sfxVolume = 1f;
+    public float musicVolume = .5f;
+    public float sfxVolume = .5f;
 
     public PlayerSettings()
     {

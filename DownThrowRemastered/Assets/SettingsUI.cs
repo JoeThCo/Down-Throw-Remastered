@@ -19,4 +19,9 @@ public class SettingsUI : MonoBehaviour, IUIInit
     {
         Init();
     }
+
+    public void SaveSettings()
+    {
+        PlayFabInfo.SavePlayerInfo();
+    }
 }
