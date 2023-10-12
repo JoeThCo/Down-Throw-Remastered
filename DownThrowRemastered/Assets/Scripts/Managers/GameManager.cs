@@ -6,6 +6,8 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] BackgroundManager backgroundManager;
+    [Space(10)]
+    [SerializeField] GameOverUI gameOverUI;
     [SerializeField] NextMonsterUI nextMonsterUI;
     [SerializeField] AimUI aimerUI;
     [SerializeField] ScoreUI scoreUI;
@@ -48,6 +50,10 @@ public class GameManager : MonoBehaviour
 
     void Init()
     {
+        //Application.targetFrameRate = Screen.currentResolution.refreshRate;
+        QualitySettings.vSyncCount = 1;
+
+        gameOverUI.Init();
         backgroundManager.Init();
         nextMonsterUI.Init();
         aimerUI.Init();
@@ -104,7 +110,6 @@ public class GameManager : MonoBehaviour
     private void EventManager_OnHighScoreChange()
     {
         Debug.Log("New highscore from " + highScore + " -> " + currentScore);
-        GameOverUI.Instance.SetHighscoreText(isNewHighScore(), currentScore, highScore);
         PlayFabInfo.SetHighScore(currentScore);
     }
 
@@ -129,6 +134,9 @@ public class GameManager : MonoBehaviour
     private void EventManager_OnGameOver()
     {
         CheckNewHighScore();
+
+        gameOverUI.SetGameOverUI(currentScore, highScore);
+
         MenuManager.Instance.DisplayMenus("GameOver");
         ItemSpawner.PlaySFX("gameOver");
         isPlaying = false;

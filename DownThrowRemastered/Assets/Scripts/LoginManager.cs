@@ -57,7 +57,6 @@ public class LoginManager : MonoBehaviour
         Debug.Log("Logged in successfully");
 
         PlayFabInfo.LoadPlayerInfo();
-        MenuManager.Instance.LoadAScene("MainMenu");
 
         PlayFabInfo.isLoggedIn = true;
     }

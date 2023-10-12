@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class GameOverUI : MonoBehaviour
+public class GameOverUI : MonoBehaviour, IUIInit
 {
     [SerializeField] TextMeshProUGUI newHighscoreText;
     [SerializeField] TextMeshProUGUI highscoreText;
@@ -11,21 +11,16 @@ public class GameOverUI : MonoBehaviour
 
     public static GameOverUI Instance;
 
-    private void Awake()
+    public void Init()
     {
         Instance = this;
     }
 
-    public void SetScoreText(int score)
+    public void SetGameOverUI(int score, int highscore)
     {
-        scoreText.SetText("Score: " + score);
-    }
+        newHighscoreText.gameObject.SetActive(score > highscore);
 
-    public void SetHighscoreText(bool isHighScore, int score, int highscore)
-    {
-        newHighscoreText.gameObject.SetActive(isHighScore);
-
-        if (isHighScore)
+        if (score > highscore)
         {
             highscoreText.SetText("Highscore: " + score.ToString());
         }
@@ -33,5 +28,7 @@ public class GameOverUI : MonoBehaviour
         {
             highscoreText.SetText("Highscore: " + highscore.ToString());
         }
+
+        scoreText.SetText("Score: " + score);
     }
 }

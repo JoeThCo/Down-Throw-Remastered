@@ -55,7 +55,6 @@ public static class PlayFabInfo
             playerInfo = JsonUtility.FromJson<PlayerInfo>(jsonData);
             playerInfo.DebugInfo();
 
-
             MenuManager.Instance.LoadAScene("MainMenu");
             isLoggedIn = true;
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class AimUI : MonoBehaviour
+public class AimUI : MonoBehaviour, IUIInit
 {
     [SerializeField] TextMeshProUGUI ballsLeftText;
     [Space(10)]

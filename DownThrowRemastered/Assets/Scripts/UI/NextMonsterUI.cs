@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NextMonsterUI : MonoBehaviour
+public class NextMonsterUI : MonoBehaviour, IUIInit
 {
     public static NextMonsterUI Instance;
 
