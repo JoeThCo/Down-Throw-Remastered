@@ -6,7 +6,6 @@ public class AimController : MonoBehaviour
 {
     [SerializeField] float basePower = 10f;
     [Space(10)]
-    [SerializeField] Transform aimText;
     [SerializeField] Transform ballParent;
     [SerializeField] Transform firePoint;
 

@@ -18,6 +18,11 @@ public static class SettingsManager
         }
     }
 
+    public static bool ComparePlayerSettings(PlayerSettings playerSettings)
+    {
+        return playerSettings.Equals(playerSettings);
+    }
+
     public static float GetMusicVolume()
     {
         return playerSettings.musicVolume;
@@ -35,6 +40,16 @@ public static class SettingsManager
     public static float GetPowerSensitivity()
     {
         return playerSettings.powerSensitivity;
+    }
+
+    public static AimType GetAimType()
+    {
+        return playerSettings.aimType;
+    }
+
+    public static void SetAimType(AimType aimType)
+    {
+        playerSettings.aimType = aimType;
     }
 
     public static void SetPowerSensitvity(float value)
@@ -67,6 +82,8 @@ public class PlayerSettings
     public float powerSensitivity;
     public float aimSensitivity;
 
+    public AimType aimType = 0;
+
     public PlayerSettings()
     {
         musicVolume = .25f;
@@ -74,5 +91,6 @@ public class PlayerSettings
 
         powerSensitivity = 1f;
         aimSensitivity = 1f;
+        aimType = 0;
     }
 }

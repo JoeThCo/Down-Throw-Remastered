@@ -32,8 +32,12 @@ public class GameManager : MonoBehaviour
     public const float MAX_MONSTERS = 6;
     static MonsterSO[] allMonsters;
 
+    public static Camera Cam;
+
     private void Start()
     {
+        Cam = Camera.main;
+
         PlayFabInfo.OfflinePlay();
         Application.targetFrameRate = -1;
 
