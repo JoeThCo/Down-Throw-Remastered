@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] BackgroundManager backgroundManager;
     [Space(10)]
+    [SerializeField] CurrentMonsterUI currentMonsterUI;
     [SerializeField] GameOverUI gameOverUI;
     [SerializeField] NextMonsterUI nextMonsterUI;
     [SerializeField] AimUI aimerUI;
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour
         //Application.targetFrameRate = Screen.currentResolution.refreshRate;
         QualitySettings.vSyncCount = 1;
 
+        currentMonsterUI.Init();
         gameOverUI.Init();
         backgroundManager.Init();
         nextMonsterUI.Init();
