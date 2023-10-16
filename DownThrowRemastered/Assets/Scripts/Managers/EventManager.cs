@@ -115,7 +115,7 @@ public class EventManager : MonoBehaviour
                 OnYouWin?.Invoke();
                 break;
 
-            case CustomEvent.CashChange:
+            case CustomEvent.GoldChange:
                 OnCashChange?.Invoke(Convert.ToInt32(parameter));
                 break;
 

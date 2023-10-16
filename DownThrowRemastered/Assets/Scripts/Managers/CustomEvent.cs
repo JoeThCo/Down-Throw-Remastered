@@ -25,5 +25,5 @@ public enum CustomEvent
     GameOver,
     YouWin,
 
-    CashChange
+    GoldChange
 }

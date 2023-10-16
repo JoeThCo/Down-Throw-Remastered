@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     {
         Cam = Camera.main;
 
-        PlayFabInfo.OfflinePlay();
+        PlayFabPlayerInfo.OfflinePlay();
         Application.targetFrameRate = -1;
 
         Load();
@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
         currentMonsters = new CurrentMonsters(CURRENT_TEST_MONSTERS);
 
         currentScore = 0;
-        highScore = PlayFabInfo.GetHighScore();
+        highScore = PlayFabPlayerInfo.GetHighScore();
 
         scoreUI.SetHighScoreText(highScore);
         scoreUI.SetCurrentScoreText(currentScore);
@@ -118,7 +118,7 @@ public class GameManager : MonoBehaviour
     private void EventManager_OnHighScoreChange()
     {
         Debug.Log("New highscore from " + highScore + " -> " + currentScore);
-        PlayFabInfo.SetHighScore(currentScore);
+        PlayFabPlayerInfo.SetHighScore(currentScore);
     }
 
     private void EventManager_OnScoreChange(int change)
@@ -147,7 +147,10 @@ public class GameManager : MonoBehaviour
 
         MenuManager.Instance.DisplayMenus("GameOver");
         ItemSpawner.PlaySFX("gameOver");
+
         isPlaying = false;
+
+        PlayFabPlayerInfo.SavePlayerInfo();
     }
 
     private void EventManager_OnAreaClear()

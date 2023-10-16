@@ -9,7 +9,8 @@ public class PegBoard : MonoBehaviour
     [Space(10)]
     [SerializeField] [Range(0f, 1f)] float pegSpawningRate;
     [SerializeField] [Range(0f, 1f)] float damagePegSpawningRate;
-    [SerializeField] [Range(0f, 1f)] float cashPegSpawningRate;
+    [Space(10)]
+    [SerializeField] [Range(0f, 1f)] float goldPegSpawningRate;
     [Space(10)]
     [SerializeField] Transform pegParent;
     [SerializeField] float scale = .75f;
@@ -123,13 +124,13 @@ public class PegBoard : MonoBehaviour
                     }
                     else
                     {
-                        if (Random.value > cashPegSpawningRate)
+                        if (Random.value < goldPegSpawningRate)
                         {
-                            pegBoard[x, y] = SpawnPeg("Neutral", current);
+                            pegBoard[x, y] = SpawnPeg("Gold", current);
                         }
                         else
                         {
-                            pegBoard[x, y] = SpawnPeg("Cash", current);
+                            pegBoard[x, y] = SpawnPeg("Neutral", current);
                         }
                     }
                 }

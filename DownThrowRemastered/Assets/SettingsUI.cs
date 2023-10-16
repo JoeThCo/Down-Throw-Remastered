@@ -32,6 +32,6 @@ public class SettingsUI : MonoBehaviour, IUIInit
 
     public void SaveSettings()
     {
-        PlayFabInfo.SavePlayerInfo();
+        PlayFabPlayerInfo.SavePlayerInfo();
     }
 }
