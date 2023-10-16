@@ -18,7 +18,7 @@ public class AimUI : MonoBehaviour, IUIInit
         Instance = this;
     }
 
-    public void SetBallsLeftText(Player player)
+    public void SetBallsLeftText(InGamePlayer player)
     {
         ballsLeftText.SetText(player.GetHealth().ToString());
     }

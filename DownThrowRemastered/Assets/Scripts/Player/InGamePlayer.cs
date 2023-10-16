@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [System.Serializable]
-public class Player : Being
+public class InGamePlayer : Being
 {
     public int cash = 0;
 
     const float BALLS_BACK_RATE = .33f;
     const int MINIMUM_BALLS_BACK = 1;
 
-    public Player(int health) : base(health)
+    public InGamePlayer(int health) : base(health)
     {
         EventManager.OnPlayerShoot += EventManager_OnPlayerShootStart;
         EventManager.OnPlayerShootEnd += EventManager_OnPlayerShootEnd;

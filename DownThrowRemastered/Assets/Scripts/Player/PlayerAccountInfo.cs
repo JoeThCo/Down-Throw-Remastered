@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class PlayerInfo
+public class PlayerAccountInfo
 {
     public string name;
     public int highScore;
@@ -12,7 +12,7 @@ public class PlayerInfo
 
     public PlayerSettings playerSettings;
 
-    public PlayerInfo()
+    public PlayerAccountInfo()
     {
         name = "Offline";
 

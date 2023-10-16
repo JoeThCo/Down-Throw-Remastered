@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     public static bool isPlaying;
 
-    Player player;
+    InGamePlayer player;
     CurrentMonsters currentMonsters;
 
     public static float CurrentDifficulty = 1;
@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
         nextMonsterUI.Init();
         aimerUI.Init();
 
-        player = new Player(START_PLAYER_BALLS);
+        player = new InGamePlayer(START_PLAYER_BALLS);
         AimUI.Instance.SetBallsLeftText(player);
 
         CurrentDifficulty = 1;
