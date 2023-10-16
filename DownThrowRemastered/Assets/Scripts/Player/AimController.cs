@@ -47,7 +47,7 @@ public class AimController : MonoBehaviour
         canShoot = false;
     }
 
-    void PlayerPower() 
+    void PlayerPower()
     {
         float vert = Input.GetAxisRaw("Vertical");
 
@@ -65,6 +65,13 @@ public class AimController : MonoBehaviour
         AimUI.Instance.SetBarPower(playerPower);
     }
 
+    bool isCorrectPlayerControlsToShoot()
+    {
+        int aimType = SettingsManager.GetAimType();
+
+        return aimType == (int)AimType.Keys && Input.GetKeyDown(KeyCode.Space) || aimType == (int)AimType.Mouse && Input.GetMouseButtonDown(0);
+    }
+
     private void FixedUpdate()
     {
         if (!canShoot) return;
@@ -76,7 +83,7 @@ public class AimController : MonoBehaviour
     {
         if (!canShoot) return;
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (isCorrectPlayerControlsToShoot())
         {
             EventManager.Invoke(CustomEvent.PlayerShootStart);
         }
