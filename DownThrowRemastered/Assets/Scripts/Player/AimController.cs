@@ -69,7 +69,7 @@ public class AimController : MonoBehaviour
     {
         int aimType = SettingsManager.GetAimType();
 
-        return aimType == (int)AimType.Keys && Input.GetKeyDown(KeyCode.Space) || aimType == (int)AimType.Mouse && Input.GetMouseButtonDown(0);
+        return aimType == (int)AimType.Keys && Input.GetKeyDown(KeyCode.Space) || aimType == (int)AimType.Mouse && Input.GetMouseButtonDown(0) && !MouseOverUI.isOverUI;
     }
 
     private void FixedUpdate()
