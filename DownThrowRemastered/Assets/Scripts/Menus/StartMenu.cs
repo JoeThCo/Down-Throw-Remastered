@@ -17,7 +17,7 @@ public class StartMenu : MonoBehaviour
     private void Awake()
     {
         PlayFabPlayerInfo.OfflinePlay();
-        ItemSpawner.Load();
+        StaticSpawner.Load();
 
         titleText.SetText(Application.productName);
         versionText.SetText(Application.version);

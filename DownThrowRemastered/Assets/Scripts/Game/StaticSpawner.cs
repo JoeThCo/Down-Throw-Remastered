@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class ItemSpawner
+public static class StaticSpawner
 {
     static GameObject[] allGameObjects;
     static GameObject[] allUI;
 
+    static MonsterSO[] allMonstersSOs;
     static AudioSO[] allSFXAudioSO;
     static BackgroundSO[] allBackgroundSO;
 
@@ -15,6 +16,7 @@ public static class ItemSpawner
         allGameObjects = Resources.LoadAll<GameObject>("GameObjects");
         allUI = Resources.LoadAll<GameObject>("UI");
 
+        allMonstersSOs = Resources.LoadAll<MonsterSO>("Monsters");
         allSFXAudioSO = Resources.LoadAll<AudioSO>("SFX");
         allBackgroundSO = Resources.LoadAll<BackgroundSO>("Backgrounds");
     }
@@ -90,6 +92,11 @@ public static class ItemSpawner
     public static BackgroundSO GetBackgroundSO()
     {
         return allBackgroundSO[Random.Range(0, allBackgroundSO.Length)];
+    }
+
+    public static MonsterSO GetMonsterSO()
+    {
+        return allMonstersSOs[Random.Range(0, allMonstersSOs.Length)];
     }
 
     public static void PlaySFX(string name)

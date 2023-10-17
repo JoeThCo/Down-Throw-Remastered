@@ -30,8 +30,7 @@ public class GameManager : MonoBehaviour
 
     public const int START_PLAYER_BALLS = 5;
     public const int CURRENT_TEST_MONSTERS = 6;
-    public const float MAX_MONSTERS = 6;
-    static MonsterSO[] allMonsters;
+    public const int MAX_MONSTERS = 6;
 
     public static Camera Cam;
 
@@ -50,8 +49,7 @@ public class GameManager : MonoBehaviour
 
     void Load()
     {
-        ItemSpawner.Load();
-        allMonsters = Resources.LoadAll<MonsterSO>("Monsters");
+        StaticSpawner.Load();
     }
 
     void Init()
@@ -146,7 +144,7 @@ public class GameManager : MonoBehaviour
         gameOverUI.SetGameOverUI(currentScore, highScore);
 
         MenuManager.Instance.DisplayMenus("GameOver");
-        ItemSpawner.PlaySFX("gameOver");
+        StaticSpawner.PlaySFX("gameOver");
 
         isPlaying = false;
 
@@ -156,7 +154,7 @@ public class GameManager : MonoBehaviour
     private void EventManager_OnAreaClear()
     {
         Debug.Log("Area clear!");
-        ItemSpawner.PlaySFX("areaClear");
+        StaticSpawner.PlaySFX("areaClear");
         CurrentDifficulty += AREA_COMPLETE_INCREMENT;
 
         MenuManager.Instance.DisplayMenus("AreaClear");
@@ -164,9 +162,5 @@ public class GameManager : MonoBehaviour
 
         currentMonsters = new CurrentMonsters(CURRENT_TEST_MONSTERS);
         backgroundManager.SetBackground();
-    }
-    public static MonsterSO GetRandomMonster()
-    {
-        return allMonsters[Random.Range(0, allMonsters.Length)];
     }
 }

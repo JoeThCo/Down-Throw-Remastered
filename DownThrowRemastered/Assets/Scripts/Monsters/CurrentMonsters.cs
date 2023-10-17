@@ -6,6 +6,8 @@ public class CurrentMonsters
 {
     List<Monster> monsters = new List<Monster>();
 
+    public int Count { get; private set; }
+
     public CurrentMonsters(int count)
     {
         monsters = MakeMonsterList(count);
@@ -37,9 +39,10 @@ public class CurrentMonsters
 
         for (int i = 0; i < count; i++)
         {
-            monsterList.Add(new Monster(GameManager.GetRandomMonster()));
+            monsterList.Add(new Monster(StaticSpawner.GetMonsterSO()));
         }
 
+        Count = count;
         return monsterList;
     }
 
@@ -48,7 +51,7 @@ public class CurrentMonsters
         int damage = Mathf.Min(ball.damage, GetTopMonster().GetHealth());
         if (damage == 0)
         {
-            ItemSpawner.PlaySFX("noMonsterDamage");
+            StaticSpawner.PlaySFX("noMonsterDamage");
         }
 
         GetTopMonster().ChangeHealth(damage);
@@ -58,7 +61,7 @@ public class CurrentMonsters
 
         if (!GetTopMonster().isDead())
         {
-            ItemSpawner.PlaySFX("monsterDamage");
+            StaticSpawner.PlaySFX("monsterDamage");
             return;
         }
 
@@ -67,7 +70,7 @@ public class CurrentMonsters
 
         if (isAnotherMonster())
         {
-            ItemSpawner.PlaySFX("monsterDefeat");
+            StaticSpawner.PlaySFX("monsterDefeat");
             EventManager.Invoke(CustomEvent.NewMonster, GetTopMonster());
             NextMonsterUI.Instance.UpdateNextMonsters(this);
         }

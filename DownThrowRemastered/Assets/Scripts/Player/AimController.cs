@@ -40,10 +40,10 @@ public class AimController : MonoBehaviour
 
     private void EventManager_onPlayerShoot()
     {
-        Rigidbody2D ball = ItemSpawner.SpawnGame("Ball", firePoint.transform.position, ballParent).GetComponent<Rigidbody2D>();
+        Rigidbody2D ball = StaticSpawner.SpawnGame("Ball", firePoint.transform.position, ballParent).GetComponent<Rigidbody2D>();
         ball.velocity = -firePoint.transform.up * (playerPower * basePower);
 
-        ItemSpawner.PlaySFX("playerShoot");
+        StaticSpawner.PlaySFX("playerShoot");
         canShoot = false;
     }
 

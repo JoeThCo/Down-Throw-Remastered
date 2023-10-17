@@ -16,7 +16,7 @@ public class BackgroundManager : MonoBehaviour
 
     public void SetBackground(string name)
     {
-        BackgroundSO backgroundSO = ItemSpawner.GetBackgroundSO(name);
+        BackgroundSO backgroundSO = StaticSpawner.GetBackgroundSO(name);
 
         backgroundSR.sprite = backgroundSO.GetSprite();
         backgroundSR.transform.localScale = (Vector3.right + Vector3.up) * backgroundSO.GetScale();
@@ -24,7 +24,7 @@ public class BackgroundManager : MonoBehaviour
 
     public void SetBackground()
     {
-        BackgroundSO backgroundSO = ItemSpawner.GetBackgroundSO();
+        BackgroundSO backgroundSO = StaticSpawner.GetBackgroundSO();
 
         backgroundSR.sprite = backgroundSO.GetSprite();
         backgroundSR.transform.localScale = (Vector3.right + Vector3.up) * backgroundSO.GetScale();

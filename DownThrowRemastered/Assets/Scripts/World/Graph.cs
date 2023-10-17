@@ -8,18 +8,29 @@ public class Graph
     public List<Node> Nodes { get; } = new List<Node>();
     public List<Edge> Edges { get; } = new List<Edge>();
 
+    public int Start;
+    public int End;
+
+    void PickStartAndEnd(Vector2Int dimensions)
+    {
+        Start = Random.Range(0, dimensions.y);
+        End = Random.Range(Nodes.Count - dimensions.y, Nodes.Count);
+    }
+
     public void CreateAndConnectImmediateNeighbors(Vector2Int dimensions, int scale)
     {
         int i = 0;
 
-        for (int y = 0; y < dimensions.y; y++)
+        for (int x = 0; x < dimensions.x; x++)
         {
-            for (int x = 0; x < dimensions.x; x++)
+            for (int y = 0; y < dimensions.y; y++)
             {
                 Nodes.Add(new Node(i, x, y, scale));
                 i++;
             }
         }
+
+        PickStartAndEnd(dimensions);
     }
 
     public void ConnectToClosestKNeighbors(int k)
@@ -71,8 +82,6 @@ public class Graph
         edgeToRemove.a.DisconnectFrom(edgeToRemove);
         edgeToRemove.b.DisconnectFrom(edgeToRemove);
         Edges.Remove(edgeToRemove);
-
-        Debug.Log($"Removed edge: {edgeToRemove}. Total Edges now: {Edges.Count}");
     }
 
 
@@ -116,12 +125,13 @@ public class Graph
 
     void SpawnNode(Node node, Transform parent)
     {
-        ItemSpawner.SpawnGame("Peg", new Vector3(node.Position.x, node.Position.y), parent);
+        WorldNode worldNode = StaticSpawner.SpawnGame("WorldNode", new Vector3(node.Position.x, node.Position.y), parent).GetComponent<WorldNode>();
+        worldNode.Init(node, Start, End);
     }
 
     void SpawnEdge(Node a, Node b, Transform parent)
     {
-        WorldEdge edge = ItemSpawner.SpawnGame("Line", Vector3.zero, parent).GetComponent<WorldEdge>();
+        WorldEdge edge = StaticSpawner.SpawnGame("Line", Vector3.zero, parent).GetComponent<WorldEdge>();
         edge.ConnectNodes(a, b);
     }
 

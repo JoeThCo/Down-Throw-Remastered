@@ -10,9 +10,10 @@ public class WorldManager : MonoBehaviour
 
     private void Start()
     {
-        ItemSpawner.Load();
+        StaticSpawner.Load();
 
         Graph graph = MakeWorldGraph();
+
         graph.SpawnAllNodes(transform);
         graph.SpawnAllEdges(transform);
     }

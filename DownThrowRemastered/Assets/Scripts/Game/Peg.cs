@@ -31,7 +31,7 @@ public class Peg : MonoBehaviour
 
     public virtual void OnPegHit()
     {
-        ItemSpawner.PlaySFX("pegHit");
+        StaticSpawner.PlaySFX("pegHit");
     }
 
     void Peg_OnPegHit()
@@ -43,7 +43,7 @@ public class Peg : MonoBehaviour
     public virtual void OnPegDeath(Ball ball)
     {
         EventManager.Invoke(CustomEvent.ScoreChange, 1);
-        ItemSpawner.PlaySFX("pegDeath");
+        StaticSpawner.PlaySFX("pegDeath");
     }
 
     void Peg_onPegDeath(Ball ball)
