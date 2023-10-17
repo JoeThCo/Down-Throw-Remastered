@@ -54,7 +54,6 @@ public class GameManager : MonoBehaviour
 
     void Init()
     {
-        //Application.targetFrameRate = Screen.currentResolution.refreshRate;
         QualitySettings.vSyncCount = 1;
 
         currencyUI.Init();

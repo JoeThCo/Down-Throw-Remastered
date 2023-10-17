@@ -17,7 +17,7 @@ public class Graph
         End = Random.Range(Nodes.Count - dimensions.y, Nodes.Count);
     }
 
-    public void CreateAndConnectImmediateNeighbors(Vector2Int dimensions, int scale)
+    public void MakeNodes(Vector2Int dimensions, float scale)
     {
         int i = 0;
 
@@ -33,12 +33,12 @@ public class Graph
         PickStartAndEnd(dimensions);
     }
 
-    public void ConnectToClosestKNeighbors(int k)
+    public void ConnectToClosestKNeighbors(int k, float scale)
     {
         foreach (var node in Nodes)
         {
             var neighbors = Nodes
-                .Where(n => n != node)
+                .Where(n => n != node && node.DistanceTo(n) <= scale) // Additional check for distance
                 .OrderBy(n => node.DistanceTo(n))
                 .Take(k)
                 .ToList();
@@ -46,10 +46,14 @@ public class Graph
             foreach (var neighbor in neighbors)
             {
                 node.ConnectTo(neighbor);
-                Edges.Add(node.Edges.Last());
+                if (!Edges.Any(e => e.a == node && e.b == neighbor || e.a == neighbor && e.b == node))
+                {
+                    Edges.Add(node.Edges.Last());
+                }
             }
         }
     }
+
 
     public void RemoveEdges(float percent)
     {
@@ -129,17 +133,17 @@ public class Graph
         worldNode.Init(node, Start, End);
     }
 
-    void SpawnEdge(Node a, Node b, Transform parent)
+    void SpawnEdge(Edge edge, Transform parent)
     {
-        WorldEdge edge = StaticSpawner.SpawnGame("Line", Vector3.zero, parent).GetComponent<WorldEdge>();
-        edge.ConnectNodes(a, b);
+        WorldEdge worldEdge = StaticSpawner.SpawnGame("Line", Vector3.zero, parent).GetComponent<WorldEdge>();
+        worldEdge.ConnectNodes(edge);
     }
 
     public void SpawnAllEdges(Transform parent)
     {
         foreach (Edge edge in Edges)
         {
-            SpawnEdge(edge.a, edge.b, parent);
+            SpawnEdge(edge, parent);
         }
     }
 

@@ -6,11 +6,11 @@ public class WorldEdge : MonoBehaviour
 {
     [SerializeField] LineRenderer lineRenderer;
 
-    public void ConnectNodes(Node a, Node b)
+    public void ConnectNodes(Edge edge)
     {
         lineRenderer.positionCount = 2;
 
-        lineRenderer.SetPosition(0, new Vector3(a.Position.x, a.Position.y));
-        lineRenderer.SetPosition(1, new Vector3(b.Position.x, b.Position.y));
+        lineRenderer.SetPosition(0, new Vector3(edge.a.Position.x, edge.a.Position.y));
+        lineRenderer.SetPosition(1, new Vector3(edge.b.Position.x, edge.b.Position.y));
     }
 }

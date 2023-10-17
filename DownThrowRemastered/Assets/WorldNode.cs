@@ -3,18 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using PrimeTween;
 
 public class WorldNode : MonoBehaviour
 {
     [SerializeField] Image image;
     [SerializeField] TextMeshProUGUI nodeText;
 
+    private Node node;
+
     public void Init(Node node, int Start, int End)
     {
+        this.node = node;
+
         MakeMonsters(node, Start, End);
 
         SetText(node, Start, End);
         SetColor(node, Start, End);
+
+        if (node.Id == Start)
+        {
+            WorldManager.Instance.SetPlayerStartPosition(node);
+        }
     }
 
     void MakeMonsters(Node node, int Start, int End)
@@ -37,6 +47,7 @@ public class WorldNode : MonoBehaviour
         }
         else
         {
+            /*
             if (node.MonstersToSpawn != 0)
             {
                 nodeText.SetText(node.MonstersToSpawn.ToString());
@@ -45,6 +56,8 @@ public class WorldNode : MonoBehaviour
             {
                 nodeText.gameObject.SetActive(false);
             }
+            */
+            nodeText.SetText(node.Id.ToString());
         }
     }
 
@@ -52,7 +65,7 @@ public class WorldNode : MonoBehaviour
     {
         if (node.Id == Start)
         {
-            image.color = Color.blue;
+            image.color = Color.white;
         }
         else if (node.Id == End)
         {
@@ -69,5 +82,10 @@ public class WorldNode : MonoBehaviour
                 image.color = Color.gray;
             }
         }
+    }
+
+    public void MovePlayer()
+    {
+        WorldManager.Instance.WorldPlayer.MovePlayer(node);
     }
 }
