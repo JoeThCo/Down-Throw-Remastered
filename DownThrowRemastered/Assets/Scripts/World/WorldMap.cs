@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class WorldManager : MonoBehaviour
+public class WorldMap : MonoBehaviour
 {
+    [SerializeField] [Range(0f, 1f)] float removalPercent;
+    [Space(10)]
+    [SerializeField] Vector2Int dimensions;
+    [SerializeField] Vector2Int offset;
+    [Space(10)]
+    [SerializeField] Transform LineCanvas;
+    [SerializeField] Transform NodeCanvas;
+    [Space(10)]
     public WorldPlayer WorldPlayer;
 
-    [SerializeField] [Range(0f, 1f)] float removalPercent;
-    [SerializeField] Vector2Int dimensions;
+    public static WorldMap Instance;
 
-    public static WorldManager Instance;
-
-    private void Start()
+    public void Init()
     {
         Instance = this;
         StaticSpawner.Load();
@@ -25,13 +30,13 @@ public class WorldManager : MonoBehaviour
         Graph graph = new Graph();
         float scale = 5f;
 
-        graph.MakeNodes(dimensions, scale);
+        graph.MakeNodes(dimensions, offset, scale);
         graph.ConnectToClosestKNeighbors(4, scale * 1.5f);
         graph.RemoveEdges(removalPercent);
 
-        graph.SpawnAllNodes(transform);
-        graph.SpawnAllEdges(transform);
-        
+        graph.SpawnAllNodes(NodeCanvas);
+        graph.SpawnAllEdges(LineCanvas);
+
         return graph;
     }
 

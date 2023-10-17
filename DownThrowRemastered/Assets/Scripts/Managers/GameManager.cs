@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] BackgroundManager backgroundManager;
     [Space(10)]
+    [SerializeField] WorldMap worldMap;
+    [Space(10)]
     [SerializeField] CurrencyUI currencyUI;
     [SerializeField] CurrentMonsterUI currentMonsterUI;
     [SerializeField] GameOverUI gameOverUI;
@@ -29,7 +31,7 @@ public class GameManager : MonoBehaviour
     public const int MONSTER_DEFEAT_MULTIPLIER = 3;
 
     public const int START_PLAYER_BALLS = 5;
-    public const int CURRENT_TEST_MONSTERS = 6;
+    public const int CURRENT_TEST_MONSTERS = 2;
     public const int MAX_MONSTERS = 6;
 
     public static Camera Cam;
@@ -55,6 +57,8 @@ public class GameManager : MonoBehaviour
     void Init()
     {
         QualitySettings.vSyncCount = 1;
+
+        worldMap.Init();
 
         currencyUI.Init();
         currentMonsterUI.Init();
@@ -156,10 +160,12 @@ public class GameManager : MonoBehaviour
         StaticSpawner.PlaySFX("areaClear");
         CurrentDifficulty += AREA_COMPLETE_INCREMENT;
 
+        currentMonsters = new CurrentMonsters(CURRENT_TEST_MONSTERS);
+        backgroundManager.SetBackground();
+
         MenuManager.Instance.DisplayMenus("AreaClear");
         AreaClearUI.Instance.SetScoreText(currentScore);
 
-        currentMonsters = new CurrentMonsters(CURRENT_TEST_MONSTERS);
-        backgroundManager.SetBackground();
+        isPlaying = false;
     }
 }

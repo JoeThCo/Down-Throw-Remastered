@@ -17,7 +17,7 @@ public class Graph
         End = Random.Range(Nodes.Count - dimensions.y, Nodes.Count);
     }
 
-    public void MakeNodes(Vector2Int dimensions, float scale)
+    public void MakeNodes(Vector2Int dimensions, Vector2Int offset, float scale)
     {
         int i = 0;
 
@@ -25,7 +25,7 @@ public class Graph
         {
             for (int y = 0; y < dimensions.y; y++)
             {
-                Nodes.Add(new Node(i, x, y, scale));
+                Nodes.Add(new Node(i, x + offset.x, y + offset.y, scale));
                 i++;
             }
         }

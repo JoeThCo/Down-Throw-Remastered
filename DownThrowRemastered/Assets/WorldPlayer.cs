@@ -18,7 +18,7 @@ public class WorldPlayer : MonoBehaviour
         if (!currentNode.IsConnectedTo(node)) return;
 
         float distance = Vector2.Distance(transform.position, node.Position);
-        Tween.Position(WorldManager.Instance.WorldPlayer.transform, endValue: node.Position, duration: distance / Speed, ease: Ease.Linear);
+        Tween.Position(WorldMap.Instance.WorldPlayer.transform, endValue: node.Position, duration: distance / Speed, ease: Ease.Linear);
 
         SetCurrentNode(node);
         node.PrintNeighbors();

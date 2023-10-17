@@ -23,7 +23,7 @@ public class WorldNode : MonoBehaviour
 
         if (node.Id == Start)
         {
-            WorldManager.Instance.SetPlayerStartPosition(node);
+            WorldMap.Instance.SetPlayerStartPosition(node);
         }
     }
 
@@ -86,6 +86,6 @@ public class WorldNode : MonoBehaviour
 
     public void MovePlayer()
     {
-        WorldManager.Instance.WorldPlayer.MovePlayer(node);
+        WorldMap.Instance.WorldPlayer.MovePlayer(node);
     }
 }
