@@ -13,13 +13,15 @@ public class WorldPlayer : MonoBehaviour
         currentNode = node;
     }
 
-    public void MovePlayer(Node node)
+    public void MovePlayer(WorldNode worldNode)
     {
-        StartCoroutine(MovePlayerI(node));
+        StartCoroutine(MovePlayerI(worldNode));
     }
 
-    IEnumerator MovePlayerI(Node node)
+    IEnumerator MovePlayerI(WorldNode worldNode)
     {
+        Node node = worldNode.node;
+
         if (!currentNode.IsConnectedTo(node)) yield break;
 
         float distance = Vector2.Distance(transform.position, node.Position);
@@ -30,10 +32,6 @@ public class WorldPlayer : MonoBehaviour
         yield return new WaitForSeconds(duration);
 
         SetCurrentNode(node);
-
-        if (node.MonstersToSpawn > 0)
-        {
-            GameManager.Instance.LoadArea(node.MonstersToSpawn);
-        }
+        worldNode.OnEnterNode();
     }
 }

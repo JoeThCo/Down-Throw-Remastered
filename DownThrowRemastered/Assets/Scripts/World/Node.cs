@@ -5,12 +5,10 @@ using UnityEngine;
 
 public class Node
 {
-    public int MonstersToSpawn { get; private set; }
     public int Id { get; }
     public Vector2 Position { get; }
     public List<Edge> Edges { get; } = new List<Edge>();
 
-    private const float MONSTER_SPAWN_CHANCE = .65f;
     private const float SCALE_MOVEMENT = .15f;
 
     public Node(int id, int x, int y, float scale)
@@ -18,14 +16,6 @@ public class Node
         Id = id;
 
         Position = (Vector2.right * x + Vector2.up * y) * scale + (Random.insideUnitCircle * (scale * SCALE_MOVEMENT));
-    }
-
-    public void MakeMonsters()
-    {
-        if (Random.value < MONSTER_SPAWN_CHANCE)
-        {
-            MonstersToSpawn = Random.Range(0, GameManager.MAX_MONSTERS + 1);
-        }
     }
 
     public bool IsConnectedTo(Node targetNode)

@@ -8,8 +8,10 @@ public class Graph
     public List<Node> Nodes { get; } = new List<Node>();
     public List<Edge> Edges { get; } = new List<Edge>();
 
-    public int Start;
-    public int End;
+    public int Start { get; private set; }
+    public int End { get; private set; }
+
+    private const float MONSTER_SPAWN_CHANCE = .65f;
 
     void PickStartAndEnd(Vector2Int dimensions)
     {
@@ -131,8 +133,25 @@ public class Graph
 
     void SpawnNode(Node node, Transform parent)
     {
-        WorldNode worldNode = StaticSpawner.SpawnGame("WorldNode", new Vector3(node.Position.x, node.Position.y), parent).GetComponent<WorldNode>();
-        worldNode.Init(node, Start, End);
+        if (node.Id == Start)
+        {
+            WorldNode emptyNode = StaticSpawner.SpawnGame("StartNode", new Vector3(node.Position.x, node.Position.y), parent).GetComponent<WorldNode>();
+            emptyNode.Init(node);
+        }
+        else if (node.Id == End)
+        {
+            EndNode endNode = StaticSpawner.SpawnGame("EndNode", new Vector3(node.Position.x, node.Position.y), parent).GetComponent<EndNode>();
+            endNode.Init(node);
+        }
+        else if (Random.value < MONSTER_SPAWN_CHANCE)
+        {
+            MonsterNode monsterNode = StaticSpawner.SpawnGame("MonsterNode", new Vector3(node.Position.x, node.Position.y), parent).GetComponent<MonsterNode>();
+            monsterNode.Init(node);
+        }
+        else 
+        {
+        
+        }
     }
 
     void SpawnEdge(Edge edge, Transform parent)

@@ -58,7 +58,6 @@ public class WorldMap : MonoBehaviour
     {
         WorldPlayer.transform.position = node.Position;
         WorldPlayer.SetCurrentNode(node);
-        //node.PrintNeighbors();
     }
 
     private void Update()

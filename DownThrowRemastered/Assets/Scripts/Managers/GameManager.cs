@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
         backgroundManager.SetRandomBackground();
     }
 
-    public void LoadArea(int monsterCount)
+    public void LoadNode(int monsterCount)
     {
         MenuManager.Instance.DisplayMenus("Game");
         currentMonsters = new CurrentMonsters(monsterCount);
@@ -163,7 +163,6 @@ public class GameManager : MonoBehaviour
         StaticSpawner.PlaySFX("gameOver");
 
         isDownThrowing = false;
-
         PlayFabPlayerInfo.SavePlayerInfo();
     }
 
