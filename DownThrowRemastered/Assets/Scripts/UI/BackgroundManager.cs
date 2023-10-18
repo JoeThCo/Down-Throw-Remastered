@@ -22,7 +22,7 @@ public class BackgroundManager : MonoBehaviour
         backgroundSR.transform.localScale = (Vector3.right + Vector3.up) * backgroundSO.GetScale();
     }
 
-    public void SetBackground()
+    public void SetRandomBackground()
     {
         BackgroundSO backgroundSO = StaticSpawner.GetBackgroundSO();
 

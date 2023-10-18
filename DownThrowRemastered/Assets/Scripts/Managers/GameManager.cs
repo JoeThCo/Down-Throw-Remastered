@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] AimUI aimerUI;
     [SerializeField] ScoreUI scoreUI;
 
-    public static bool isPlaying;
+    public static bool isDownThrowing;
 
     InGamePlayer player;
     CurrentMonsters currentMonsters;
@@ -36,25 +36,24 @@ public class GameManager : MonoBehaviour
 
     public static Camera Cam;
 
+    public static GameManager Instance;
+
     private void Start()
     {
+        Instance = this;
         Cam = Camera.main;
 
         PlayFabPlayerInfo.OfflinePlay();
         Application.targetFrameRate = -1;
 
-        Load();
-        Init();
-
-        isPlaying = true;
-    }
-
-    void Load()
-    {
         StaticSpawner.Load();
+
+        GameStart();
+
+        isDownThrowing = false;
     }
 
-    void Init()
+    void GameStart()
     {
         QualitySettings.vSyncCount = 1;
 
@@ -71,7 +70,6 @@ public class GameManager : MonoBehaviour
         AimUI.Instance.SetBallsLeftText(player);
 
         CurrentDifficulty = 1;
-        currentMonsters = new CurrentMonsters(CURRENT_TEST_MONSTERS);
 
         currentScore = 0;
         highScore = PlayFabPlayerInfo.GetHighScore();
@@ -79,12 +77,19 @@ public class GameManager : MonoBehaviour
         scoreUI.SetHighScoreText(highScore);
         scoreUI.SetCurrentScoreText(currentScore);
 
-        backgroundManager.SetBackground();
+        backgroundManager.SetRandomBackground();
+    }
+
+    public void LoadArea(int monsterCount)
+    {
+        MenuManager.Instance.DisplayMenus("Game");
+        currentMonsters = new CurrentMonsters(monsterCount);
+        isDownThrowing = true;
     }
 
     private void OnApplicationFocus(bool focus)
     {
-        if (!isPlaying) return;
+        if (!isDownThrowing) return;
 
         if (!focus)
         {
@@ -112,7 +117,7 @@ public class GameManager : MonoBehaviour
 
     public void SetIsPlaying(bool state)
     {
-        isPlaying = state;
+        isDownThrowing = state;
     }
 
     #region Score
@@ -149,7 +154,7 @@ public class GameManager : MonoBehaviour
         MenuManager.Instance.DisplayMenus("GameOver");
         StaticSpawner.PlaySFX("gameOver");
 
-        isPlaying = false;
+        isDownThrowing = false;
 
         PlayFabPlayerInfo.SavePlayerInfo();
     }
@@ -161,11 +166,10 @@ public class GameManager : MonoBehaviour
         CurrentDifficulty += AREA_COMPLETE_INCREMENT;
 
         currentMonsters = new CurrentMonsters(CURRENT_TEST_MONSTERS);
-        backgroundManager.SetBackground();
 
         MenuManager.Instance.DisplayMenus("AreaClear");
         AreaClearUI.Instance.SetScoreText(currentScore);
 
-        isPlaying = false;
+        isDownThrowing = false;
     }
 }

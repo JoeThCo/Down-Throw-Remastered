@@ -127,6 +127,8 @@ public class Graph
         Nodes.RemoveAll(node => !node.Edges.Any());
     }
 
+    #region Spawning
+
     void SpawnNode(Node node, Transform parent)
     {
         WorldNode worldNode = StaticSpawner.SpawnGame("WorldNode", new Vector3(node.Position.x, node.Position.y), parent).GetComponent<WorldNode>();
@@ -135,7 +137,7 @@ public class Graph
 
     void SpawnEdge(Edge edge, Transform parent)
     {
-        WorldEdge worldEdge = StaticSpawner.SpawnGame("Line", Vector3.zero, parent).GetComponent<WorldEdge>();
+        WorldEdge worldEdge = StaticSpawner.SpawnGame("WorldEdge", Vector3.zero, parent).GetComponent<WorldEdge>();
         worldEdge.ConnectNodes(edge);
     }
 
@@ -154,4 +156,6 @@ public class Graph
             SpawnNode(node, parent);
         }
     }
+
+    #endregion
 }

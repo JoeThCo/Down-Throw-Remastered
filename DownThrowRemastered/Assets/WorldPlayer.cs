@@ -15,12 +15,25 @@ public class WorldPlayer : MonoBehaviour
 
     public void MovePlayer(Node node)
     {
-        if (!currentNode.IsConnectedTo(node)) return;
+        StartCoroutine(MovePlayerI(node));
+    }
+
+    IEnumerator MovePlayerI(Node node)
+    {
+        if (!currentNode.IsConnectedTo(node)) yield break;
 
         float distance = Vector2.Distance(transform.position, node.Position);
-        Tween.Position(WorldMap.Instance.WorldPlayer.transform, endValue: node.Position, duration: distance / Speed, ease: Ease.Linear);
+        float duration = distance / Speed;
+
+        Tween.Position(WorldMap.Instance.WorldPlayer.transform, endValue: node.Position, duration: duration, ease: Ease.Linear);
+
+        yield return new WaitForSeconds(duration);
 
         SetCurrentNode(node);
-        node.PrintNeighbors();
+
+        if (node.MonstersToSpawn > 0)
+        {
+            GameManager.Instance.LoadArea(node.MonstersToSpawn);
+        }
     }
 }

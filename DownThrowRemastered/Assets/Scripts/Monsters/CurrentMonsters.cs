@@ -77,7 +77,7 @@ public class CurrentMonsters
         else
         {
             EventManager.OnMonsterDamage -= EventManager_OnMonsterDamage;
-            EventManager.Invoke(CustomEvent.AreaClear);
+            EventManager.Invoke(CustomEvent.NodeClear);
         }
     }
 
