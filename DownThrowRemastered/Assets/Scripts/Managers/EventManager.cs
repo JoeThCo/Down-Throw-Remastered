@@ -33,7 +33,10 @@ public class EventManager : MonoBehaviour
     public static event MonsterDead OnMonsterDead;
 
     public delegate void NodeClear();
-    public static event NodeClear OnAreaClear;
+    public static event NodeClear OnNodeClear;
+
+    public delegate void WorldClear();
+    public static event WorldClear OnWorldClear;
 
     public delegate void ScoreChange(int change);
     public static event ScoreChange OnScoreChange;
@@ -95,7 +98,11 @@ public class EventManager : MonoBehaviour
                 break;
 
             case CustomEvent.NodeClear:
-                OnAreaClear?.Invoke();
+                OnNodeClear?.Invoke();
+                break;
+
+            case CustomEvent.WorldClear:
+                OnWorldClear?.Invoke();
                 break;
 
             //Game

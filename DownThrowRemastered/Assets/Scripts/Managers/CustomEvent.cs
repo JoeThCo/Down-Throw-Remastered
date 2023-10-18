@@ -18,6 +18,7 @@ public enum CustomEvent
     BallBottoms,
 
     NodeClear,
+    WorldClear,
 
     ScoreChange,
     HighScoreChange,

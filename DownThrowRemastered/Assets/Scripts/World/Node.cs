@@ -24,7 +24,7 @@ public class Node
     {
         if (Random.value < MONSTER_SPAWN_CHANCE)
         {
-            MonstersToSpawn = Random.Range(0, 6);
+            MonstersToSpawn = Random.Range(0, GameManager.MAX_MONSTERS + 1);
         }
     }
 

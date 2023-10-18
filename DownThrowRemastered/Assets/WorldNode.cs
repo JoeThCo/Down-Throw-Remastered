@@ -47,7 +47,6 @@ public class WorldNode : MonoBehaviour
         }
         else
         {
-            /*
             if (node.MonstersToSpawn != 0)
             {
                 nodeText.SetText(node.MonstersToSpawn.ToString());
@@ -56,8 +55,6 @@ public class WorldNode : MonoBehaviour
             {
                 nodeText.gameObject.SetActive(false);
             }
-            */
-            nodeText.SetText(node.Id.ToString());
         }
     }
 

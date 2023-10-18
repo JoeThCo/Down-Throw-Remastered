@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     CurrentMonsters currentMonsters;
 
     public static float CurrentDifficulty = 1;
-    private const float AREA_COMPLETE_INCREMENT = .33f;
+    private const float WORLD_COMPLETE_INCREMENT = .33f;
 
     private int currentScore;
     private int highScore;
@@ -31,8 +31,7 @@ public class GameManager : MonoBehaviour
     public const int MONSTER_DEFEAT_MULTIPLIER = 3;
 
     public const int START_PLAYER_BALLS = 5;
-    public const int CURRENT_TEST_MONSTERS = 2;
-    public const int MAX_MONSTERS = 6;
+    public const int MAX_MONSTERS = 1;
 
     public static Camera Cam;
 
@@ -99,7 +98,9 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.OnAreaClear += EventManager_OnAreaClear;
+        EventManager.OnNodeClear += EventManager_OnNodeClear;
+        EventManager.OnWorldClear += EventManager_OnWorldClear;
+
         EventManager.OnGameOver += EventManager_OnGameOver;
 
         EventManager.OnScoreChange += EventManager_OnScoreChange;
@@ -108,7 +109,9 @@ public class GameManager : MonoBehaviour
 
     private void OnDisable()
     {
-        EventManager.OnAreaClear -= EventManager_OnAreaClear;
+        EventManager.OnNodeClear -= EventManager_OnNodeClear;
+        EventManager.OnWorldClear -= EventManager_OnWorldClear;
+
         EventManager.OnGameOver -= EventManager_OnGameOver;
 
         EventManager.OnScoreChange -= EventManager_OnScoreChange;
@@ -145,6 +148,11 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    private void EventManager_OnWorldClear()
+    {
+        CurrentDifficulty += WORLD_COMPLETE_INCREMENT;
+    }
+
     private void EventManager_OnGameOver()
     {
         CheckNewHighScore();
@@ -159,13 +167,11 @@ public class GameManager : MonoBehaviour
         PlayFabPlayerInfo.SavePlayerInfo();
     }
 
-    private void EventManager_OnAreaClear()
+    private void EventManager_OnNodeClear()
     {
         Debug.Log("Area clear!");
         StaticSpawner.PlaySFX("areaClear");
-        CurrentDifficulty += AREA_COMPLETE_INCREMENT;
 
-        currentMonsters = new CurrentMonsters(CURRENT_TEST_MONSTERS);
 
         MenuManager.Instance.DisplayMenus("AreaClear");
         AreaClearUI.Instance.SetScoreText(currentScore);

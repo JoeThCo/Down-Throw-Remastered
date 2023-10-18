@@ -22,7 +22,21 @@ public class WorldMap : MonoBehaviour
         Instance = this;
         StaticSpawner.Load();
 
+        ClearMap();
         Graph graph = MakeWorldGraph();
+    }
+
+    void ClearMap()
+    {
+        foreach (Transform t in LineCanvas)
+        {
+            Destroy(t.gameObject);
+        }
+
+        foreach (Transform t in NodeCanvas)
+        {
+            Destroy(t.gameObject);
+        }
     }
 
     public Graph MakeWorldGraph()
@@ -44,8 +58,7 @@ public class WorldMap : MonoBehaviour
     {
         WorldPlayer.transform.position = node.Position;
         WorldPlayer.SetCurrentNode(node);
-
-        node.PrintNeighbors();
+        //node.PrintNeighbors();
     }
 
     private void Update()
