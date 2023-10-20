@@ -148,9 +148,10 @@ public class Graph
             MonsterNode monsterNode = StaticSpawner.SpawnGame("MonsterNode", new Vector3(node.Position.x, node.Position.y), parent).GetComponent<MonsterNode>();
             monsterNode.Init(node);
         }
-        else 
+        else
         {
-        
+            WorldNode emptyNode = StaticSpawner.SpawnGame("EmptyNode", new Vector3(node.Position.x, node.Position.y), parent).GetComponent<WorldNode>();
+            emptyNode.Init(node);
         }
     }
 

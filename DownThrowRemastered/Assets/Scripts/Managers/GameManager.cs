@@ -171,9 +171,10 @@ public class GameManager : MonoBehaviour
         Debug.Log("Area clear!");
         StaticSpawner.PlaySFX("areaClear");
 
-
         MenuManager.Instance.DisplayMenus("AreaClear");
         AreaClearUI.Instance.SetScoreText(currentScore);
+
+        WorldMap.CurrentWorldNode.GetComponent<MonsterNode>().OnNodeClear();
 
         isDownThrowing = false;
     }

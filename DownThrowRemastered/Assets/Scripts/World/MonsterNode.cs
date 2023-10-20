@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MonsterNode : WorldNode
 {
+    [SerializeField] Image onCompleteCheckMark;
     public int MonstersToSpawn { get; private set; }
 
     public override void Init(Node node)
@@ -18,6 +20,8 @@ public class MonsterNode : WorldNode
 
     public override void OnEnterNode()
     {
+        if (MonstersToSpawn <= 0) return;
+
         base.OnEnterNode();
 
         GameManager.Instance.LoadNode(MonstersToSpawn);
@@ -27,5 +31,13 @@ public class MonsterNode : WorldNode
     public void MakeMonsters()
     {
         MonstersToSpawn = Random.Range(1, GameManager.MAX_MONSTERS + 1);
+    }
+
+    public void OnNodeClear()
+    {
+        nodeText.gameObject.SetActive(false);
+        onCompleteCheckMark.gameObject.SetActive(true);
+
+        MonstersToSpawn = 0;
     }
 }

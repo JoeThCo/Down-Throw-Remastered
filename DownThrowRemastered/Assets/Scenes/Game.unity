@@ -1185,12 +1185,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 1358116790}
     m_Modifications:
     - target: {fileID: 5709175176129494273, guid: 6e279bfc2e37324499b3b8f597596b61, type: 3}
+      propertyPath: offset.x
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5709175176129494273, guid: 6e279bfc2e37324499b3b8f597596b61, type: 3}
       propertyPath: dimensions.x
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5709175176129494273, guid: 6e279bfc2e37324499b3b8f597596b61, type: 3}
       propertyPath: dimensions.y
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5709175176129494278, guid: 6e279bfc2e37324499b3b8f597596b61, type: 3}
       propertyPath: m_RootOrder
@@ -2971,7 +2975,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aee76ec778f883b4f8a5bab425facb5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basePower: 10
+  basePower: 12.5
   ballParent: {fileID: 2139184259}
   firePoint: {fileID: 1264091594}
   canShoot: 1

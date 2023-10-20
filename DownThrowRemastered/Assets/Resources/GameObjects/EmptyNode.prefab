@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5680554269397548999, guid: 2bbbd7adc49617a4c998a9884db0ac10, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5884071764155284469, guid: 2bbbd7adc49617a4c998a9884db0ac10, type: 3}
       propertyPath: m_Color.b
       value: 0.78431374
@@ -25,7 +29,7 @@ PrefabInstance:
       objectReference: {fileID: -3332219315580732546}
     - target: {fileID: 5884071764155284470, guid: 2bbbd7adc49617a4c998a9884db0ac10, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnEnterNode
+      value: MovePlayer
       objectReference: {fileID: 0}
     - target: {fileID: 6228438793997805342, guid: 2bbbd7adc49617a4c998a9884db0ac10, type: 3}
       propertyPath: m_Name

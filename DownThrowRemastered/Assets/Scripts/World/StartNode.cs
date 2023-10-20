@@ -8,7 +8,7 @@ public class StartNode : WorldNode
     {
         base.Init(node);
 
-        WorldMap.Instance.SetPlayerStartPosition(node);
+        WorldMap.Instance.SetPlayerStartPosition(this);
     }
 
     public override void OnEnterNode()

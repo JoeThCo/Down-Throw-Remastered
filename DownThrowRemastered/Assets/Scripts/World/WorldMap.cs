@@ -16,6 +16,7 @@ public class WorldMap : MonoBehaviour
     public WorldPlayer WorldPlayer;
 
     public static WorldMap Instance;
+    public static WorldNode CurrentWorldNode;
 
     public void Init()
     {
@@ -54,10 +55,10 @@ public class WorldMap : MonoBehaviour
         return graph;
     }
 
-    public void SetPlayerStartPosition(Node node)
+    public void SetPlayerStartPosition(WorldNode worldNode)
     {
-        WorldPlayer.transform.position = node.Position;
-        WorldPlayer.SetCurrentNode(node);
+        WorldPlayer.transform.position = worldNode.node.Position;
+        CurrentWorldNode = worldNode;
     }
 
     private void Update()

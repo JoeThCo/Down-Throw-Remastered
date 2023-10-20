@@ -14,12 +14,12 @@ public class WorldNode : MonoBehaviour
 
     public virtual void Init(Node node)
     {
-
+        this.node = node;
     }
 
     public virtual void OnEnterNode()
     {
-
+        WorldMap.CurrentWorldNode = this;
     }
 
     public void MovePlayer()

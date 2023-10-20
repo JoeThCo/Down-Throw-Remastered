@@ -6,12 +6,6 @@ using PrimeTween;
 public class WorldPlayer : MonoBehaviour
 {
     [SerializeField] float Speed = 5;
-    public Node currentNode;
-
-    public void SetCurrentNode(Node node)
-    {
-        currentNode = node;
-    }
 
     public void MovePlayer(WorldNode worldNode)
     {
@@ -22,7 +16,11 @@ public class WorldPlayer : MonoBehaviour
     {
         Node node = worldNode.node;
 
-        if (!currentNode.IsConnectedTo(node)) yield break;
+        if (!WorldMap.CurrentWorldNode.node.IsConnectedTo(node)) 
+        {
+            Debug.Log("Not connected!");
+            yield break;
+        }
 
         float distance = Vector2.Distance(transform.position, node.Position);
         float duration = distance / Speed;
@@ -31,7 +29,6 @@ public class WorldPlayer : MonoBehaviour
 
         yield return new WaitForSeconds(duration);
 
-        SetCurrentNode(node);
         worldNode.OnEnterNode();
     }
 }
