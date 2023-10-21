@@ -16,7 +16,7 @@ public class WorldMap : MonoBehaviour
     public WorldPlayer WorldPlayer;
 
     public static WorldMap Instance;
-    public static WorldNode CurrentWorldNode;
+    public static WorldNode CurrentWorldNode { get; private set; }
 
     public void Init()
     {
@@ -24,7 +24,7 @@ public class WorldMap : MonoBehaviour
         StaticSpawner.Load();
 
         ClearMap();
-        Graph graph = MakeWorldGraph();
+        MakeWorldGraph();
     }
 
     void ClearMap()
@@ -40,8 +40,10 @@ public class WorldMap : MonoBehaviour
         }
     }
 
-    public Graph MakeWorldGraph()
+    public void MakeWorldGraph()
     {
+        ClearMap();
+
         Graph graph = new Graph();
         float scale = 5f;
 
@@ -51,13 +53,16 @@ public class WorldMap : MonoBehaviour
 
         graph.SpawnAllNodes(NodeCanvas);
         graph.SpawnAllEdges(LineCanvas);
-
-        return graph;
     }
 
     public void SetPlayerStartPosition(WorldNode worldNode)
     {
         WorldPlayer.transform.position = worldNode.node.Position;
+        CurrentWorldNode = worldNode;
+    }
+
+    public static void SetCurrentNode(WorldNode worldNode)
+    {
         CurrentWorldNode = worldNode;
     }
 

@@ -19,7 +19,7 @@ public class WorldNode : MonoBehaviour
 
     public virtual void OnEnterNode()
     {
-        WorldMap.CurrentWorldNode = this;
+        WorldMap.SetCurrentNode(this);
     }
 
     public void MovePlayer()

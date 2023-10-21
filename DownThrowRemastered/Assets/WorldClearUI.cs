@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class AreaClearUI : MonoBehaviour
+public class WorldClearUI : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI scoreText;
 
-    public static AreaClearUI Instance;
+    public static WorldClearUI Instance;
 
-    private void Awake()
+    public void Awake()
     {
         Instance = this;
     }

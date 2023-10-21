@@ -12,5 +12,6 @@ public class EndNode : WorldNode
     public override void OnEnterNode()
     {
         base.OnEnterNode();
+        EventManager.Invoke(CustomEvent.WorldClear);
     }
 }

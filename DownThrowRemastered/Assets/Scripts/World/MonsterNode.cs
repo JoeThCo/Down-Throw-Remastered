@@ -20,10 +20,10 @@ public class MonsterNode : WorldNode
 
     public override void OnEnterNode()
     {
-        if (MonstersToSpawn <= 0) return;
-
         base.OnEnterNode();
 
+        if (MonstersToSpawn <= 0) return;
+        
         GameManager.Instance.LoadNode(MonstersToSpawn);
         MenuManager.Instance.DisplayMenus("Game");
     }
