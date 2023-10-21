@@ -16,16 +16,16 @@ public class StartMenu : MonoBehaviour
 
     private void Awake()
     {
-        PlayFabInfo.OfflinePlay();
-        ItemSpawner.Load();
+        PlayFabPlayerInfo.OfflinePlay();
+        StaticSpawner.Load();
 
         titleText.SetText(Application.productName);
         versionText.SetText(Application.version);
         companyText.SetText(Application.companyName);
 
-        usernameText.SetText(PlayFabInfo.GetName());
+        usernameText.SetText(PlayFabPlayerInfo.GetName());
 
         backgroundManager.Init();
-        backgroundManager.SetBackground();
+        backgroundManager.SetRandomBackground();
     }
 }

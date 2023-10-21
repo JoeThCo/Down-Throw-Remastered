@@ -5,18 +5,19 @@ using TMPro;
 
 public class CurrencyUI : MonoBehaviour, IUIInit
 {
-    [SerializeField] TextMeshProUGUI cashText;
+    [SerializeField] TextMeshProUGUI goldText;
 
     public static CurrencyUI Instance;
 
     public void Init()
     {
         Instance = this;
-        SetCashText(0);
+
+        SetGoldText(PlayFabPlayerInfo.GetGold());
     }
 
-    public void SetCashText(int cash)
+    public void SetGoldText(int gold)
     {
-        cashText.SetText("$" + cash.ToString());
+        goldText.SetText(gold.ToString() + "G");
     }
 }

@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] BackgroundManager backgroundManager;
     [Space(10)]
+    [SerializeField] WorldMap worldMap;
+    [Space(10)]
     [SerializeField] CurrencyUI currencyUI;
     [SerializeField] CurrentMonsterUI currentMonsterUI;
     [SerializeField] GameOverUI gameOverUI;
@@ -14,13 +16,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] AimUI aimerUI;
     [SerializeField] ScoreUI scoreUI;
 
-    public static bool isPlaying;
+    public static bool isDownThrowing;
 
-    Player player;
+    InGamePlayer player;
     CurrentMonsters currentMonsters;
 
     public static float CurrentDifficulty = 1;
-    private const float AREA_COMPLETE_INCREMENT = .33f;
+    private const float WORLD_COMPLETE_INCREMENT = .33f;
 
     private int currentScore;
     private int highScore;
@@ -29,35 +31,32 @@ public class GameManager : MonoBehaviour
     public const int MONSTER_DEFEAT_MULTIPLIER = 3;
 
     public const int START_PLAYER_BALLS = 5;
-    public const int CURRENT_TEST_MONSTERS = 6;
-    public const float MAX_MONSTERS = 6;
-    static MonsterSO[] allMonsters;
+    public const int MAX_MONSTERS = 1;
 
     public static Camera Cam;
 
+    public static GameManager Instance;
+
     private void Start()
     {
+        Instance = this;
         Cam = Camera.main;
 
-        PlayFabInfo.OfflinePlay();
+        PlayFabPlayerInfo.OfflinePlay();
         Application.targetFrameRate = -1;
 
-        Load();
-        Init();
+        StaticSpawner.Load();
 
-        isPlaying = true;
+        GameStart();
+
+        isDownThrowing = false;
     }
 
-    void Load()
+    void GameStart()
     {
-        ItemSpawner.Load();
-        allMonsters = Resources.LoadAll<MonsterSO>("Monsters");
-    }
-
-    void Init()
-    {
-        //Application.targetFrameRate = Screen.currentResolution.refreshRate;
         QualitySettings.vSyncCount = 1;
+
+        worldMap.Init();
 
         currencyUI.Init();
         currentMonsterUI.Init();
@@ -66,24 +65,30 @@ public class GameManager : MonoBehaviour
         nextMonsterUI.Init();
         aimerUI.Init();
 
-        player = new Player(START_PLAYER_BALLS);
+        player = new InGamePlayer(START_PLAYER_BALLS);
         AimUI.Instance.SetBallsLeftText(player);
 
         CurrentDifficulty = 1;
-        currentMonsters = new CurrentMonsters(CURRENT_TEST_MONSTERS);
 
         currentScore = 0;
-        highScore = PlayFabInfo.GetHighScore();
+        highScore = PlayFabPlayerInfo.GetHighScore();
 
         scoreUI.SetHighScoreText(highScore);
         scoreUI.SetCurrentScoreText(currentScore);
 
-        backgroundManager.SetBackground();
+        backgroundManager.SetRandomBackground();
+    }
+
+    public void LoadNode(int monsterCount)
+    {
+        MenuManager.Instance.DisplayMenus("Game");
+        currentMonsters = new CurrentMonsters(monsterCount);
+        isDownThrowing = true;
     }
 
     private void OnApplicationFocus(bool focus)
     {
-        if (!isPlaying) return;
+        if (!isDownThrowing) return;
 
         if (!focus)
         {
@@ -93,7 +98,9 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.OnAreaClear += EventManager_OnAreaClear;
+        EventManager.OnNodeClear += EventManager_OnNodeClear;
+        EventManager.OnWorldClear += EventManager_OnWorldClear;
+
         EventManager.OnGameOver += EventManager_OnGameOver;
 
         EventManager.OnScoreChange += EventManager_OnScoreChange;
@@ -102,7 +109,9 @@ public class GameManager : MonoBehaviour
 
     private void OnDisable()
     {
-        EventManager.OnAreaClear -= EventManager_OnAreaClear;
+        EventManager.OnNodeClear -= EventManager_OnNodeClear;
+        EventManager.OnWorldClear -= EventManager_OnWorldClear;
+
         EventManager.OnGameOver -= EventManager_OnGameOver;
 
         EventManager.OnScoreChange -= EventManager_OnScoreChange;
@@ -111,14 +120,14 @@ public class GameManager : MonoBehaviour
 
     public void SetIsPlaying(bool state)
     {
-        isPlaying = state;
+        isDownThrowing = state;
     }
 
     #region Score
     private void EventManager_OnHighScoreChange()
     {
         Debug.Log("New highscore from " + highScore + " -> " + currentScore);
-        PlayFabInfo.SetHighScore(currentScore);
+        PlayFabPlayerInfo.SetHighScore(currentScore);
     }
 
     private void EventManager_OnScoreChange(int change)
@@ -139,6 +148,20 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    private void EventManager_OnWorldClear()
+    {
+        CurrentDifficulty += WORLD_COMPLETE_INCREMENT;
+
+        MenuManager.Instance.DisplayMenus("WorldClear");
+        WorldClearUI.Instance.SetScoreText(currentScore);
+
+        StaticSpawner.PlaySFX("areaClear");
+        backgroundManager.SetRandomBackground();
+
+        WorldMap.Instance.MakeWorldGraph();
+        PlayFabPlayerInfo.SavePlayerInfo();
+    }
+
     private void EventManager_OnGameOver()
     {
         CheckNewHighScore();
@@ -146,24 +169,22 @@ public class GameManager : MonoBehaviour
         gameOverUI.SetGameOverUI(currentScore, highScore);
 
         MenuManager.Instance.DisplayMenus("GameOver");
-        ItemSpawner.PlaySFX("gameOver");
-        isPlaying = false;
+        StaticSpawner.PlaySFX("gameOver");
+
+        isDownThrowing = false;
+        PlayFabPlayerInfo.SavePlayerInfo();
     }
 
-    private void EventManager_OnAreaClear()
+    private void EventManager_OnNodeClear()
     {
         Debug.Log("Area clear!");
-        ItemSpawner.PlaySFX("areaClear");
-        CurrentDifficulty += AREA_COMPLETE_INCREMENT;
+        StaticSpawner.PlaySFX("areaClear");
 
         MenuManager.Instance.DisplayMenus("AreaClear");
         AreaClearUI.Instance.SetScoreText(currentScore);
 
-        currentMonsters = new CurrentMonsters(CURRENT_TEST_MONSTERS);
-        backgroundManager.SetBackground();
-    }
-    public static MonsterSO GetRandomMonster()
-    {
-        return allMonsters[Random.Range(0, allMonsters.Length)];
+        WorldMap.CurrentWorldNode.GetComponent<MonsterNode>().OnNodeClear();
+
+        isDownThrowing = false;
     }
 }

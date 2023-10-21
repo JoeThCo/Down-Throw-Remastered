@@ -17,7 +17,8 @@ public enum CustomEvent
 
     BallBottoms,
 
-    AreaClear,
+    NodeClear,
+    WorldClear,
 
     ScoreChange,
     HighScoreChange,
@@ -25,5 +26,5 @@ public enum CustomEvent
     GameOver,
     YouWin,
 
-    CashChange
+    GoldChange
 }

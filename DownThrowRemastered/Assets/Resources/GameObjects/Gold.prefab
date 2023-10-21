@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 810429707364362669, guid: 5c5f3c32b139c124a9280be759d1cc79, type: 3}
       propertyPath: m_Name
-      value: Cash
+      value: Gold
       objectReference: {fileID: 0}
     - target: {fileID: 810429707364362670, guid: 5c5f3c32b139c124a9280be759d1cc79, type: 3}
       propertyPath: m_RootOrder
@@ -57,7 +57,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1350021836122398488, guid: 5c5f3c32b139c124a9280be759d1cc79, type: 3}
       propertyPath: m_text
-      value: $
+      value: G
       objectReference: {fileID: 0}
     - target: {fileID: 1350021836122398488, guid: 5c5f3c32b139c124a9280be759d1cc79, type: 3}
       propertyPath: m_fontSize
@@ -65,15 +65,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3649680639441534254, guid: 5c5f3c32b139c124a9280be759d1cc79, type: 3}
       propertyPath: m_Color.b
-      value: 0.2227216
+      value: 0.08235291
       objectReference: {fileID: 0}
     - target: {fileID: 3649680639441534254, guid: 5c5f3c32b139c124a9280be759d1cc79, type: 3}
       propertyPath: m_Color.g
-      value: 0.6132076
+      value: 0.83858323
       objectReference: {fileID: 0}
     - target: {fileID: 3649680639441534254, guid: 5c5f3c32b139c124a9280be759d1cc79, type: 3}
       propertyPath: m_Color.r
-      value: 0.24877752
+      value: 0.9137255
       objectReference: {fileID: 0}
     - target: {fileID: 8522982697874991221, guid: 5c5f3c32b139c124a9280be759d1cc79, type: 3}
       propertyPath: m_IsActive

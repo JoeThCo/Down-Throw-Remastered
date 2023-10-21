@@ -20,7 +20,7 @@ public class NextMonsterUI : MonoBehaviour, IUIInit
 
         foreach (Monster monster in currentMonsters.GetNextMonsters())
         {
-            NextMonster nextMonster = ItemSpawner.SpawnUI("NextMonsterObject", transform).GetComponent<NextMonster>();
+            NextMonster nextMonster = StaticSpawner.SpawnUI("NextMonsterObject", transform).GetComponent<NextMonster>();
             nextMonster.Init(monster);
         }
     }

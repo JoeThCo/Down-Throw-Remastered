@@ -4,9 +4,9 @@ using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 
-public static class PlayFabInfo
+public static class PlayFabPlayerInfo
 {
-    static PlayerInfo playerInfo;
+    static PlayerAccountInfo playerInfo;
     private const string PLAYER_INFO_KEY = "PLAYER_INFO";
 
     public static bool isLoggedIn = false;
@@ -55,7 +55,7 @@ public static class PlayFabInfo
             Debug.Log("Successfully loaded player data");
             string jsonData = result.Data[PLAYER_INFO_KEY].Value;
 
-            playerInfo = JsonUtility.FromJson<PlayerInfo>(jsonData);
+            playerInfo = JsonUtility.FromJson<PlayerAccountInfo>(jsonData);
             SettingsManager.SetPlayerSettings(playerInfo.playerSettings);
 
             Debug.Log(jsonData);
@@ -68,7 +68,7 @@ public static class PlayFabInfo
     public static void NewPlayer()
     {
         Debug.Log("No Player Info, creating...");
-        playerInfo = new PlayerInfo();
+        playerInfo = new PlayerAccountInfo();
         SavePlayerInfo();
     }
 
@@ -94,19 +94,14 @@ public static class PlayFabInfo
         return playerInfo.highScore;
     }
 
-    public static void ChangeGold(int change)
-    {
-        playerInfo.gems += change;
-    }
-
-    public static int GetGold() { return playerInfo.gems; }
+    public static int GetGold() { return playerInfo.gold; }
 
     public static void OfflinePlay()
     {
         if (playerInfo != null) return;
 
         Debug.LogWarning("You are not connected to Playfab!");
-        playerInfo = new PlayerInfo();
+        playerInfo = new PlayerAccountInfo();
         SettingsManager.SetPlayerSettings(null);
     }
 }

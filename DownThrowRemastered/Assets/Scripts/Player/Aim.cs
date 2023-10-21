@@ -5,7 +5,6 @@ using UnityEngine;
 public class Aim : MonoBehaviour
 {
     [SerializeField] Transform rotatePoint;
-    [SerializeField] AimController aimController;
     [Space(10)]
     [SerializeField] float rotationLimit = 75f;
     [SerializeField] [Range(0f, 250f)] float rotateSpeed = 10f;
@@ -15,8 +14,6 @@ public class Aim : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!aimController.canShoot) return;
-
         WhatAim();
     }
 

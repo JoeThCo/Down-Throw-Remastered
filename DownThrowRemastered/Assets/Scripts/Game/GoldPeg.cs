@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CashPeg : Peg
+public class GoldPeg : Peg
 {
     int pegWorth = 1;
 
@@ -15,6 +15,6 @@ public class CashPeg : Peg
     {
         base.OnPegDeath(ball);
 
-        EventManager.Invoke(CustomEvent.CashChange, pegWorth);
+        EventManager.Invoke(CustomEvent.GoldChange, pegWorth);
     }
 }

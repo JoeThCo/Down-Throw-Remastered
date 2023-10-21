@@ -95,9 +95,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Text
       objectReference: {fileID: 0}
+    - target: {fileID: 1026170826981532211, guid: fb0fe9b18be9b884e8130d56001a578a, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1489107199171791131, guid: fb0fe9b18be9b884e8130d56001a578a, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 1489107199171791131, guid: fb0fe9b18be9b884e8130d56001a578a, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1489107199171791131, guid: fb0fe9b18be9b884e8130d56001a578a, type: 3}
       propertyPath: m_IsActive

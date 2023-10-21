@@ -32,8 +32,11 @@ public class EventManager : MonoBehaviour
     public delegate void MonsterDead(Monster monster);
     public static event MonsterDead OnMonsterDead;
 
-    public delegate void AreaClear();
-    public static event AreaClear OnAreaClear;
+    public delegate void NodeClear();
+    public static event NodeClear OnNodeClear;
+
+    public delegate void WorldClear();
+    public static event WorldClear OnWorldClear;
 
     public delegate void ScoreChange(int change);
     public static event ScoreChange OnScoreChange;
@@ -42,10 +45,10 @@ public class EventManager : MonoBehaviour
     public static event HighScoreChange OnHighScoreChange;
 
     public delegate void GameOver();
-    public static event AreaClear OnGameOver;
+    public static event NodeClear OnGameOver;
 
     public delegate void YouWin();
-    public static event AreaClear OnYouWin;
+    public static event NodeClear OnYouWin;
 
     public delegate void GoldChange(int change);
     public static event GoldChange OnCashChange;
@@ -94,8 +97,12 @@ public class EventManager : MonoBehaviour
                 OnBallBottoms?.Invoke((Ball)parameter);
                 break;
 
-            case CustomEvent.AreaClear:
-                OnAreaClear?.Invoke();
+            case CustomEvent.NodeClear:
+                OnNodeClear?.Invoke();
+                break;
+
+            case CustomEvent.WorldClear:
+                OnWorldClear?.Invoke();
                 break;
 
             //Game
@@ -115,7 +122,7 @@ public class EventManager : MonoBehaviour
                 OnYouWin?.Invoke();
                 break;
 
-            case CustomEvent.CashChange:
+            case CustomEvent.GoldChange:
                 OnCashChange?.Invoke(Convert.ToInt32(parameter));
                 break;
 

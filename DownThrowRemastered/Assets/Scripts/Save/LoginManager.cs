@@ -56,9 +56,9 @@ public class LoginManager : MonoBehaviour
     {
         Debug.Log("Logged in successfully");
 
-        PlayFabInfo.LoadPlayerInfo();
+        PlayFabPlayerInfo.LoadPlayerInfo();
 
-        PlayFabInfo.isLoggedIn = true;
+        PlayFabPlayerInfo.isLoggedIn = true;
     }
 
     public void NewUser()
@@ -77,7 +77,7 @@ public class LoginManager : MonoBehaviour
     {
         Debug.Log("Successfully registered user");
 
-        PlayFabInfo.NewPlayer();
+        PlayFabPlayerInfo.NewPlayer();
         UpdateDisplayName(registerUserName.text);
 
         UserLogin(registerEmail.text, registerPassword.text);
@@ -96,7 +96,7 @@ public class LoginManager : MonoBehaviour
     private void OnDisplayNameUpdated(UpdateUserTitleDisplayNameResult result)
     {
         Debug.Log($"Updated display name to: {result.DisplayName}");
-        PlayFabInfo.SetName(result.DisplayName);
+        PlayFabPlayerInfo.SetName(result.DisplayName);
     }
 
     private void OnPlayFabError(PlayFabError error)

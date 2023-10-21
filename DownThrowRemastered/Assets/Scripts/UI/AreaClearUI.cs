@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class AreaClearUI : MonoBehaviour, IUIInit
+public class AreaClearUI : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI scoreText;
 
@@ -17,10 +17,5 @@ public class AreaClearUI : MonoBehaviour, IUIInit
     public void SetScoreText(int score)
     {
         scoreText.SetText("Score: " + score);
-    }
-
-    public void Init()
-    {
-        Instance = this;
     }
 }
