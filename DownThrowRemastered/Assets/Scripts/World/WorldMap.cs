@@ -30,11 +30,18 @@ public class WorldMap : MonoBehaviour
     private void OnEnable()
     {
         EventManager.OnWorldClear += EventManager_OnWorldClear;
+        EventManager.OnNodeClear += EventManager_OnNodeClear;
     }
 
     private void OnDisable()
     {
+        EventManager.OnNodeClear += EventManager_OnNodeClear;
         EventManager.OnWorldClear -= EventManager_OnWorldClear;
+    }
+
+    private void EventManager_OnNodeClear()
+    {
+        CurrentWorldNode.GetComponent<MonsterNode>().OnNodeClear();
     }
 
     private void EventManager_OnWorldClear()

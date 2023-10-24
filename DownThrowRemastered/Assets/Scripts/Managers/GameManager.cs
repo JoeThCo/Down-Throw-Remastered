@@ -8,17 +8,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] BackgroundManager backgroundManager;
     [Space(10)]
     [SerializeField] WorldMap worldMap;
-    [Space(10)]
-    [SerializeField] CurrencyUI currencyUI;
-    [SerializeField] CurrentMonsterUI currentMonsterUI;
-    [SerializeField] GameOverUI gameOverUI;
-    [SerializeField] NextMonsterUI nextMonsterUI;
-    [SerializeField] AimUI aimerUI;
     [SerializeField] ScoreUI scoreUI;
 
     public static bool isDownThrowing;
 
-    InGamePlayer player;
+    public static InGamePlayer player { get; set; }
     CurrentMonsters currentMonsters;
 
     public static float CurrentDifficulty = 1;
@@ -57,16 +51,9 @@ public class GameManager : MonoBehaviour
         QualitySettings.vSyncCount = 1;
 
         worldMap.Init();
-
-        currencyUI.Init();
-        currentMonsterUI.Init();
-        gameOverUI.Init();
-        backgroundManager.Init();
-        nextMonsterUI.Init();
-        aimerUI.Init();
+        scoreUI.Init();
 
         player = new InGamePlayer(START_PLAYER_BALLS);
-        AimUI.Instance.SetBallsLeftText(player);
 
         CurrentDifficulty = 1;
 
@@ -167,14 +154,7 @@ public class GameManager : MonoBehaviour
 
     private void EventManager_OnNodeClear()
     {
-        Debug.Log("Area clear!");
         StaticSpawner.PlaySFX("areaClear");
-
-        MenuManager.Instance.DisplayMenus("AreaClear");
-        AreaClearUI.Instance.SetScoreText(currentScore);
-
-        WorldMap.CurrentWorldNode.GetComponent<MonsterNode>().OnNodeClear();
-
         isDownThrowing = false;
     }
 }

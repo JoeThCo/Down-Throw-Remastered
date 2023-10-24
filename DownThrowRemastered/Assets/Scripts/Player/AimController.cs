@@ -8,6 +8,8 @@ public class AimController : MonoBehaviour
     [Space(10)]
     [SerializeField] Transform ballParent;
     [SerializeField] Transform firePoint;
+    [Space(10)]
+    [SerializeField] AimUI aimUI;
 
     [HideInInspector] public bool canShoot = true;
     private float playerPower = HALF_POWER;
@@ -18,7 +20,7 @@ public class AimController : MonoBehaviour
 
     private void Start()
     {
-        AimUI.Instance.SetBarPower(playerPower);
+        aimUI.SetBarPower(playerPower);
     }
 
     private void OnEnable()
@@ -62,7 +64,7 @@ public class AimController : MonoBehaviour
         }
 
         playerPower = Mathf.Clamp(playerPower, MIN_POWER, MAX_POWER);
-        AimUI.Instance.SetBarPower(playerPower);
+        aimUI.SetBarPower(playerPower);
     }
 
     bool isCorrectPlayerControlsToShoot()

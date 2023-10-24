@@ -39,7 +39,6 @@ public class InGamePlayer : Being
         int ballsBack = Mathf.FloorToInt(monsterHealthFraction) + MINIMUM_BALLS_BACK;
 
         ChangeHealth(-ballsBack);
-        AimUI.Instance.SetBallsLeftText(this);
 
         Debug.Log("+" + ballsBack + " balls back for " + monster.GetName());
     }
@@ -47,6 +46,5 @@ public class InGamePlayer : Being
     private void EventManager_OnPlayerShootStart()
     {
         ChangeHealth(1);
-        AimUI.Instance.SetBallsLeftText(this);
     }
 }

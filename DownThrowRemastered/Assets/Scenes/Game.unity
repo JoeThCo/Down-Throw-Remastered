@@ -990,11 +990,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundManager: {fileID: 216843424}
   worldMap: {fileID: 558867880}
-  currencyUI: {fileID: 1578671307}
-  currentMonsterUI: {fileID: 1584712908}
-  gameOverUI: {fileID: 1509130689}
-  nextMonsterUI: {fileID: 1510836828}
-  aimerUI: {fileID: 1063497943}
   scoreUI: {fileID: 14213711}
 --- !u!114 &310803718
 MonoBehaviour:
@@ -3467,6 +3462,7 @@ MonoBehaviour:
   basePower: 12.5
   ballParent: {fileID: 2139184259}
   firePoint: {fileID: 1264091594}
+  aimUI: {fileID: 1063497943}
   canShoot: 1
 --- !u!114 &1063497943
 MonoBehaviour:
@@ -6134,7 +6130,7 @@ GameObject:
   - component: {fileID: 1836470620}
   - component: {fileID: 1836470621}
   m_Layer: 5
-  m_Name: Area Clear
+  m_Name: Node Clear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6176,7 +6172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d688f1f3032f774581c0d3da65fb0a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: AreaClear
+  id: NodeClear
 --- !u!114 &1836470621
 MonoBehaviour:
   m_ObjectHideFlags: 0

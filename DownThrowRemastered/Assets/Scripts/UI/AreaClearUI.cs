@@ -14,7 +14,12 @@ public class AreaClearUI : MonoBehaviour
         Instance = this;
     }
 
-    public void SetScoreText(int score)
+    private void OnEnable()
+    {
+        SetScoreText(GameManager.currentScore);
+    }
+
+    void SetScoreText(int score)
     {
         scoreText.SetText("Score: " + score);
     }

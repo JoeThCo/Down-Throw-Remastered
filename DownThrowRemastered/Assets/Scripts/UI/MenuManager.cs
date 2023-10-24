@@ -20,12 +20,19 @@ public class MenuManager : MonoBehaviour
     {
         EventManager.OnWorldClear += EventManager_OnWorldClear;
         EventManager.OnGameOver += EventManager_OnGameOver;
+        EventManager.OnNodeClear += EventManager_OnNodeClear;
     }
 
     private void OnDisable()
     {
         EventManager.OnWorldClear -= EventManager_OnWorldClear;
         EventManager.OnGameOver -= EventManager_OnGameOver;
+        EventManager.OnNodeClear -= EventManager_OnNodeClear;
+    }
+
+    private void EventManager_OnNodeClear()
+    {
+        DisplayMenus("NodeClear");
     }
 
     private void EventManager_OnGameOver()
