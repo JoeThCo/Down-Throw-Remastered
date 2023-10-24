@@ -19,11 +19,18 @@ public class MenuManager : MonoBehaviour
     private void OnEnable()
     {
         EventManager.OnWorldClear += EventManager_OnWorldClear;
+        EventManager.OnGameOver += EventManager_OnGameOver;
     }
 
     private void OnDisable()
     {
         EventManager.OnWorldClear -= EventManager_OnWorldClear;
+        EventManager.OnGameOver -= EventManager_OnGameOver;
+    }
+
+    private void EventManager_OnGameOver()
+    {
+        DisplayMenus("GameOver");
     }
 
     private void EventManager_OnWorldClear()

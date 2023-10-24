@@ -16,7 +16,12 @@ public class GameOverUI : MonoBehaviour, IUIInit
         Instance = this;
     }
 
-    public void SetGameOverUI(int score, int highscore)
+    private void OnEnable()
+    {
+        SetGameOverUI(GameManager.currentScore, GameManager.highScore);
+    }
+
+    void SetGameOverUI(int score, int highscore)
     {
         newHighscoreText.gameObject.SetActive(score > highscore);
 

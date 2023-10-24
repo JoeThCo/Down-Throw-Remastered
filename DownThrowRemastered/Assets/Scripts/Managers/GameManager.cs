@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
 
     public static float CurrentDifficulty = 1;
     private const float WORLD_COMPLETE_INCREMENT = .33f;
-        
+
     public static int currentScore { get; set; }
     public static int highScore { get; set; }
 
@@ -151,7 +151,7 @@ public class GameManager : MonoBehaviour
     private void EventManager_OnWorldClear()
     {
         CurrentDifficulty += WORLD_COMPLETE_INCREMENT;
-        
+
         StaticSpawner.PlaySFX("areaClear");
         PlayFabPlayerInfo.SavePlayerInfo();
     }
@@ -159,13 +159,9 @@ public class GameManager : MonoBehaviour
     private void EventManager_OnGameOver()
     {
         CheckNewHighScore();
-
-        gameOverUI.SetGameOverUI(currentScore, highScore);
-
-        MenuManager.Instance.DisplayMenus("GameOver");
-        StaticSpawner.PlaySFX("gameOver");
-
         isDownThrowing = false;
+
+        StaticSpawner.PlaySFX("gameOver");
         PlayFabPlayerInfo.SavePlayerInfo();
     }
 
