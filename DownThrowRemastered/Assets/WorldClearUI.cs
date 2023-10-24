@@ -14,8 +14,12 @@ public class WorldClearUI : MonoBehaviour
         Instance = this;
     }
 
-    public void SetScoreText(int score)
+    private void OnEnable()
     {
-        scoreText.SetText("Score: " + score);
+        SetScoreText();
+    }
+    public void SetScoreText()
+    {
+        scoreText.SetText("Score: " + GameManager.currentScore);
     }
 }

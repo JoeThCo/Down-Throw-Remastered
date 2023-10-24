@@ -14,6 +14,21 @@ public class BackgroundManager : MonoBehaviour
         Instance = this;
     }
 
+    private void OnEnable()
+    {
+        EventManager.OnWorldClear += EventManager_OnWorldClear;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnWorldClear -= EventManager_OnWorldClear;
+    }
+
+    private void EventManager_OnWorldClear()
+    {
+        SetRandomBackground();
+    }
+
     public void SetBackground(string name)
     {
         BackgroundSO backgroundSO = StaticSpawner.GetBackgroundSO(name);

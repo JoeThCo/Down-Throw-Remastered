@@ -23,9 +23,9 @@ public class GameManager : MonoBehaviour
 
     public static float CurrentDifficulty = 1;
     private const float WORLD_COMPLETE_INCREMENT = .33f;
-
-    private int currentScore;
-    private int highScore;
+        
+    public static int currentScore { get; set; }
+    public static int highScore { get; set; }
 
     const int SCORE_MULTIPLIER = 10;
     public const int MONSTER_DEFEAT_MULTIPLIER = 3;
@@ -151,14 +151,8 @@ public class GameManager : MonoBehaviour
     private void EventManager_OnWorldClear()
     {
         CurrentDifficulty += WORLD_COMPLETE_INCREMENT;
-
-        MenuManager.Instance.DisplayMenus("WorldClear");
-        WorldClearUI.Instance.SetScoreText(currentScore);
-
+        
         StaticSpawner.PlaySFX("areaClear");
-        backgroundManager.SetRandomBackground();
-
-        WorldMap.Instance.MakeWorldGraph();
         PlayFabPlayerInfo.SavePlayerInfo();
     }
 

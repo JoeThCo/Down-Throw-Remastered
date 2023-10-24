@@ -27,6 +27,21 @@ public class WorldMap : MonoBehaviour
         MakeWorldGraph();
     }
 
+    private void OnEnable()
+    {
+        EventManager.OnWorldClear += EventManager_OnWorldClear;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnWorldClear -= EventManager_OnWorldClear;
+    }
+
+    private void EventManager_OnWorldClear()
+    {
+        MakeWorldGraph();
+    }
+
     void ClearMap()
     {
         foreach (Transform t in LineCanvas)

@@ -16,6 +16,21 @@ public class MenuManager : MonoBehaviour
         DisplayMenus(startMenu);
     }
 
+    private void OnEnable()
+    {
+        EventManager.OnWorldClear += EventManager_OnWorldClear;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnWorldClear -= EventManager_OnWorldClear;
+    }
+
+    private void EventManager_OnWorldClear()
+    {
+        DisplayMenus("WorldClear");
+    }
+
     public void DisplayMenus(string searchID)
     {
         foreach (Menu menu in allMenus)
