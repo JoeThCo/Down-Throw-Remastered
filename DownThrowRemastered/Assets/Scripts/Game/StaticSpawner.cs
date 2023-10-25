@@ -11,14 +11,20 @@ public static class StaticSpawner
     static AudioSO[] allSFXAudioSO;
     static BackgroundSO[] allBackgroundSO;
 
+    static bool isLoaded = false;
+
     public static void Load()
     {
+        if (isLoaded) return;
+
         allGameObjects = Resources.LoadAll<GameObject>("GameObjects");
         allUI = Resources.LoadAll<GameObject>("UI");
 
         allMonstersSOs = Resources.LoadAll<MonsterSO>("Monsters");
         allSFXAudioSO = Resources.LoadAll<AudioSO>("SFX");
         allBackgroundSO = Resources.LoadAll<BackgroundSO>("Backgrounds");
+
+        isLoaded = true;
     }
 
     static ScriptableObject GetScriptableObject(ScriptableObject[] input, string name)

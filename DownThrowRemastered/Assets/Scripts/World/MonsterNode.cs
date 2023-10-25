@@ -23,9 +23,7 @@ public class MonsterNode : WorldNode
         base.OnEnterNode();
 
         if (MonstersToSpawn <= 0) return;
-        
-        GameManager.Instance.LoadNode(MonstersToSpawn);
-        MenuManager.Instance.DisplayMenus("Game");
+        EventManager.Invoke(CustomEvent.NodeEnter, MonstersToSpawn);
     }
 
     public void MakeMonsters()

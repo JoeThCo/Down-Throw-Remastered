@@ -11,14 +11,30 @@ public class NextMonsterUI : MonoBehaviour, IUIInit
         Instance = this;
     }
 
-    public void UpdateNextMonsters(CurrentMonsters currentMonsters)
+    private void OnEnable()
     {
+        EventManager.OnNewMonster += EventManager_OnNewMonster;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnNewMonster -= EventManager_OnNewMonster;
+    }
+
+    private void EventManager_OnNewMonster()
+    {
+        UpdateNextMonsters();
+    }
+
+    void UpdateNextMonsters()
+    {
+        Debug.Log("Update Next");
         foreach (Transform t in transform)
         {
             Destroy(t.gameObject);
         }
 
-        foreach (Monster monster in currentMonsters.GetNextMonsters())
+        foreach (Monster monster in GameManager.currentMonsters.GetNextMonsters())
         {
             NextMonster nextMonster = StaticSpawner.SpawnUI("NextMonsterObject", transform).GetComponent<NextMonster>();
             nextMonster.Init(monster);

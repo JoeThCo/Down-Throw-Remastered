@@ -11,10 +11,7 @@ public class CurrentMonsters
     public CurrentMonsters(int count)
     {
         monsters = MakeMonsterList(count);
-        NextMonsterUI.Instance.UpdateNextMonsters(this);
-        PrintMonsters();
-
-        EventManager.Invoke(CustomEvent.NewMonster, GetTopMonster());
+        EventManager.Invoke(CustomEvent.NewMonster);
 
         EventManager.OnMonsterDamage += EventManager_OnMonsterDamage;
         SceneManager.sceneUnloaded += SceneManager_sceneUnloaded;
@@ -55,7 +52,6 @@ public class CurrentMonsters
         }
 
         GetTopMonster().ChangeHealth(damage);
-        CurrentMonsterUI.Instance.UpdateCurrentMonsterUI(GetTopMonster());
 
         EventManager.Invoke(CustomEvent.ScoreChange, damage);
 
@@ -72,7 +68,6 @@ public class CurrentMonsters
         {
             StaticSpawner.PlaySFX("monsterDefeat");
             EventManager.Invoke(CustomEvent.NewMonster, GetTopMonster());
-            NextMonsterUI.Instance.UpdateNextMonsters(this);
         }
         else
         {

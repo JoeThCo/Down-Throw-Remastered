@@ -22,16 +22,29 @@ public class PegBoard : MonoBehaviour
 
     private void OnEnable()
     {
+        StaticSpawner.Load();
+
+        EventManager.OnNodeEnter += EventManager_OnNodeEnter;
+
         EventManager.OnNewMonster += EventManager_OnNewMonster;
         EventManager.OnBallBottoms += EventManager_OnBallBottoms;
         EventManager.OnBoardClear += EventManager_OnBoardClear;
+
+        NewBoard();
     }
 
     private void OnDisable()
     {
+        EventManager.OnNodeEnter -= EventManager_OnNodeEnter;
+
         EventManager.OnNewMonster -= EventManager_OnNewMonster;
         EventManager.OnBallBottoms -= EventManager_OnBallBottoms;
         EventManager.OnBoardClear -= EventManager_OnBoardClear;
+    }
+
+    private void EventManager_OnNodeEnter(int count)
+    {
+        NewBoard();
     }
 
     private void EventManager_OnBoardClear()
@@ -45,7 +58,7 @@ public class PegBoard : MonoBehaviour
         EventManager.Invoke(CustomEvent.BoardClear);
     }
 
-    private void EventManager_OnNewMonster(Monster monster)
+    private void EventManager_OnNewMonster()
     {
         NewBoard();
     }

@@ -18,6 +18,8 @@ public class MenuManager : MonoBehaviour
 
     private void OnEnable()
     {
+        EventManager.OnNodeEnter += EventManager_OnNodeEnter;
+
         EventManager.OnWorldClear += EventManager_OnWorldClear;
         EventManager.OnGameOver += EventManager_OnGameOver;
         EventManager.OnNodeClear += EventManager_OnNodeClear;
@@ -25,9 +27,16 @@ public class MenuManager : MonoBehaviour
 
     private void OnDisable()
     {
+        EventManager.OnNodeEnter -= EventManager_OnNodeEnter;
+
         EventManager.OnWorldClear -= EventManager_OnWorldClear;
         EventManager.OnGameOver -= EventManager_OnGameOver;
         EventManager.OnNodeClear -= EventManager_OnNodeClear;
+    }
+
+    private void EventManager_OnNodeEnter(int count)
+    {
+        DisplayMenus("Game");
     }
 
     private void EventManager_OnNodeClear()

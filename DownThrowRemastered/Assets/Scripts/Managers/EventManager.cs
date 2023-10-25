@@ -23,7 +23,7 @@ public class EventManager : MonoBehaviour
     public delegate void BallBottoms(Ball ball);
     public static event BallBottoms OnBallBottoms;
 
-    public delegate void NewMonster(Monster monster);
+    public delegate void NewMonster();
     public static event NewMonster OnNewMonster;
 
     public delegate void MonsterDamage(Ball ball);
@@ -31,6 +31,9 @@ public class EventManager : MonoBehaviour
 
     public delegate void MonsterDead(Monster monster);
     public static event MonsterDead OnMonsterDead;
+
+    public delegate void NodeEnter(int count);
+    public static event NodeEnter OnNodeEnter;
 
     public delegate void NodeClear();
     public static event NodeClear OnNodeClear;
@@ -81,7 +84,7 @@ public class EventManager : MonoBehaviour
 
             //Monsters
             case CustomEvent.NewMonster:
-                OnNewMonster?.Invoke((Monster)parameter);
+                OnNewMonster?.Invoke();
                 break;
 
             case CustomEvent.MonsterDamage:
@@ -95,6 +98,10 @@ public class EventManager : MonoBehaviour
             //Other
             case CustomEvent.BallBottoms:
                 OnBallBottoms?.Invoke((Ball)parameter);
+                break;
+
+            case CustomEvent.NodeEnter:
+                OnNodeEnter?.Invoke(Convert.ToInt32(parameter));
                 break;
 
             case CustomEvent.NodeClear:

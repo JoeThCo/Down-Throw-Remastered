@@ -13,27 +13,21 @@ public class GameManager : MonoBehaviour
     public static bool isDownThrowing;
 
     public static InGamePlayer player { get; set; }
-    CurrentMonsters currentMonsters;
+    public static CurrentMonsters currentMonsters { get; set; }
 
     public static float CurrentDifficulty = 1;
     private const float WORLD_COMPLETE_INCREMENT = .33f;
-
     public static int currentScore { get; set; }
     public static int highScore { get; set; }
-
     const int SCORE_MULTIPLIER = 10;
     public const int MONSTER_DEFEAT_MULTIPLIER = 3;
-
     public const int START_PLAYER_BALLS = 5;
     public const int MAX_MONSTERS = 1;
 
     public static Camera Cam;
 
-    public static GameManager Instance;
-
     private void Start()
     {
-        Instance = this;
         Cam = Camera.main;
 
         PlayFabPlayerInfo.OfflinePlay();
@@ -66,13 +60,6 @@ public class GameManager : MonoBehaviour
         backgroundManager.SetRandomBackground();
     }
 
-    public void LoadNode(int monsterCount)
-    {
-        MenuManager.Instance.DisplayMenus("Game");
-        currentMonsters = new CurrentMonsters(monsterCount);
-        isDownThrowing = true;
-    }
-
     private void OnApplicationFocus(bool focus)
     {
         if (!isDownThrowing) return;
@@ -85,7 +72,9 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
+        EventManager.OnNodeEnter += EventManager_OnNodeEnter;
         EventManager.OnNodeClear += EventManager_OnNodeClear;
+
         EventManager.OnWorldClear += EventManager_OnWorldClear;
 
         EventManager.OnGameOver += EventManager_OnGameOver;
@@ -96,7 +85,9 @@ public class GameManager : MonoBehaviour
 
     private void OnDisable()
     {
+        EventManager.OnNodeEnter -= EventManager_OnNodeEnter;
         EventManager.OnNodeClear -= EventManager_OnNodeClear;
+
         EventManager.OnWorldClear -= EventManager_OnWorldClear;
 
         EventManager.OnGameOver -= EventManager_OnGameOver;
@@ -134,6 +125,12 @@ public class GameManager : MonoBehaviour
         EventManager.Invoke(CustomEvent.HighScoreChange);
     }
     #endregion
+
+    private void EventManager_OnNodeEnter(int monsterCount)
+    {
+        currentMonsters = new CurrentMonsters(monsterCount);
+        isDownThrowing = true;
+    }
 
     private void EventManager_OnWorldClear()
     {

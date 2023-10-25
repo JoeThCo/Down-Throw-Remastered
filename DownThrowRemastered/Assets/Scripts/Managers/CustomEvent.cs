@@ -17,6 +17,8 @@ public enum CustomEvent
 
     BallBottoms,
 
+    NodeEnter,
+
     NodeClear,
     WorldClear,
 
