@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class WorldMap : MonoBehaviour
 {
+    [SerializeField] [Range(0f, 1f)] float scale = 5f;
+    [SerializeField] [Range(0f, 5f)] float distanceCutOffMultiplier = 1.5f;
+    [Space(10)]
     [SerializeField] [Range(0f, 1f)] float removalPercent;
     [Space(10)]
     [SerializeField] Vector2Int dimensions;
@@ -45,10 +48,9 @@ public class WorldMap : MonoBehaviour
         ClearMap();
 
         Graph graph = new Graph();
-        float scale = 5f;
 
         graph.MakeNodes(dimensions, offset, scale);
-        graph.ConnectToClosestKNeighbors(4, scale * 1.5f);
+        graph.ConnectToClosestKNeighbors(Node.MAX_CONNECTIONS, scale * distanceCutOffMultiplier);
         graph.RemoveEdges(removalPercent);
 
         graph.SpawnAllNodes(NodeCanvas);

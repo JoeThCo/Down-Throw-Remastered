@@ -9,12 +9,13 @@ public class Node
     public Vector2 Position { get; }
     public List<Edge> Edges { get; } = new List<Edge>();
 
+    public const int MAX_CONNECTIONS = 3;
+
     private const float SCALE_MOVEMENT = .15f;
 
     public Node(int id, int x, int y, float scale)
     {
         Id = id;
-
         Position = (Vector2.right * x + Vector2.up * y) * scale + (Random.insideUnitCircle * (scale * SCALE_MOVEMENT));
     }
 
@@ -35,6 +36,7 @@ public class Node
 
     public void ConnectTo(Node node)
     {
+        if (Edges.Count > MAX_CONNECTIONS) return;
         if (Edges.Any(e => (e.a == this && e.b == node) || (e.a == node && e.b == this)))
             return; // Skip if already connected
 

@@ -7,11 +7,9 @@ public class Graph
 {
     public List<Node> Nodes { get; } = new List<Node>();
     public List<Edge> Edges { get; } = new List<Edge>();
-
     public int Start { get; private set; }
     public int End { get; private set; }
-
-    private const float MONSTER_SPAWN_CHANCE = .65f;
+    private const float MONSTER_SPAWN_CHANCE = .5f;
 
     void PickStartAndEnd(Vector2Int dimensions)
     {

@@ -11,6 +11,7 @@ public class InGamePlayer : Being
 
     public InGamePlayer(int health) : base(health)
     {
+        EventManager.OnWorldClear += EventManager_OnWorldClear;
         EventManager.OnPlayerShoot += EventManager_OnPlayerShootStart;
         EventManager.OnPlayerShootEnd += EventManager_OnPlayerShootEnd;
         EventManager.OnMonsterDead += EventManager_OnMonsterDead;
@@ -27,6 +28,11 @@ public class InGamePlayer : Being
         SceneManager.sceneUnloaded -= SceneManager_sceneUnloaded;
     }
 
+    private void EventManager_OnWorldClear()
+    {
+        ChangeHealth(-GameManager.WorldsCleared);
+    }
+
     private void EventManager_OnPlayerShootEnd()
     {
         if (!isDead()) return;
@@ -40,8 +46,6 @@ public class InGamePlayer : Being
 
         ChangeHealth(-ballsBack);
         AimUI.Instance.SetBallsLeftText(this);
-
-        Debug.Log("+" + ballsBack + " balls back for " + monster.GetName());
     }
 
     private void EventManager_OnPlayerShootStart()

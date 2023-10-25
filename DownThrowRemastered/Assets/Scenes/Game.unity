@@ -1605,18 +1605,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1358116790}
     m_Modifications:
-    - target: {fileID: 5709175176129494273, guid: 6e279bfc2e37324499b3b8f597596b61, type: 3}
-      propertyPath: offset.x
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5709175176129494273, guid: 6e279bfc2e37324499b3b8f597596b61, type: 3}
-      propertyPath: dimensions.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5709175176129494273, guid: 6e279bfc2e37324499b3b8f597596b61, type: 3}
-      propertyPath: dimensions.y
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 5709175176129494278, guid: 6e279bfc2e37324499b3b8f597596b61, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -1815,7 +1803,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 560610249705156247, guid: 287c7bee07a25074fa7c5e4a7e045272, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: DisplayMenus
+      value: DisplayMenu
       objectReference: {fileID: 0}
     - target: {fileID: 560610249705156247, guid: 287c7bee07a25074fa7c5e4a7e045272, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -2332,7 +2320,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 560610249705156247, guid: 287c7bee07a25074fa7c5e4a7e045272, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: DisplayMenus
+      value: DisplayMenu
       objectReference: {fileID: 0}
     - target: {fileID: 560610249705156247, guid: 287c7bee07a25074fa7c5e4a7e045272, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -3749,7 +3737,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 560610249705156247, guid: 287c7bee07a25074fa7c5e4a7e045272, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: DisplayMenus
+      value: DisplayMenu
       objectReference: {fileID: 0}
     - target: {fileID: 560610249705156247, guid: 287c7bee07a25074fa7c5e4a7e045272, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -5035,7 +5023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dac854b0119fd1644ac2772db9385038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasGroup: {fileID: 1584712910}
+  canvasGroup: {fileID: 0}
   nameText: {fileID: 1555739565}
   icon: {fileID: 94344950}
   healthText: {fileID: 1139663609}
@@ -5590,7 +5578,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 560610249705156247, guid: 287c7bee07a25074fa7c5e4a7e045272, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: DisplayMenus
+      value: DisplayMenu
       objectReference: {fileID: 0}
     - target: {fileID: 560610249705156247, guid: 287c7bee07a25074fa7c5e4a7e045272, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -6134,7 +6122,7 @@ GameObject:
   - component: {fileID: 1836470620}
   - component: {fileID: 1836470621}
   m_Layer: 5
-  m_Name: Area Clear
+  m_Name: Node Clear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6176,7 +6164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d688f1f3032f774581c0d3da65fb0a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: AreaClear
+  id: NodeClear
 --- !u!114 &1836470621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8399,7 +8387,7 @@ PrefabInstance:
       objectReference: {fileID: 1358116791}
     - target: {fileID: 7411820726775625599, guid: 5907fe5805f5f5a41aa973a878ba1c24, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: DisplayMenus
+      value: DisplayMenu
       objectReference: {fileID: 0}
     - target: {fileID: 7411820726775625599, guid: 5907fe5805f5f5a41aa973a878ba1c24, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

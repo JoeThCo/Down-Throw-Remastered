@@ -7,6 +7,7 @@ public class MonsterNode : WorldNode
 {
     [SerializeField] Image onCompleteCheckMark;
     public int MonstersToSpawn { get; private set; }
+    private const float MONSTER_SPAWN_BIAS = .35f;
 
     public override void Init(Node node)
     {
@@ -23,14 +24,15 @@ public class MonsterNode : WorldNode
         base.OnEnterNode();
 
         if (MonstersToSpawn <= 0) return;
-        
+
         GameManager.Instance.LoadNode(MonstersToSpawn);
-        MenuManager.Instance.DisplayMenus("Game");
+        MenuManager.Instance.DisplayMenu("Game");
     }
 
     public void MakeMonsters()
     {
-        MonstersToSpawn = Random.Range(1, GameManager.MAX_MONSTERS + 1);
+        int damage = Mathf.CeilToInt(Helpers.GetBiasNumber(MONSTER_SPAWN_BIAS) * GameManager.MAX_MONSTERS);
+        MonstersToSpawn = Mathf.Clamp(damage, 1, GameManager.MAX_MONSTERS);
     }
 
     public void OnNodeClear()

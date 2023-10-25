@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     InGamePlayer player;
     CurrentMonsters currentMonsters;
 
-    public static float CurrentDifficulty = 1;
+    public static int WorldsCleared = 1;
     private const float WORLD_COMPLETE_INCREMENT = .33f;
 
     private int currentScore;
@@ -30,8 +30,8 @@ public class GameManager : MonoBehaviour
     const int SCORE_MULTIPLIER = 10;
     public const int MONSTER_DEFEAT_MULTIPLIER = 3;
 
-    public const int START_PLAYER_BALLS = 5;
-    public const int MAX_MONSTERS = 1;
+    public const int START_PLAYER_BALLS = 10;
+    public const int MAX_MONSTERS = 6;
 
     public static Camera Cam;
 
@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
         player = new InGamePlayer(START_PLAYER_BALLS);
         AimUI.Instance.SetBallsLeftText(player);
 
-        CurrentDifficulty = 1;
+        WorldsCleared = 1;
 
         currentScore = 0;
         highScore = PlayFabPlayerInfo.GetHighScore();
@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadNode(int monsterCount)
     {
-        MenuManager.Instance.DisplayMenus("Game");
+        MenuManager.Instance.DisplayMenu("Game");
         currentMonsters = new CurrentMonsters(monsterCount);
         isDownThrowing = true;
     }
@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
 
         if (!focus)
         {
-            MenuManager.Instance.DisplayMenus("Pause");
+            MenuManager.Instance.DisplayMenu("Pause");
         }
     }
 
@@ -123,6 +123,11 @@ public class GameManager : MonoBehaviour
         isDownThrowing = state;
     }
 
+    public static float GetMonsterDifficulty()
+    {
+        return 1 + ((float)(WorldsCleared - 1) * WORLD_COMPLETE_INCREMENT);
+    }
+
     #region Score
     private void EventManager_OnHighScoreChange()
     {
@@ -150,25 +155,24 @@ public class GameManager : MonoBehaviour
 
     private void EventManager_OnWorldClear()
     {
-        CurrentDifficulty += WORLD_COMPLETE_INCREMENT;
+        EventManager.Invoke(CustomEvent.ScoreChange, 25);
+        WorldsCleared++;
 
-        MenuManager.Instance.DisplayMenus("WorldClear");
+        MenuManager.Instance.DisplayMenu("WorldClear");
         WorldClearUI.Instance.SetScoreText(currentScore);
 
         StaticSpawner.PlaySFX("areaClear");
         backgroundManager.SetRandomBackground();
 
         WorldMap.Instance.MakeWorldGraph();
-        PlayFabPlayerInfo.SavePlayerInfo();
     }
 
     private void EventManager_OnGameOver()
     {
         CheckNewHighScore();
+        GameOverUI.Instance.SetGameOverUI(currentScore, highScore);
+        MenuManager.Instance.DisplayMenu("GameOver");
 
-        gameOverUI.SetGameOverUI(currentScore, highScore);
-
-        MenuManager.Instance.DisplayMenus("GameOver");
         StaticSpawner.PlaySFX("gameOver");
 
         isDownThrowing = false;
@@ -177,10 +181,10 @@ public class GameManager : MonoBehaviour
 
     private void EventManager_OnNodeClear()
     {
-        Debug.Log("Area clear!");
+        EventManager.Invoke(CustomEvent.ScoreChange, 5);
         StaticSpawner.PlaySFX("areaClear");
 
-        MenuManager.Instance.DisplayMenus("AreaClear");
+        MenuManager.Instance.DisplayMenu("NodeClear");
         AreaClearUI.Instance.SetScoreText(currentScore);
 
         WorldMap.CurrentWorldNode.GetComponent<MonsterNode>().OnNodeClear();

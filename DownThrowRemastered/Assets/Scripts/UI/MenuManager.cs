@@ -13,10 +13,10 @@ public class MenuManager : MonoBehaviour
     private void Start()
     {
         Instance = this;
-        DisplayMenus(startMenu);
+        DisplayMenu(startMenu);
     }
 
-    public void DisplayMenus(string searchID)
+    public void DisplayMenu(string searchID)
     {
         foreach (Menu menu in allMenus)
         {
@@ -34,11 +34,11 @@ public class MenuManager : MonoBehaviour
         switch (SettingsManager.GetAimType())
         {
             case (int)AimType.Keys:
-                DisplayMenus("Keys");
+                DisplayMenu("Keys");
                 break;
 
             case (int)AimType.Mouse:
-                DisplayMenus("Mouse");
+                DisplayMenu("Mouse");
                 break;
 
             default:
