@@ -39,7 +39,7 @@ public class DamagePeg : Peg
         base.OnPegDeath(ball);
         ball.ChangeDamage(damage);
 
-        TextObject textObject = StaticSpawner.SpawnText(transform.position, ball.damage.ToString()).GetComponent<TextObject>();
+        TextObject textObject = StaticSpawner.SpawnText(transform.position, ball.damage.ToString(), GameManager.Instance.gameTransform).GetComponent<TextObject>();
         textObject.SetColor(sprite.color);
     }
 }

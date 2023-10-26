@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    public int damage;
+    [HideInInspector] public int damage;
 
     public void ChangeDamage(int change)
     {

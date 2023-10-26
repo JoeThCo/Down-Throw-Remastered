@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] BackgroundManager backgroundManager;
     [Space(10)]
+    public Transform gameTransform;
     [SerializeField] WorldMap worldMap;
     [Space(10)]
     [SerializeField] CurrencyUI currencyUI;

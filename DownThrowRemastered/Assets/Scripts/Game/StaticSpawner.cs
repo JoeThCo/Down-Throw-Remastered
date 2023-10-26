@@ -118,6 +118,19 @@ public static class StaticSpawner
         return go;
     }
 
+    public static GameObject SpawnText(Vector3 position, string info, Transform parent)
+    {
+        GameObject go = null;
+        GameObject ui = GetUIPrefab("TextObject");
+        if (ui)
+        {
+            go = Object.Instantiate(ui, position, Quaternion.identity, parent);
+            go.GetComponent<TextObject>().Init(info);
+        }
+
+        return go;
+    }
+
     public static GameObject SpawnText(Vector3 position, string info, float destroyTime)
     {
         GameObject go = null;
