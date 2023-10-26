@@ -14,33 +14,13 @@ public class Aim : MonoBehaviour
 
     private void FixedUpdate()
     {
-        WhatAim();
-    }
-
-    void WhatAim()
-    {
-        switch (SettingsManager.GetAimType())
-        {
-            //Keys
-            case 0:
-                AimKeys();
-                break;
-
-            //Mouse
-            case 1:
-                AimMouse();
-                break;
-
-            default:
-                Debug.LogError("Aim Error!");
-                break;
-        }
+        AimMouse();
     }
 
     void AimKeys()
     {
         float horizontal = Input.GetAxis("Horizontal");
-        float change = rotateSpeed * horizontal * Time.deltaTime * SettingsManager.GetAimSensitivity();
+        float change = rotateSpeed * horizontal * Time.deltaTime;
 
         if (currentAngle + change > rotationLimit || currentAngle + change < -rotationLimit) return;
 
@@ -54,7 +34,7 @@ public class Aim : MonoBehaviour
         Vector3 directionToMouse = (mousePosition - rotatePoint.position).normalized;
 
         float targetAngle = Mathf.Atan2(directionToMouse.y, directionToMouse.x) * Mathf.Rad2Deg;
-        float smoothedAngle = Mathf.LerpAngle(currentAngle, targetAngle, Time.deltaTime * rotateSpeed * SettingsManager.GetAimSensitivity());
+        float smoothedAngle = Mathf.LerpAngle(currentAngle, targetAngle, Time.deltaTime * rotateSpeed);
 
         float clampedAngle = Mathf.Clamp(smoothedAngle + ROTATE_OFFSET, -rotationLimit, rotationLimit);
         float change = clampedAngle - currentAngle;

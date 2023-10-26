@@ -28,22 +28,4 @@ public class MenuManager : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
-
-    public void DisplayPlayerAimType()
-    {
-        switch (SettingsManager.GetAimType())
-        {
-            case (int)AimType.Keys:
-                DisplayMenu("Keys");
-                break;
-
-            case (int)AimType.Mouse:
-                DisplayMenu("Mouse");
-                break;
-
-            default:
-                Debug.LogError("Big issue on menus");
-                break;
-        }
-    }
 }

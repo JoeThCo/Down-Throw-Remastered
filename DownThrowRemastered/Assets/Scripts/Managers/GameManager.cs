@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
     void GameStart()
     {
         QualitySettings.vSyncCount = 1;
+        player = new InGamePlayer(START_PLAYER_BALLS);
 
         worldMap.Init();
 
@@ -65,7 +66,6 @@ public class GameManager : MonoBehaviour
         nextMonsterUI.Init();
         aimerUI.Init();
 
-        player = new InGamePlayer(START_PLAYER_BALLS);
         AimUI.Instance.SetBallsLeftText(player);
 
         WorldsCleared = 1;
