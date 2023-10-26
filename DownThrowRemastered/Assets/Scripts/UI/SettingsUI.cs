@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class SettingsUI : MonoBehaviour, IUIInit
 {
     [SerializeField] SettingSliderUI music;
@@ -16,6 +15,8 @@ public class SettingsUI : MonoBehaviour, IUIInit
 
     public void Init()
     {
+        SettingsManager.Init();
+
         music.Init(SettingsManager.GetMusicVolume());
         sfx.Init(SettingsManager.GetSFXVolume());
 
@@ -28,10 +29,5 @@ public class SettingsUI : MonoBehaviour, IUIInit
     private void Awake()
     {
         Init();
-    }
-
-    public void SaveSettings()
-    {
-        PlayFabPlayerInfo.SavePlayerInfo();
     }
 }

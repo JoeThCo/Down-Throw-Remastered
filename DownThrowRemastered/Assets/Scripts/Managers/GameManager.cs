@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     public static bool isDownThrowing;
 
-    InGamePlayer player;
+    public static InGamePlayer player;
     CurrentMonsters currentMonsters;
 
     public static int WorldsCleared = 1;
@@ -43,7 +43,6 @@ public class GameManager : MonoBehaviour
         Instance = this;
         Cam = Camera.main;
 
-        PlayFabPlayerInfo.OfflinePlay();
         Application.targetFrameRate = -1;
 
         StaticSpawner.Load();
@@ -72,7 +71,6 @@ public class GameManager : MonoBehaviour
         WorldsCleared = 1;
 
         currentScore = 0;
-        highScore = PlayFabPlayerInfo.playerAccountInfo.highScore;
 
         scoreUI.SetHighScoreText(highScore);
         scoreUI.SetCurrentScoreText(currentScore);
@@ -133,7 +131,6 @@ public class GameManager : MonoBehaviour
     private void EventManager_OnHighScoreChange()
     {
         Debug.Log("New highscore from " + highScore + " -> " + currentScore);
-        PlayFabPlayerInfo.SetHighScore(currentScore);
     }
 
     private void EventManager_OnScoreChange(int change)
@@ -177,7 +174,6 @@ public class GameManager : MonoBehaviour
         StaticSpawner.PlaySFX("gameOver");
 
         isDownThrowing = false;
-        PlayFabPlayerInfo.SavePlayerInfo();
     }
 
     private void EventManager_OnNodeClear()

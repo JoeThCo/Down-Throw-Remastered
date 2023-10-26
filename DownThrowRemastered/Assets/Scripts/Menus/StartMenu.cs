@@ -15,14 +15,11 @@ public class StartMenu : MonoBehaviour
 
     private void Awake()
     {
-        PlayFabPlayerInfo.OfflinePlay();
         StaticSpawner.Load();
 
         titleText.SetText(Application.productName);
         versionText.SetText(Application.version);
         companyText.SetText(Application.companyName);
-
-        usernameText.SetText(PlayFabPlayerInfo.playerAccountInfo.name);
 
         backgroundManager.Init();
         backgroundManager.SetRandomBackground();

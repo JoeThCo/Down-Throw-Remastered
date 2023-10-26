@@ -6,16 +6,9 @@ public static class SettingsManager
 {
     static PlayerSettings playerSettings;
 
-    public static void SetPlayerSettings(PlayerSettings input)
+    public static void Init()
     {
-        if (input == null)
-        {
-            playerSettings = new PlayerSettings();
-        }
-        else
-        {
-            playerSettings = input;
-        }
+        playerSettings = new PlayerSettings();
     }
 
     public static bool ComparePlayerSettings(PlayerSettings input)
@@ -86,8 +79,8 @@ public class PlayerSettings
 
     public PlayerSettings()
     {
-        musicVolume = .25f;
-        sfxVolume = .75f;
+        musicVolume = .5f;
+        sfxVolume = .5f;
 
         powerSensitivity = 1f;
         aimSensitivity = 1f;

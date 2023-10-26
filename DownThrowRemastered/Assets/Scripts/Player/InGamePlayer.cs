@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 [System.Serializable]
 public class InGamePlayer : Being
 {
+    public int gold { get; private set; }
+
     const float BALLS_BACK_RATE = .33f;
     const int MINIMUM_BALLS_BACK = 1;
 
