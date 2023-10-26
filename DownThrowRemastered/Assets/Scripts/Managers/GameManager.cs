@@ -85,16 +85,6 @@ public class GameManager : MonoBehaviour
         isDownThrowing = true;
     }
 
-    private void OnApplicationFocus(bool focus)
-    {
-        if (!isDownThrowing) return;
-
-        if (!focus)
-        {
-            MenuManager.Instance.DisplayMenu("Pause");
-        }
-    }
-
     private void OnEnable()
     {
         EventManager.OnNodeClear += EventManager_OnNodeClear;
@@ -103,7 +93,6 @@ public class GameManager : MonoBehaviour
         EventManager.OnGameOver += EventManager_OnGameOver;
 
         EventManager.OnScoreChange += EventManager_OnScoreChange;
-        EventManager.OnHighScoreChange += EventManager_OnHighScoreChange;
     }
 
     private void OnDisable()
@@ -114,7 +103,6 @@ public class GameManager : MonoBehaviour
         EventManager.OnGameOver -= EventManager_OnGameOver;
 
         EventManager.OnScoreChange -= EventManager_OnScoreChange;
-        EventManager.OnHighScoreChange -= EventManager_OnHighScoreChange;
     }
 
     public void SetIsPlaying(bool state)
@@ -139,16 +127,6 @@ public class GameManager : MonoBehaviour
         scoreUI.SetCurrentScoreText(currentScore);
     }
 
-    bool isNewHighScore()
-    {
-        return currentScore > highScore;
-    }
-
-    void CheckNewHighScore()
-    {
-        if (!isNewHighScore()) return;
-        EventManager.Invoke(CustomEvent.HighScoreChange);
-    }
     #endregion
 
     private void EventManager_OnWorldClear()
@@ -167,8 +145,7 @@ public class GameManager : MonoBehaviour
 
     private void EventManager_OnGameOver()
     {
-        CheckNewHighScore();
-        GameOverUI.Instance.SetGameOverUI(currentScore, highScore);
+        GameOverUI.Instance.SetGameOverUI(currentScore);
         MenuManager.Instance.DisplayMenu("GameOver");
 
         StaticSpawner.PlaySFX("gameOver");

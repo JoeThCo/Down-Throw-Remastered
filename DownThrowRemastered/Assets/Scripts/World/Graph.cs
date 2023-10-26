@@ -61,7 +61,6 @@ public class Graph
         int totalEdgesToRemove = Edges.Count - mstEdges.Count;
 
         int percentToRemove = (int)((float)totalEdgesToRemove * percent);
-        Debug.Log($"Edges to Remove: {percentToRemove}");
 
         for (int i = 0; i < percentToRemove; i++)
         {

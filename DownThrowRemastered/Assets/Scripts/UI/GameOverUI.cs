@@ -5,8 +5,6 @@ using TMPro;
 
 public class GameOverUI : MonoBehaviour, IUIInit
 {
-    [SerializeField] TextMeshProUGUI newHighscoreText;
-    [SerializeField] TextMeshProUGUI highscoreText;
     [SerializeField] TextMeshProUGUI scoreText;
 
     public static GameOverUI Instance;
@@ -16,19 +14,8 @@ public class GameOverUI : MonoBehaviour, IUIInit
         Instance = this;
     }
 
-    public void SetGameOverUI(int score, int highscore)
+    public void SetGameOverUI(int score)
     {
-        newHighscoreText.gameObject.SetActive(score > highscore);
-
-        if (score > highscore)
-        {
-            highscoreText.SetText("Highscore: " + score.ToString());
-        }
-        else
-        {
-            highscoreText.SetText("Highscore: " + highscore.ToString());
-        }
-
         scoreText.SetText("Score: " + score);
     }
 }

@@ -41,9 +41,6 @@ public class EventManager : MonoBehaviour
     public delegate void ScoreChange(int change);
     public static event ScoreChange OnScoreChange;
 
-    public delegate void HighScoreChange();
-    public static event HighScoreChange OnHighScoreChange;
-
     public delegate void GameOver();
     public static event NodeClear OnGameOver;
 
@@ -106,10 +103,6 @@ public class EventManager : MonoBehaviour
                 break;
 
             //Game
-            case CustomEvent.HighScoreChange:
-                OnHighScoreChange?.Invoke();
-                break;
-
             case CustomEvent.ScoreChange:
                 OnScoreChange?.Invoke(Convert.ToInt32(parameter));
                 break;
