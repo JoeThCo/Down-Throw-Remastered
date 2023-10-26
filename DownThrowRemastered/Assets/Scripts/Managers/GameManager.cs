@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
         WorldsCleared = 1;
 
         currentScore = 0;
-        highScore = PlayFabPlayerInfo.GetHighScore();
+        highScore = PlayFabPlayerInfo.playerAccountInfo.highScore;
 
         scoreUI.SetHighScoreText(highScore);
         scoreUI.SetCurrentScoreText(currentScore);

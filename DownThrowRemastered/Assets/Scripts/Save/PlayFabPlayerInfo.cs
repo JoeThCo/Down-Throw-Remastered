@@ -6,22 +6,22 @@ using PlayFab.ClientModels;
 
 public static class PlayFabPlayerInfo
 {
-    static PlayerAccountInfo playerInfo;
-    private const string PLAYER_INFO_KEY = "PLAYER_INFO";
+    public static PlayerAccountInfo playerAccountInfo { get; private set; }
+    public static PlayerShopInfo playerShopInfo { get; private set; }
 
+    private const string PLAYER_INFO_KEY = "PLAYER_INFO";
     public static bool isLoggedIn = false;
 
     public static void SavePlayerInfo()
     {
         if (!isLoggedIn) return;
         //Debug.Log(playerInfo.ToJson());
-        //if (SettingsManager.ComparePlayerSettings(playerInfo.playerSettings)) return;
 
         var request = new UpdateUserDataRequest
         {
             Data = new Dictionary<string, string>
             {
-                {PLAYER_INFO_KEY, playerInfo.ToJson() }
+                {PLAYER_INFO_KEY, playerAccountInfo.ToJson() }
             }
         };
 
@@ -55,8 +55,8 @@ public static class PlayFabPlayerInfo
             Debug.Log("Successfully loaded player data");
             string jsonData = result.Data[PLAYER_INFO_KEY].Value;
 
-            playerInfo = JsonUtility.FromJson<PlayerAccountInfo>(jsonData);
-            SettingsManager.SetPlayerSettings(playerInfo.playerSettings);
+            playerAccountInfo = JsonUtility.FromJson<PlayerAccountInfo>(jsonData);
+            SettingsManager.SetPlayerSettings(playerAccountInfo.playerSettings);
 
             Debug.Log(jsonData);
 
@@ -68,40 +68,37 @@ public static class PlayFabPlayerInfo
     public static void NewPlayer()
     {
         Debug.Log("No Player Info, creating...");
-        playerInfo = new PlayerAccountInfo();
+
+        playerAccountInfo = new PlayerAccountInfo();
+        playerShopInfo = new PlayerShopInfo();
+
         SavePlayerInfo();
     }
 
     public static void SetName(string name)
     {
-        playerInfo.name = name;
+        playerAccountInfo.name = name;
         SavePlayerInfo();
-    }
-
-    public static string GetName()
-    {
-        return playerInfo.name;
     }
 
     public static void SetHighScore(int highScore)
     {
-        playerInfo.highScore = highScore;
+        playerAccountInfo.highScore = highScore;
         SavePlayerInfo();
     }
 
-    public static int GetHighScore()
+    public static void ChangeGold(int change)
     {
-        return playerInfo.highScore;
+        playerAccountInfo.gold -= change;
+        SavePlayerInfo();
     }
-
-    public static int GetGold() { return playerInfo.gold; }
 
     public static void OfflinePlay()
     {
-        if (playerInfo != null) return;
+        if (playerAccountInfo != null) return;
 
         Debug.LogWarning("You are not connected to Playfab!");
-        playerInfo = new PlayerAccountInfo();
+        playerAccountInfo = new PlayerAccountInfo();
         SettingsManager.SetPlayerSettings(null);
     }
 }

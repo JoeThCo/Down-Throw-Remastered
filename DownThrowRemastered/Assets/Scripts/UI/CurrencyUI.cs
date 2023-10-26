@@ -13,7 +13,7 @@ public class CurrencyUI : MonoBehaviour, IUIInit
     {
         Instance = this;
 
-        SetGoldText(PlayFabPlayerInfo.GetGold());
+        SetGoldText(PlayFabPlayerInfo.playerAccountInfo.gold);
     }
 
     public void SetGoldText(int gold)

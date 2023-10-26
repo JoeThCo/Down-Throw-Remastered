@@ -2,12 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class ShopManager
+public class ShopManager : MonoBehaviour
 {
-    static ShopItem[] allShopItems;
+    [SerializeField] Transform itemTransfrom;
+    ShopItemSO[] allShopItems;
 
-    public static void Load()
+    private void Awake()
     {
-        allShopItems = Resources.LoadAll<ShopItem>("Shop");
+        StaticSpawner.Load();
+
+        Load();
+        SpawnShop();
+    }
+
+    public void Load()
+    {
+        allShopItems = Resources.LoadAll<ShopItemSO>("Shop");
+    }
+
+    void SpawnShop()
+    {
+        foreach (Transform t in itemTransfrom)
+        {
+            Destroy(t.gameObject);
+        }
+
+        foreach (ShopItemSO item in allShopItems)
+        {
+            ShopItemUI shopItemUI = StaticSpawner.SpawnUI("ShopItem", itemTransfrom).GetComponent<ShopItemUI>();
+            shopItemUI.Init(item);
+        }
     }
 }

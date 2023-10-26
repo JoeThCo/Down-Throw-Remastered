@@ -13,7 +13,6 @@ public class StartMenu : MonoBehaviour
     [Space(10)]
     [SerializeField] TextMeshProUGUI usernameText;
 
-
     private void Awake()
     {
         PlayFabPlayerInfo.OfflinePlay();
@@ -23,7 +22,7 @@ public class StartMenu : MonoBehaviour
         versionText.SetText(Application.version);
         companyText.SetText(Application.companyName);
 
-        usernameText.SetText(PlayFabPlayerInfo.GetName());
+        usernameText.SetText(PlayFabPlayerInfo.playerAccountInfo.name);
 
         backgroundManager.Init();
         backgroundManager.SetRandomBackground();

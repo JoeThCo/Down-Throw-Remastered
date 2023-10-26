@@ -5,12 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerAccountInfo
 {
-    public string name;
-    public int highScore;
-
-    public int gold;
-
-    public PlayerSettings playerSettings;
+    public string name { get; set; }
+    public int highScore { get; set; }
+    public int gold { get; set; }
+    public PlayerSettings playerSettings { get; set; }
 
     public PlayerAccountInfo()
     {
