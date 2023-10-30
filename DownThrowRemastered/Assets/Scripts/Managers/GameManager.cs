@@ -116,11 +116,6 @@ public class GameManager : MonoBehaviour
     }
 
     #region Score
-    private void EventManager_OnHighScoreChange()
-    {
-        Debug.Log("New highscore from " + highScore + " -> " + currentScore);
-    }
-
     private void EventManager_OnScoreChange(int change)
     {
         currentScore += change * SCORE_MULTIPLIER;

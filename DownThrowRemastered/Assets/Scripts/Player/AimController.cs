@@ -67,7 +67,7 @@ public class AimController : MonoBehaviour
 
     bool isCorrectPlayerControlsToShoot()
     {
-        return Input.GetKeyDown(KeyCode.Space);
+        return Input.GetMouseButtonDown(0);
     }
 
     private void FixedUpdate()

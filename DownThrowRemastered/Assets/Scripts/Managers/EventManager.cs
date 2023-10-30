@@ -42,13 +42,13 @@ public class EventManager : MonoBehaviour
     public static event ScoreChange OnScoreChange;
 
     public delegate void GameOver();
-    public static event NodeClear OnGameOver;
+    public static event GameOver OnGameOver;
 
     public delegate void YouWin();
-    public static event NodeClear OnYouWin;
+    public static event YouWin OnYouWin;
 
     public delegate void GoldChange(int change);
-    public static event GoldChange OnCashChange;
+    public static event GoldChange OnGoldChange;
 
     public static void Invoke(CustomEvent customEvent, object parameter = null)
     {
@@ -116,7 +116,7 @@ public class EventManager : MonoBehaviour
                 break;
 
             case CustomEvent.GoldChange:
-                OnCashChange?.Invoke(Convert.ToInt32(parameter));
+                OnGoldChange?.Invoke(Convert.ToInt32(parameter));
                 break;
 
             default:

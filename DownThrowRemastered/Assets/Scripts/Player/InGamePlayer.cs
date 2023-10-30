@@ -13,9 +13,12 @@ public class InGamePlayer : Being
 
     public InGamePlayer(int health) : base(health)
     {
+        EventManager.OnGoldChange += EventManager_OnGoldChange;
+
         EventManager.OnWorldClear += EventManager_OnWorldClear;
         EventManager.OnPlayerShoot += EventManager_OnPlayerShootStart;
         EventManager.OnPlayerShootEnd += EventManager_OnPlayerShootEnd;
+
         EventManager.OnMonsterDead += EventManager_OnMonsterDead;
 
         SceneManager.sceneUnloaded += SceneManager_sceneUnloaded;
@@ -28,6 +31,13 @@ public class InGamePlayer : Being
         EventManager.OnMonsterDead -= EventManager_OnMonsterDead;
 
         SceneManager.sceneUnloaded -= SceneManager_sceneUnloaded;
+    }
+
+    private void EventManager_OnGoldChange(int change)
+    {
+        gold += change;
+
+        CurrencyUI.Instance.SetGoldText();
     }
 
     private void EventManager_OnWorldClear()
