@@ -3,7 +3,13 @@ using UnityEngine.EventSystems; // For UI events
 
 public class ItemSlot : MonoBehaviour, IDropHandler
 {
+    [HideInInspector]
     public DraggableItem currentItem;
+
+    public void SetItem(DraggableItem draggableItem)
+    {
+        this.currentItem = draggableItem;
+    }
 
     public void OnDrop(PointerEventData eventData)
     {

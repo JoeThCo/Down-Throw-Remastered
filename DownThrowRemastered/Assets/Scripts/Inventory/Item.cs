@@ -8,10 +8,15 @@ public class Item
     public ItemRarity Rarity { get; private set; }
     public List<Upgrade> Upgrades { get; private set; }
 
-    public Item(WhatItemSlot slot, ItemRarity rarity, List<Upgrade> upgrades)
+    public Item(WhatItemSlot slot, ItemRarity rarity)
     {
         Slot = slot;
         Rarity = rarity;
-        Upgrades = upgrades ?? new List<Upgrade>();
+        Upgrades = MakeUpgrades();
+    }
+
+    List<Upgrade> MakeUpgrades()
+    {
+        return new List<Upgrade>();
     }
 }

@@ -69,12 +69,9 @@ public class GameManager : MonoBehaviour
         AimUI.Instance.SetBallsLeftText(player);
 
         WorldsCleared = 1;
-
         currentScore = 0;
 
-        scoreUI.SetHighScoreText(highScore);
         scoreUI.SetCurrentScoreText(currentScore);
-
         backgroundManager.SetRandomBackground();
     }
 

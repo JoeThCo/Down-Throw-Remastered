@@ -155,4 +155,16 @@ public static class StaticSpawner
 
         return go;
     }
+
+    public static GameObject SpawnUI(string name)
+    {
+        GameObject go = null;
+        GameObject ui = GetUIPrefab(name);
+        if (ui)
+        {
+            go = Object.Instantiate(ui, Vector3.zero, Quaternion.identity);
+        }
+
+        return go;
+    }
 }
