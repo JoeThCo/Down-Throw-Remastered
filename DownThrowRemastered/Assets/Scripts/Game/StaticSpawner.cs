@@ -11,10 +11,13 @@ public static class StaticSpawner
     static AudioSO[] allSFXAudioSO;
     static BackgroundSO[] allBackgroundSO;
 
+    static Sprite[] allSprites;
+
     public static void Load()
     {
         allGameObjects = Resources.LoadAll<GameObject>("GameObjects");
         allUI = Resources.LoadAll<GameObject>("UI");
+        allSprites = Resources.LoadAll<Sprite>("Images");
 
         allMonstersSOs = Resources.LoadAll<MonsterSO>("Monsters");
         allSFXAudioSO = Resources.LoadAll<AudioSO>("SFX");
@@ -45,6 +48,24 @@ public static class StaticSpawner
         }
 
         throw new System.Exception(name + " is not found!");
+    }
+
+    static Sprite GetSprite(Sprite[] sprites, string name)
+    {
+        foreach (Sprite current in sprites)
+        {
+            if (current.name.Equals(name))
+            {
+                return current;
+            }
+        }
+
+        throw new System.Exception(name + " is not found!");
+    }
+
+    public static Sprite GetSprite(string name)
+    {
+        return GetSprite(allSprites, name);
     }
 
     static GameObject GetGameObjectPrefab(string name)

@@ -5,13 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class WorldMap : MonoBehaviour
 {
-    [SerializeField] [Range(0f, 1f)] float scale = 5f;
+    [SerializeField] [Range(0f, 10f)] float scale = 5f;
     [SerializeField] [Range(0f, 5f)] float distanceCutOffMultiplier = 1.5f;
     [Space(10)]
     [SerializeField] [Range(0f, 1f)] float removalPercent;
     [Space(10)]
     [SerializeField] Vector2Int dimensions;
-    [SerializeField] Vector2Int offset;
+    [SerializeField] Vector2 offset;
     [Space(10)]
     [SerializeField] Transform LineCanvas;
     [SerializeField] Transform NodeCanvas;

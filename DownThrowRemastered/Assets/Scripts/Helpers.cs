@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,10 +16,17 @@ public static class Helpers
 
     public static float GetBiasNumber(float bias = DEFAULT_BIAS)
     {
-        int num = Random.Range(0, RARITY_COUNT);
+        int num = UnityEngine.Random.Range(0, RARITY_COUNT);
         float fnum = ((float)num / (float)RARITY_COUNT);
         float bnum = Bias(fnum, bias);
 
         return bnum;
+    }
+
+    public static T RandomEnumValue<T>(int endCutOff = 0)
+    {
+        var values = Enum.GetValues(typeof(T));
+        int random = UnityEngine.Random.Range(0, values.Length - endCutOff);
+        return (T)values.GetValue(random);
     }
 }

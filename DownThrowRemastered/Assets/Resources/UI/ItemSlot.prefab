@@ -51,6 +51,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemImage: {fileID: 8064299238751596748}
+  outline: {fileID: 0}
+  WhatItemSlot: 4
 --- !u!1 &4365284838621904697
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,7 +64,6 @@ GameObject:
   - component: {fileID: 4365284838621904698}
   - component: {fileID: 6210181976663379398}
   - component: {fileID: 8064299238751596748}
-  - component: {fileID: 4159175516865045859}
   - component: {fileID: 1006288356053727328}
   m_Layer: 5
   m_Name: ItemImage
@@ -129,21 +130,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4159175516865045859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4365284838621904697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 2.5, y: -2.5}
-  m_UseGraphicAlpha: 1
 --- !u!225 &1006288356053727328
 CanvasGroup:
   m_ObjectHideFlags: 0

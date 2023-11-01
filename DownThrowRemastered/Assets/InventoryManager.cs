@@ -28,8 +28,7 @@ public class InventoryManager : MonoBehaviour
         SpawnSlots(MAX_EQUIP_SLOTS, equipSlotsParent);
         SpawnSlots(MAX_INVENTORY_SLOTS, inventorySlotsParent);
 
-        AddItem();
-        AddItem();
+        AddItem(6);
 
         Debug.Log(slotCount);
     }
@@ -50,19 +49,37 @@ public class InventoryManager : MonoBehaviour
     {
         if (selectedSlot == null)
         {
+            Debug.Log("Null");
             selectedSlot = itemSlot;
+        }
+        else if (selectedSlot == itemSlot)
+        {
+            Debug.Log("Same");
+            selectedSlot = null;
         }
         else
         {
-            Item tempItem = itemSlot.GetItem();
-            itemSlot.SetItem(selectedSlot.GetItem());
+            if (!CanSwap(selectedSlot, itemSlot)) 
+            {
+                selectedSlot = null;
+                return;
+            }
+
+            Item tempItem = itemSlot.Item;
+            itemSlot.SetItem(selectedSlot.Item);
             selectedSlot.SetItem(tempItem);
 
-            allItems[itemSlot.GetIndex()] = selectedSlot.GetItem();
-            allItems[selectedSlot.GetIndex()] = tempItem;
+            allItems[itemSlot.Index] = selectedSlot.Item;
+            allItems[selectedSlot.Index] = tempItem;
 
             selectedSlot = null;
         }
+    }
+
+    bool CanSwap(ItemSlot a, ItemSlot b)
+    {
+        return a.Item.Slot == b?.Item.Slot || b.Item.Slot == a?.Item.Slot &&
+            a.EquipSlot == b?.EquipSlot || b.EquipSlot == a?.EquipSlot;
     }
 
     int GetFirstEmpty()
@@ -78,14 +95,31 @@ public class InventoryManager : MonoBehaviour
         return -1;
     }
 
+    public void AddItem(int count)
+    {
+        for (int i = 0; i < Mathf.Min(MAX_EQUIP_SLOTS + MAX_INVENTORY_SLOTS, count); i++)
+        {
+            AddItem();
+        }
+    }
+
     public void AddItem()
     {
         int firstEmpty = GetFirstEmpty();
         if (firstEmpty == -1) return;
 
-        Item item = new Item(WhatItemSlot.Hat, ItemRarity.Legendary);
-        allItems[firstEmpty] = item;
+        Item newItem;
 
-        inventoryItemSlots[firstEmpty].SetItem(item);
+        if (firstEmpty < MAX_EQUIP_SLOTS)
+        {
+            newItem = new Item((WhatItemSlot)firstEmpty, ItemRarity.Common);
+        }
+        else 
+        {
+            newItem = new Item();
+        }
+
+        allItems[firstEmpty] = newItem;
+        inventoryItemSlots[firstEmpty].SetItem(newItem);
     }
 }

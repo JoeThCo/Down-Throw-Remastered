@@ -6,6 +6,7 @@ public enum WhatItemSlot
 {
     Hat,
     Shirt,
-    Pant,
-    Shoes
+    Pants,
+    Shoes,
+    None
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,8 +7,10 @@ using UnityEngine.UI;
 public class ItemSlot : MonoBehaviour
 {
     [SerializeField] Image itemImage;
-    private Item item = null;
-    private int index = -1;
+    public Item Item { get; set; }
+    public int Index { get; private set; }
+
+    public WhatItemSlot EquipSlot { get; private set; }
 
     public void OnButtonPress()
     {
@@ -16,30 +19,34 @@ public class ItemSlot : MonoBehaviour
 
     public void Init(int index)
     {
-        this.index = index;
+        this.Index = index;
+
+        SetEquipItemSlot();
+    }
+
+    void SetEquipItemSlot()
+    {
+        if (IsEquipSlot())
+        {
+            EquipSlot = (WhatItemSlot)Index;
+            Debug.Log(Index + " " + EquipSlot.ToString());
+        }
+        else
+        {
+            EquipSlot = WhatItemSlot.None;
+        }
     }
 
     public void SetItem(Item newItem)
     {
-        if (newItem == null)
-        {
-            this.item = null;
-            itemImage.color = Color.white;
-        }
-        else
-        {
-            this.item = newItem;
-            itemImage.color = newItem.color;
-        }
+        this.Item = newItem;
+
+        itemImage.color = newItem.color;
+        itemImage.sprite = StaticSpawner.GetSprite(newItem.Slot.ToString());
     }
 
-    public Item GetItem()
+    public bool IsEquipSlot()
     {
-        return item;
-    }
-
-    public int GetIndex()
-    {
-        return index;
+        return Index < Enum.GetNames(typeof(WhatItemSlot)).Length - 1;
     }
 }

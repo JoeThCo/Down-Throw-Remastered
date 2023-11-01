@@ -7358,11 +7358,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa613ab62d7758e46aa7321b66763197, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: 5
+  scale: 4
   distanceCutOffMultiplier: 1.5
   removalPercent: 0.5
   dimensions: {x: 5, y: 3}
-  offset: {x: -2, y: -1}
+  offset: {x: -1.5, y: -1}
   LineCanvas: {fileID: 5709175174191389066}
   NodeCanvas: {fileID: 5709175174156881088}
   WorldPlayer: {fileID: 5709175175377774745}

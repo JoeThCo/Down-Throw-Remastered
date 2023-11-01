@@ -13,7 +13,7 @@ public class Node
 
     private const float SCALE_MOVEMENT = .15f;
 
-    public Node(int id, int x, int y, float scale)
+    public Node(int id, float x, float y, float scale)
     {
         Id = id;
         Position = (Vector2.right * x + Vector2.up * y) * scale + (Random.insideUnitCircle * (scale * SCALE_MOVEMENT));
