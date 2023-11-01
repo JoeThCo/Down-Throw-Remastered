@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class ItemSlot : MonoBehaviour
 {
-    private Item item;
-    private int index;
+    [SerializeField] Image itemImage;
+    private Item item = null;
+    private int index = -1;
 
     public void OnButtonPress()
     {
@@ -18,9 +19,18 @@ public class ItemSlot : MonoBehaviour
         this.index = index;
     }
 
-    public void SetItem(Item item)
+    public void SetItem(Item newItem)
     {
-        this.item = item;
+        if (newItem == null)
+        {
+            this.item = null;
+            itemImage.color = Color.white;
+        }
+        else
+        {
+            this.item = newItem;
+            itemImage.color = newItem.color;
+        }
     }
 
     public Item GetItem()

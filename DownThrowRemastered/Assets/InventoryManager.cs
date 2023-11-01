@@ -9,7 +9,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] Transform equipSlotsParent;
     [SerializeField] Transform inventorySlotsParent;
 
-    static Item[] allItems;
+    static Item[] allItems = new Item[MAX_EQUIP_SLOTS + MAX_INVENTORY_SLOTS];
     List<ItemSlot> inventoryItemSlots = new List<ItemSlot>();
 
     public static ItemSlot selectedSlot = null;
@@ -18,73 +18,74 @@ public class InventoryManager : MonoBehaviour
     public const int MAX_INVENTORY_SLOTS = 6;
 
     public static InventoryManager Instance;
+    int slotCount = 0;
 
     private void Awake()
     {
         StaticSpawner.Load();
-
         Instance = this;
 
-        allItems = new Item[MAX_EQUIP_SLOTS + MAX_INVENTORY_SLOTS];
+        SpawnSlots(MAX_EQUIP_SLOTS, equipSlotsParent);
+        SpawnSlots(MAX_INVENTORY_SLOTS, inventorySlotsParent);
 
-        UpdateSlots();
+        AddItem();
+        AddItem();
+
+        Debug.Log(slotCount);
     }
 
-    void DeleteSlots(Transform parent)
-    {
-        foreach (Transform t in parent)
-        {
-            Destroy(t.gameObject);
-        }
-    }
-
-    void SpawnSlots(int count, Transform parent, bool isInvetorySlots = false)
+    void SpawnSlots(int count, Transform parent)
     {
         for (int i = 0; i < count; i++)
         {
             ItemSlot slot = StaticSpawner.SpawnUI("ItemSlot", parent).GetComponent<ItemSlot>();
+            slot.Init(slotCount);
+            slotCount++;
 
-            if (isInvetorySlots)
-            {
-                inventoryItemSlots.Add(slot);
-            }
+            inventoryItemSlots.Add(slot);
         }
-    }
-
-    void UpdateSlots()
-    {
-        Debug.Log("Update");
-
-        inventoryItemSlots.Clear();
-
-        DeleteSlots(equipSlotsParent);
-        DeleteSlots(inventorySlotsParent);
-
-        SpawnSlots(MAX_EQUIP_SLOTS, equipSlotsParent);
-        SpawnSlots(MAX_INVENTORY_SLOTS, inventorySlotsParent, true);
     }
 
     public void OnSelect(ItemSlot itemSlot)
     {
         if (selectedSlot == null)
         {
-            Debug.Log("Null");
             selectedSlot = itemSlot;
         }
         else
         {
-            if (itemSlot.GetIndex() == selectedSlot.GetIndex())
-            {
-                selectedSlot = null;
+            Item tempItem = itemSlot.GetItem();
+            itemSlot.SetItem(selectedSlot.GetItem());
+            selectedSlot.SetItem(tempItem);
 
-            }
-            else
+            allItems[itemSlot.GetIndex()] = selectedSlot.GetItem();
+            allItems[selectedSlot.GetIndex()] = tempItem;
+
+            selectedSlot = null;
+        }
+    }
+
+    int GetFirstEmpty()
+    {
+        for (int i = 0; i < allItems.Length; i++)
+        {
+            if (allItems[i] == null)
             {
-                Debug.Log("Swap");
-                itemSlot.SetItem(allItems[selectedSlot.GetIndex()]);
-                selectedSlot.SetItem(allItems[itemSlot.GetIndex()]);
-                UpdateSlots();
+                return i;
             }
         }
+
+        return -1;
+    }
+
+    public void AddItem()
+    {
+        int firstEmpty = GetFirstEmpty();
+        if (firstEmpty == -1) return;
+
+        Item item = new Item(WhatItemSlot.Hat, ItemRarity.Legendary);
+        allItems[firstEmpty] = item;
+
+        inventoryItemSlots[firstEmpty].SetItem(item);
     }
 }
