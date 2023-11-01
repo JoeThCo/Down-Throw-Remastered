@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class Inventory
 {
-    public const int MAX_SLOTS = 6;
+    private int maxSlots = 0;
+
     public List<Item> Items { get; private set; }
 
-    public Inventory()
+    public Inventory(int maxSlots)
     {
         Items = new List<Item>();
+        this.maxSlots = maxSlots;
     }
 
     public bool AddItem(Item item)
     {
-        if (Items.Count < MAX_SLOTS)
+        if (Items.Count < maxSlots)
         {
             Items.Add(item);
             return true; // Item was successfully added
@@ -33,7 +35,7 @@ public class Inventory
 
     public bool IsFull()
     {
-        return Items.Count >= MAX_SLOTS;
+        return Items.Count >= maxSlots;
     }
 
     public int Count() { return Items.Count; }

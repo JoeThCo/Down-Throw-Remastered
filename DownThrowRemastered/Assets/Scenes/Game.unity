@@ -5640,8 +5640,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1358116789}
-  equipSlots: {fileID: 952348355}
-  inventorySlots: {fileID: 982794523}
+  equipSlotsParent: {fileID: 952348355}
+  inventorySlotsParent: {fileID: 982794523}
 --- !u!1001 &1771631709
 PrefabInstance:
   m_ObjectHideFlags: 0
