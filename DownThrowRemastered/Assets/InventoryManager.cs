@@ -10,7 +10,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] Transform equipSlotsParent;
     [SerializeField] Transform inventorySlotsParent;
 
-    static Item[] allItems = new Item[MAX_EQUIP_SLOTS + MAX_INVENTORY_SLOTS];
+    static Item[] allItems;
     List<ItemSlotUI> inventoryItemSlots = new List<ItemSlotUI>();
 
     public static ItemSlotUI selectedSlot = null;
@@ -25,6 +25,8 @@ public class InventoryManager : MonoBehaviour
     {
         StaticSpawner.Load();
         Instance = this;
+
+        allItems = new Item[MAX_EQUIP_SLOTS + MAX_INVENTORY_SLOTS];
 
         SpawnSlots(MAX_EQUIP_SLOTS, equipSlotsParent);
         SpawnSlots(MAX_INVENTORY_SLOTS, inventorySlotsParent);
