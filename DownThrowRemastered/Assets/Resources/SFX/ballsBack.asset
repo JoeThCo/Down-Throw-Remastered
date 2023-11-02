@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 139ec7baf2df33e49b122b0a13bf5f00, type: 3}
-  m_Name: UC Balls Back
+  m_Script: {fileID: 11500000, guid: 04944d55c8947cc42894c3e75554d831, type: 3}
+  m_Name: ballsBack
   m_EditorClassIdentifier: 
-  ItemRarity: 1
-  ballsBackPercent: 0.025
+  audioClip: {fileID: 8300000, guid: 7bdd41d8ba554554f80e4bb66460b029, type: 3}
+  volume: 0.5

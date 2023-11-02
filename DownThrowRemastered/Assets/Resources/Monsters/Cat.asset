@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Cat
   m_EditorClassIdentifier: 
   monster:
-    icon: {fileID: 21300000, guid: 56b75b2cae4dc1b4aa2d0912908bac6e, type: 3}
-    health: 3
+    Icon: {fileID: 21300000, guid: 56b75b2cae4dc1b4aa2d0912908bac6e, type: 3}
+    Health: 3

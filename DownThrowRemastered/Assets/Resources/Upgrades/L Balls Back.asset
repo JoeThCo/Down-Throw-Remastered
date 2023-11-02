@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: L Balls Back
   m_EditorClassIdentifier: 
   ItemRarity: 4
-  ballsBackPercent: 0.1
+  ballsBackPercent: 0.075

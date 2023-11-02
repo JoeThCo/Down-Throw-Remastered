@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public Transform gameTransform;
     [SerializeField] WorldMap worldMap;
     [Space(10)]
+    [SerializeField] EquippedItemsUI equippedItemsUI;
     [SerializeField] SideBarUI sideBarUI;
     [SerializeField] CurrencyUI currencyUI;
     [SerializeField] CurrentMonsterUI currentMonsterUI;
@@ -60,6 +61,7 @@ public class GameManager : MonoBehaviour
 
         worldMap.Init();
 
+        equippedItemsUI.Init();
         sideBarUI.Init();
         currencyUI.Init();
         currentMonsterUI.Init();
@@ -75,6 +77,7 @@ public class GameManager : MonoBehaviour
 
         scoreUI.SetCurrentScoreText(currentScore);
         sideBarUI.SetBallsLeft();
+        equippedItemsUI.SpawnSlots();
 
         backgroundManager.SetRandomBackground();
     }
@@ -85,11 +88,7 @@ public class GameManager : MonoBehaviour
         currentMonsters = new CurrentMonsters(monsterCount);
         isDownThrowing = true;
 
-
-        foreach (Item item in InventoryManager.GetEquipItems())
-        {
-            Debug.Log(item.Slot.ToString());
-        }
+        equippedItemsUI.SetItemSlots();
     }
 
     private void OnEnable()
@@ -164,7 +163,9 @@ public class GameManager : MonoBehaviour
         AreaClearUI.Instance.SetScoreText(currentScore);
 
         WorldMap.CurrentWorldNode.GetComponent<MonsterNode>().OnNodeClear();
-
         isDownThrowing = false;
+
+        sideBarUI.SetBallsLeft();
+        InventoryManager.Instance.AddItem(.5f);
     }
 }

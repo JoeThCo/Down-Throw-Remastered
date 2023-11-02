@@ -5,12 +5,12 @@ using UnityEngine;
 public class UpgradeSO : ScriptableObject
 {
     public Rarity ItemRarity;
-    public virtual void BuffAdded()
+    public virtual void Equip()
     {
 
     }
 
-    public virtual void BuffRemoved()
+    public virtual void DeEquip()
     {
 
     }

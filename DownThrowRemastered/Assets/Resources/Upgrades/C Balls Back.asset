@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: C Balls Back
   m_EditorClassIdentifier: 
   ItemRarity: 0
-  ballsBackPercent: 0.1
+  ballsBackPercent: 0.01

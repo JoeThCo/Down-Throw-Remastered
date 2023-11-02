@@ -8,11 +8,11 @@ public static class RarityProperties
     {
         switch (rarity)
         {
-            case Rarity.Common: return 3;
-            case Rarity.Uncommon: return 6;
-            case Rarity.Rare: return 9;
-            case Rarity.Epic: return 12;
-            case Rarity.Legendary: return 15;
+            case Rarity.Common: return 1;
+            case Rarity.Uncommon: return 3;
+            case Rarity.Rare: return 5;
+            case Rarity.Epic: return 7;
+            case Rarity.Legendary: return 9;
             default: return 0;
         }
     }
@@ -25,7 +25,7 @@ public static class RarityProperties
             case Rarity.Uncommon: return 2;
             case Rarity.Rare: return 3;
             case Rarity.Epic: return 4;
-            case Rarity.Legendary: return 4;
+            case Rarity.Legendary: return 5;
             default: return 0;
         }
     }
@@ -43,7 +43,7 @@ public static class RarityProperties
         }
     }
 
-    public static Rarity GetRarity() 
+    public static Rarity GetRarity()
     {
         float randValue = UnityEngine.Random.value; // Returns a random number between 0.0 [inclusive] and 1.0 [exclusive]
 

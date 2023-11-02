@@ -5,10 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class Being
 {
-    public Sprite Icon { get; protected set; }
+    public Sprite Icon;
     public string Name { get; protected set; }
-    public int Health { get; protected set; }
-    
+    [Range(0, 5)] public int Health;
+
     public Being()
     {
         Health = 1;

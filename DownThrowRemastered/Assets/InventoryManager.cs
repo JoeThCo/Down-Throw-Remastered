@@ -67,12 +67,13 @@ public class InventoryManager : MonoBehaviour
                 return;
             }
 
+            Item tempArrayItem = allItems[itemSlot.Index];
+            allItems[itemSlot.Index] = selectedSlot.Item;
+            allItems[selectedSlot.Index] = tempArrayItem;
+
             Item tempItem = itemSlot.Item;
             itemSlot.SetItem(selectedSlot.Item);
             selectedSlot.SetItem(tempItem);
-
-            allItems[itemSlot.Index] = selectedSlot.Item;
-            allItems[selectedSlot.Index] = tempItem;
 
             selectedSlot = null;
         }
@@ -84,9 +85,6 @@ public class InventoryManager : MonoBehaviour
 
         bool sameItemSlot = a.Item.Slot == b?.Item.Slot || b.Item.Slot == a?.Item.Slot;
         bool crossSame = a.Item.Slot == b?.EquipSlot || b.Item.Slot == a?.EquipSlot;
-
-        Debug.Log("SameItem: " + sameItemSlot);
-        Debug.Log("CrossSame: " + crossSame);
 
         return sameItemSlot && crossSame;
     }
@@ -104,6 +102,14 @@ public class InventoryManager : MonoBehaviour
         return -1;
     }
 
+    public void AddItem(float percent)
+    {
+        if (Random.value < percent)
+        {
+            AddItem();
+        }
+    }
+
     public void AddItem(int count)
     {
         for (int i = 0; i < Mathf.Min(MAX_EQUIP_SLOTS + MAX_INVENTORY_SLOTS, count); i++)
@@ -115,20 +121,29 @@ public class InventoryManager : MonoBehaviour
     public void AddItem()
     {
         int firstEmpty = GetFirstEmpty();
-        if (firstEmpty == -1) return;
-
         Item newItem;
 
-        if (firstEmpty < MAX_EQUIP_SLOTS)
-        {
-            newItem = new Item((ItemSlot)firstEmpty, Rarity.Common);
-        }
-        else
+        //overflow
+        if (firstEmpty == -1)
         {
             newItem = new Item();
-        }
 
-        allItems[firstEmpty] = newItem;
-        inventoryItemSlots[firstEmpty].SetItem(newItem);
+            allItems[MAX_EQUIP_SLOTS] = newItem;
+            inventoryItemSlots[MAX_EQUIP_SLOTS].SetItem(newItem);
+        }
+        //empty
+        else
+        {
+            if (firstEmpty < MAX_EQUIP_SLOTS)
+            {
+                newItem = new Item((ItemSlot)firstEmpty, Rarity.Common);
+            }
+            else
+            {
+                newItem = new Item();
+            }
+            allItems[firstEmpty] = newItem;
+            inventoryItemSlots[firstEmpty].SetItem(newItem);
+        }
     }
 }

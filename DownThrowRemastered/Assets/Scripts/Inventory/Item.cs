@@ -7,7 +7,6 @@ public class Item
     public ItemSlot Slot { get; private set; }
     public Rarity Rarity { get; private set; }
     public List<UpgradeSO> Upgrades { get; private set; }
-    public Color color { get; private set; }
 
     public Item()
     {
@@ -15,7 +14,6 @@ public class Item
         Rarity = Helpers.RandomEnumValue<Rarity>();
 
         Upgrades = MakeUpgrades();
-        color = Random.ColorHSV();
     }
 
     public Item(Rarity rarity)
@@ -24,7 +22,6 @@ public class Item
 
         Rarity = rarity;
         Upgrades = MakeUpgrades();
-        color = Random.ColorHSV();
     }
 
     public Item(ItemSlot slot, Rarity rarity)
@@ -33,20 +30,23 @@ public class Item
 
         Rarity = rarity;
         Upgrades = MakeUpgrades();
-        color = Random.ColorHSV();
     }
 
     List<UpgradeSO> MakeUpgrades()
     {
         List<UpgradeSO> output = new List<UpgradeSO>();
-
         int totalCost = RarityProperties.GetUpgradePoints(Rarity);
 
         int iterations = 0;
+
         while (totalCost > 0)
         {
-            UpgradeSO newUpgrade = ScriptableObject.Instantiate(StaticSpawner.GetUpgradeSO(RarityProperties.GetRarity()));
-            totalCost -= RarityProperties.GetBuffCost(newUpgrade.ItemRarity);
+            Rarity rarity = RarityProperties.GetRarity();
+            if (totalCost - RarityProperties.GetBuffCost(rarity) < 0) continue;
+
+            UpgradeSO newUpgrade = ScriptableObject.Instantiate(StaticSpawner.GetUpgradeSO(rarity));
+
+            totalCost -= RarityProperties.GetBuffCost(rarity);
             output.Add(newUpgrade);
 
             iterations++;
@@ -58,5 +58,26 @@ public class Item
         }
 
         return output;
+    }
+
+    public override string ToString()
+    {
+        return Rarity.ToString() + " " + Slot.ToString();
+    }
+
+    public void OnEquip()
+    {
+        foreach (UpgradeSO upgradeSO in Upgrades)
+        {
+            upgradeSO.Equip();
+        }
+    }
+
+    public void OnDeEquip()
+    {
+        foreach (UpgradeSO upgradeSO in Upgrades)
+        {
+            upgradeSO.DeEquip();
+        }
     }
 }
