@@ -9,18 +9,18 @@ public class Monster : Being
 
     public Monster(MonsterSO monsterSO)
     {
-        this.health = Mathf.FloorToInt(monsterSO.monster.health * GameManager.CurrentDifficulty);
-        this.beingName = monsterSO.name;
-        this.icon = monsterSO.monster.icon;
+        this.Health = Mathf.FloorToInt(monsterSO.monster.Health * GameManager.GetMonsterDifficulty());
+        this.Name = monsterSO.name;
+        this.Icon = monsterSO.monster.Icon;
 
-        maxHealth = health;
+        maxHealth = Health;
     }
 
     public int GetMaxHealth() { return maxHealth; }
 
     public string GetDebugString()
     {
-        return beingName + " H: " + health;
+        return Name + " H: " + Health;
     }
 
     public override void OnDeath()

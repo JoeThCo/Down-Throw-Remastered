@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Snake
   m_EditorClassIdentifier: 
   monster:
-    icon: {fileID: 21300000, guid: e1aa32acb0ed87a4badaf21692edfd07, type: 3}
-    health: 5
+    Icon: {fileID: 21300000, guid: e1aa32acb0ed87a4badaf21692edfd07, type: 3}
+    Health: 5

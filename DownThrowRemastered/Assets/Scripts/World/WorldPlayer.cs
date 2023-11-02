@@ -16,7 +16,7 @@ public class WorldPlayer : MonoBehaviour
     {
         Node node = worldNode.node;
 
-        if (!WorldMap.CurrentWorldNode.node.IsConnectedTo(node)) 
+        if (!WorldMap.CurrentWorldNode.node.IsConnectedTo(node))
         {
             Debug.Log("Not connected!");
             yield break;

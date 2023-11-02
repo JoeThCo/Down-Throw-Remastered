@@ -11,7 +11,7 @@ public class Node
 
     private const float SCALE_MOVEMENT = .15f;
 
-    public Node(int id, int x, int y, float scale)
+    public Node(int id, float x, float y, float scale)
     {
         Id = id;
 

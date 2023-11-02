@@ -10,6 +10,6 @@ public class NextMonster : MonoBehaviour
 
     public void Init(Monster monster)
     {
-        icon.sprite = monster.GetIcon();
+        icon.sprite = monster.Icon;
     }
 }

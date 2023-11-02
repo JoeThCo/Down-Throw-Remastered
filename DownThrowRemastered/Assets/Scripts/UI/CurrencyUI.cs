@@ -12,12 +12,11 @@ public class CurrencyUI : MonoBehaviour, IUIInit
     public void Init()
     {
         Instance = this;
-
-        SetGoldText(PlayFabPlayerInfo.GetGold());
+        SetGoldText();
     }
 
-    public void SetGoldText(int gold)
+    public void SetGoldText()
     {
-        goldText.SetText(gold.ToString() + "G");
+        goldText.SetText(GameManager.player.gold.ToString() + "G");
     }
 }

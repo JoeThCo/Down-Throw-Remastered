@@ -5,7 +5,6 @@ using TMPro;
 
 public class ScoreUI : MonoBehaviour, IUIInit
 {
-    [SerializeField] TextMeshProUGUI highScoreText;
     [SerializeField] TextMeshProUGUI currentScoreText;
 
     public static ScoreUI Instance;
@@ -13,11 +12,6 @@ public class ScoreUI : MonoBehaviour, IUIInit
     public void Init()
     {
         Instance = this;
-    }
-
-    public void SetHighScoreText(int highScore)
-    {
-        highScoreText.SetText("High: " + highScore);
     }
 
     public void SetCurrentScoreText(int score)

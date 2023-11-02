@@ -54,11 +54,11 @@ public class AimController : MonoBehaviour
         if (vert == 0) return;
         if (vert > 0)
         {
-            playerPower += Time.deltaTime * SettingsManager.GetPowerSensitivity();
+            playerPower += Time.deltaTime;
         }
         else
         {
-            playerPower -= Time.deltaTime * SettingsManager.GetPowerSensitivity();
+            playerPower -= Time.deltaTime;
         }
 
         playerPower = Mathf.Clamp(playerPower, MIN_POWER, MAX_POWER);
@@ -67,9 +67,7 @@ public class AimController : MonoBehaviour
 
     bool isCorrectPlayerControlsToShoot()
     {
-        int aimType = SettingsManager.GetAimType();
-
-        return aimType == (int)AimType.Keys && Input.GetKeyDown(KeyCode.Space) || aimType == (int)AimType.Mouse && Input.GetMouseButtonDown(0) && !MouseOverUI.isOverUI;
+        return Input.GetMouseButtonDown(0);
     }
 
     private void FixedUpdate()

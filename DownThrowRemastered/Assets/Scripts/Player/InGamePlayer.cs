@@ -6,13 +6,19 @@ using UnityEngine.SceneManagement;
 [System.Serializable]
 public class InGamePlayer : Being
 {
+    public int gold { get; private set; }
+
     const float BALLS_BACK_RATE = .33f;
     const int MINIMUM_BALLS_BACK = 1;
 
     public InGamePlayer(int health) : base(health)
     {
+        EventManager.OnGoldChange += EventManager_OnGoldChange;
+
+        EventManager.OnWorldClear += EventManager_OnWorldClear;
         EventManager.OnPlayerShoot += EventManager_OnPlayerShootStart;
         EventManager.OnPlayerShootEnd += EventManager_OnPlayerShootEnd;
+
         EventManager.OnMonsterDead += EventManager_OnMonsterDead;
 
         SceneManager.sceneUnloaded += SceneManager_sceneUnloaded;
@@ -25,6 +31,18 @@ public class InGamePlayer : Being
         EventManager.OnMonsterDead -= EventManager_OnMonsterDead;
 
         SceneManager.sceneUnloaded -= SceneManager_sceneUnloaded;
+    }
+
+    private void EventManager_OnGoldChange(int change)
+    {
+        gold += change;
+
+        CurrencyUI.Instance.SetGoldText();
+    }
+
+    private void EventManager_OnWorldClear()
+    {
+        ChangeHealth(-GameManager.WorldsCleared);
     }
 
     private void EventManager_OnPlayerShootEnd()
@@ -40,8 +58,6 @@ public class InGamePlayer : Being
 
         ChangeHealth(-ballsBack);
         AimUI.Instance.SetBallsLeftText(this);
-
-        Debug.Log("+" + ballsBack + " balls back for " + monster.GetName());
     }
 
     private void EventManager_OnPlayerShootStart()

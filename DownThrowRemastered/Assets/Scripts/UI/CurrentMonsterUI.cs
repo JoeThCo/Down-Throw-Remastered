@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class CurrentMonsterUI : MonoBehaviour, IUIInit
 {
-    [SerializeField] CanvasGroup canvasGroup;
     [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] Image icon;
 
@@ -35,19 +34,14 @@ public class CurrentMonsterUI : MonoBehaviour, IUIInit
 
     void SetCurrentMonsterUI(Monster monster)
     {
-        nameText.SetText(monster.GetName());
-        icon.sprite = monster.GetIcon();
+        nameText.SetText(monster.Name);
+        icon.sprite = monster.Icon;
 
         UpdateCurrentMonsterUI(monster);
     }
 
     public void UpdateCurrentMonsterUI(Monster monster)
     {
-        healthText.SetText(monster.GetHealth() + "/" + monster.GetMaxHealth());
-    }
-
-    public void SetVisablity(bool state)
-    {
-        canvasGroup.alpha = state ? 1 : 0;
+        healthText.SetText(monster.Health + "/" + monster.GetMaxHealth());
     }
 }

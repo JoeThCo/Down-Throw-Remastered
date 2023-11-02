@@ -21,7 +21,6 @@ public enum CustomEvent
     WorldClear,
 
     ScoreChange,
-    HighScoreChange,
 
     GameOver,
     YouWin,

@@ -19,7 +19,7 @@ public class Graph
         End = Random.Range(Nodes.Count - dimensions.y, Nodes.Count);
     }
 
-    public void MakeNodes(Vector2Int dimensions, Vector2Int offset, float scale)
+    public void MakeNodes(Vector2Int dimensions, Vector2 offset, float scale)
     {
         int i = 0;
 
@@ -63,7 +63,6 @@ public class Graph
         int totalEdgesToRemove = Edges.Count - mstEdges.Count;
 
         int percentToRemove = (int)((float)totalEdgesToRemove * percent);
-        Debug.Log($"Edges to Remove: {percentToRemove}");
 
         for (int i = 0; i < percentToRemove; i++)
         {

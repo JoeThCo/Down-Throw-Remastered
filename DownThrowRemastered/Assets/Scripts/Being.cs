@@ -5,34 +5,30 @@ using UnityEngine;
 [System.Serializable]
 public class Being
 {
-    [SerializeField] protected Sprite icon;
-    protected string beingName;
-    [SerializeField] protected int health;
-
-    public int GetHealth() { return health; }
-    public Sprite GetIcon() { return icon; }
-    public string GetName() { return beingName; }
+    public Sprite Icon;
+    public string Name { get; protected set; }
+    [Range(0, 5)] public int Health;
 
     public Being()
     {
-        health = 1;
+        Health = 1;
     }
 
     public Being(int health)
     {
-        this.health = health;
+        this.Health = health;
     }
 
     public bool isDead()
     {
-        return health <= 0;
+        return Health <= 0;
     }
 
     public void ChangeHealth(int change)
     {
-        health -= change;
+        Health -= change;
 
-        if (health <= 0)
+        if (Health <= 0)
         {
             OnDeath();
         }

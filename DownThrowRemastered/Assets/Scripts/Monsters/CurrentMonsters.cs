@@ -12,7 +12,6 @@ public class CurrentMonsters
     {
         monsters = MakeMonsterList(count);
         NextMonsterUI.Instance.UpdateNextMonsters(this);
-        PrintMonsters();
 
         EventManager.Invoke(CustomEvent.NewMonster, GetTopMonster());
 
@@ -48,7 +47,7 @@ public class CurrentMonsters
 
     private void EventManager_OnMonsterDamage(Ball ball)
     {
-        int damage = Mathf.Min(ball.damage, GetTopMonster().GetHealth());
+        int damage = Mathf.Min(ball.damage, GetTopMonster().Health);
         if (damage == 0)
         {
             StaticSpawner.PlaySFX("noMonsterDamage");
@@ -98,7 +97,6 @@ public class CurrentMonsters
 
     public void PrintMonsters()
     {
-        Debug.LogWarning("Current Monsters");
         foreach (Monster current in monsters)
         {
             Debug.Log(current.GetDebugString());
