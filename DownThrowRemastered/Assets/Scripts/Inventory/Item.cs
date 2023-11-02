@@ -4,30 +4,30 @@ using UnityEngine;
 
 public class Item
 {
-    public WhatItemSlot Slot { get; private set; }
-    public ItemRarity Rarity { get; private set; }
-    public List<Upgrade> Upgrades { get; private set; }
-    public Color color = Color.white;
+    public ItemSlot Slot { get; private set; }
+    public Rarity Rarity { get; private set; }
+    public List<UpgradeSO> Upgrades { get; private set; }
+    public Color color { get; private set; }
 
-    public Item() 
+    public Item()
     {
-        Slot = Helpers.RandomEnumValue<WhatItemSlot>(1);
-        Rarity = Helpers.RandomEnumValue<ItemRarity>();
+        Slot = Helpers.RandomEnumValue<ItemSlot>(1);
+        Rarity = Helpers.RandomEnumValue<Rarity>();
 
         Upgrades = MakeUpgrades();
         color = Random.ColorHSV();
     }
 
-    public Item(ItemRarity rarity)
+    public Item(Rarity rarity)
     {
-        Slot = Helpers.RandomEnumValue<WhatItemSlot>(1);
+        Slot = Helpers.RandomEnumValue<ItemSlot>(1);
 
         Rarity = rarity;
         Upgrades = MakeUpgrades();
         color = Random.ColorHSV();
     }
 
-    public Item(WhatItemSlot slot, ItemRarity rarity)
+    public Item(ItemSlot slot, Rarity rarity)
     {
         Slot = slot;
 
@@ -36,8 +36,27 @@ public class Item
         color = Random.ColorHSV();
     }
 
-    List<Upgrade> MakeUpgrades()
+    List<UpgradeSO> MakeUpgrades()
     {
-        return new List<Upgrade>();
+        List<UpgradeSO> output = new List<UpgradeSO>();
+
+        int totalCost = RarityProperties.GetUpgradePoints(Rarity);
+
+        int iterations = 0;
+        while (totalCost > 0)
+        {
+            UpgradeSO newUpgrade = ScriptableObject.Instantiate(StaticSpawner.GetUpgradeSO(RarityProperties.GetRarity()));
+            totalCost -= RarityProperties.GetBuffCost(newUpgrade.ItemRarity);
+            output.Add(newUpgrade);
+
+            iterations++;
+            if (iterations > 25)
+            {
+                Debug.LogError("Iteration max!");
+                return output;
+            }
+        }
+
+        return output;
     }
 }

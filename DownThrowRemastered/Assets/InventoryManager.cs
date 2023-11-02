@@ -11,9 +11,9 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] Transform inventorySlotsParent;
 
     static Item[] allItems = new Item[MAX_EQUIP_SLOTS + MAX_INVENTORY_SLOTS];
-    List<ItemSlot> inventoryItemSlots = new List<ItemSlot>();
+    List<ItemSlotUI> inventoryItemSlots = new List<ItemSlotUI>();
 
-    public static ItemSlot selectedSlot = null;
+    public static ItemSlotUI selectedSlot = null;
 
     public const int MAX_EQUIP_SLOTS = 4;
     public const int MAX_INVENTORY_SLOTS = 6;
@@ -29,14 +29,14 @@ public class InventoryManager : MonoBehaviour
         SpawnSlots(MAX_EQUIP_SLOTS, equipSlotsParent);
         SpawnSlots(MAX_INVENTORY_SLOTS, inventorySlotsParent);
 
-        AddItem(MAX_EQUIP_SLOTS);
+        AddItem(MAX_INVENTORY_SLOTS);
     }
 
     void SpawnSlots(int count, Transform parent)
     {
         for (int i = 0; i < count; i++)
         {
-            ItemSlot slot = StaticSpawner.SpawnUI("ItemSlot", parent).GetComponent<ItemSlot>();
+            ItemSlotUI slot = StaticSpawner.SpawnUI("ItemSlot", parent).GetComponent<ItemSlotUI>();
             slot.Init(slotCount);
             slotCount++;
 
@@ -49,7 +49,7 @@ public class InventoryManager : MonoBehaviour
         return allItems.ToList().Take(MAX_EQUIP_SLOTS).ToArray();
     }
 
-    public void OnSelect(ItemSlot itemSlot)
+    public void OnSelect(ItemSlotUI itemSlot)
     {
         if (selectedSlot == null)
         {
@@ -78,12 +78,17 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    bool CanSwap(ItemSlot a, ItemSlot b)
+    bool CanSwap(ItemSlotUI a, ItemSlotUI b)
     {
         if (a.Item == null || b.Item == null) return true;
 
-        return a.Item.Slot == b?.Item.Slot || b.Item.Slot == a?.Item.Slot &&
-            a.EquipSlot == b?.EquipSlot || b.EquipSlot == a?.EquipSlot;
+        bool sameItemSlot = a.Item.Slot == b?.Item.Slot || b.Item.Slot == a?.Item.Slot;
+        bool crossSame = a.Item.Slot == b?.EquipSlot || b.Item.Slot == a?.EquipSlot;
+
+        Debug.Log("SameItem: " + sameItemSlot);
+        Debug.Log("CrossSame: " + crossSame);
+
+        return sameItemSlot && crossSame;
     }
 
     int GetFirstEmpty()
@@ -116,7 +121,7 @@ public class InventoryManager : MonoBehaviour
 
         if (firstEmpty < MAX_EQUIP_SLOTS)
         {
-            newItem = new Item((WhatItemSlot)firstEmpty, ItemRarity.Common);
+            newItem = new Item((ItemSlot)firstEmpty, Rarity.Common);
         }
         else
         {

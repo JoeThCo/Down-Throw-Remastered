@@ -7,11 +7,10 @@ public class SideBarUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI ballsLeft;
     public static SideBarUI Instance;
 
-    private void Awake()
+    public void Init()
     {
         Instance = this;
     }
-
     public void SetBallsLeft()
     {
         ballsLeft.SetText("Balls Left: " + GameManager.player.Health.ToString());

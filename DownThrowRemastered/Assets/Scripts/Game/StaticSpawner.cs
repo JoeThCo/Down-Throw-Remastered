@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public static class StaticSpawner
 {
     static GameObject[] allGameObjects;
     static GameObject[] allUI;
 
+    static UpgradeSO[] allUpgradeSOs;
     static MonsterSO[] allMonstersSOs;
     static AudioSO[] allSFXAudioSO;
     static BackgroundSO[] allBackgroundSO;
@@ -19,6 +21,7 @@ public static class StaticSpawner
         allUI = Resources.LoadAll<GameObject>("UI");
         allSprites = Resources.LoadAll<Sprite>("Images");
 
+        allUpgradeSOs = Resources.LoadAll<UpgradeSO>("Upgrades");
         allMonstersSOs = Resources.LoadAll<MonsterSO>("Monsters");
         allSFXAudioSO = Resources.LoadAll<AudioSO>("SFX");
         allBackgroundSO = Resources.LoadAll<BackgroundSO>("Backgrounds");
@@ -118,6 +121,17 @@ public static class StaticSpawner
     public static MonsterSO GetMonsterSO()
     {
         return allMonstersSOs[Random.Range(0, allMonstersSOs.Length)];
+    }
+
+    public static UpgradeSO GetUpgradeSO() 
+    {
+        return allUpgradeSOs[Random.Range(0, allUpgradeSOs.Length)];
+    }
+
+    public static UpgradeSO GetUpgradeSO(Rarity rarity)
+    {
+        UpgradeSO[] filteredResults = allUpgradeSOs.Where(item => item.ItemRarity == rarity).ToArray();
+        return filteredResults[Random.Range(0, filteredResults.Length)];
     }
 
     public static void PlaySFX(string name)

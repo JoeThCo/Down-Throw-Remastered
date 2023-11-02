@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum WhatItemSlot
+public enum Rarity
 {
-    Hat,
-    Shirt,
-    Pants,
-    Shoes,
-    None
+    Common,
+    Uncommon,
+    Rare,
+    Epic,
+    Legendary
 }

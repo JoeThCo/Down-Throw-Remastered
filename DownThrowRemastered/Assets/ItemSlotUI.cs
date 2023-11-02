@@ -4,13 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemSlot : MonoBehaviour
+public class ItemSlotUI : MonoBehaviour
 {
     [SerializeField] Image itemImage;
     public Item Item { get; set; }
     public int Index { get; private set; }
-
-    public WhatItemSlot EquipSlot { get; private set; }
+    public ItemSlot EquipSlot { get; private set; }
 
     public void OnButtonPress()
     {
@@ -28,11 +27,11 @@ public class ItemSlot : MonoBehaviour
     {
         if (IsEquipSlot())
         {
-            EquipSlot = (WhatItemSlot)Index;
+            EquipSlot = (ItemSlot)Index;
         }
         else
         {
-            EquipSlot = WhatItemSlot.None;
+            EquipSlot = ItemSlot.None;
         }
     }
 
@@ -54,6 +53,6 @@ public class ItemSlot : MonoBehaviour
 
     public bool IsEquipSlot()
     {
-        return Index < Enum.GetNames(typeof(WhatItemSlot)).Length - 1;
+        return Index < Enum.GetNames(typeof(ItemSlot)).Length - 1;
     }
 }
