@@ -47,7 +47,7 @@ public class CurrentMonsters
 
     private void EventManager_OnMonsterDamage(Ball ball)
     {
-        int damage = Mathf.Min(ball.damage, GetTopMonster().GetHealth());
+        int damage = Mathf.Min(ball.damage, GetTopMonster().Health);
         if (damage == 0)
         {
             StaticSpawner.PlaySFX("noMonsterDamage");

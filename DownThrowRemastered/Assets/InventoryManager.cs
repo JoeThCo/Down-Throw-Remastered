@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
@@ -28,9 +29,7 @@ public class InventoryManager : MonoBehaviour
         SpawnSlots(MAX_EQUIP_SLOTS, equipSlotsParent);
         SpawnSlots(MAX_INVENTORY_SLOTS, inventorySlotsParent);
 
-        AddItem(6);
-
-        Debug.Log(slotCount);
+        AddItem(MAX_EQUIP_SLOTS);
     }
 
     void SpawnSlots(int count, Transform parent)
@@ -45,21 +44,24 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    public static Item[] GetEquipItems()
+    {
+        return allItems.ToList().Take(MAX_EQUIP_SLOTS).ToArray();
+    }
+
     public void OnSelect(ItemSlot itemSlot)
     {
         if (selectedSlot == null)
         {
-            Debug.Log("Null");
             selectedSlot = itemSlot;
         }
         else if (selectedSlot == itemSlot)
         {
-            Debug.Log("Same");
             selectedSlot = null;
         }
         else
         {
-            if (!CanSwap(selectedSlot, itemSlot)) 
+            if (!CanSwap(selectedSlot, itemSlot))
             {
                 selectedSlot = null;
                 return;
@@ -78,6 +80,8 @@ public class InventoryManager : MonoBehaviour
 
     bool CanSwap(ItemSlot a, ItemSlot b)
     {
+        if (a.Item == null || b.Item == null) return true;
+
         return a.Item.Slot == b?.Item.Slot || b.Item.Slot == a?.Item.Slot &&
             a.EquipSlot == b?.EquipSlot || b.EquipSlot == a?.EquipSlot;
     }
@@ -114,7 +118,7 @@ public class InventoryManager : MonoBehaviour
         {
             newItem = new Item((WhatItemSlot)firstEmpty, ItemRarity.Common);
         }
-        else 
+        else
         {
             newItem = new Item();
         }

@@ -80,6 +80,12 @@ public class GameManager : MonoBehaviour
         MenuManager.Instance.DisplayMenu("Game");
         currentMonsters = new CurrentMonsters(monsterCount);
         isDownThrowing = true;
+
+
+        foreach (Item item in InventoryManager.GetEquipItems())
+        {
+            Debug.Log(item.Slot.ToString());
+        }
     }
 
     private void OnEnable()

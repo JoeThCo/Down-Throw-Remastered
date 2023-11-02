@@ -20,7 +20,7 @@ public class AimUI : MonoBehaviour, IUIInit
 
     public void SetBallsLeftText(InGamePlayer player)
     {
-        ballsLeftText.SetText(player.GetHealth().ToString());
+        ballsLeftText.SetText(player.Health.ToString());
     }
 
     public void SetBarPower(float power)

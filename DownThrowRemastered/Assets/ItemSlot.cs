@@ -29,7 +29,6 @@ public class ItemSlot : MonoBehaviour
         if (IsEquipSlot())
         {
             EquipSlot = (WhatItemSlot)Index;
-            Debug.Log(Index + " " + EquipSlot.ToString());
         }
         else
         {
@@ -41,8 +40,16 @@ public class ItemSlot : MonoBehaviour
     {
         this.Item = newItem;
 
-        itemImage.color = newItem.color;
-        itemImage.sprite = StaticSpawner.GetSprite(newItem.Slot.ToString());
+        if (Item == null)
+        {
+            itemImage.color = Color.white;
+            itemImage.sprite = null;
+        }
+        else
+        {
+            itemImage.color = newItem.color;
+            itemImage.sprite = StaticSpawner.GetSprite(newItem.Slot.ToString());
+        }
     }
 
     public bool IsEquipSlot()
