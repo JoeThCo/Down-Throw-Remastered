@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] BackgroundManager backgroundManager;
     [Space(10)]
+    [SerializeField] bool useSetSeed = false;
+    [SerializeField] int seed = 0;
+    [Space(10)]
     public Transform gameTransform;
     [SerializeField] WorldMap worldMap;
     [Space(10)]
@@ -45,12 +48,11 @@ public class GameManager : MonoBehaviour
         Instance = this;
         Cam = Camera.main;
 
+        setSeed();
         Application.targetFrameRate = -1;
-
         StaticSpawner.Load();
 
         GameStart();
-
         isDownThrowing = false;
     }
 
@@ -109,6 +111,17 @@ public class GameManager : MonoBehaviour
         EventManager.OnGameOver -= EventManager_OnGameOver;
 
         EventManager.OnScoreChange -= EventManager_OnScoreChange;
+    }
+
+    void setSeed()
+    {
+        if (!useSetSeed)
+        {
+            seed = Random.Range(-999999999, 999999999);
+        }
+
+        Random.InitState(seed);
+        Debug.LogWarning("Seed: " + seed);
     }
 
     public void SetIsPlaying(bool state)
