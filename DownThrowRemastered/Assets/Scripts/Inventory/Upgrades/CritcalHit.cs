@@ -3,26 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/Upgrade/CriticalHit")]
-public class CritcalHit : UpgradeSO
+public class CritcalHit : PercentUpgradeSO
 {
-    [SerializeField] [Range(0f, 1f)] float criticalHitPercent = 0f;
-
     public override void OnEquip()
     {
-        EventManager.OnMonsterDamage += EventManager_OnMonsterDamage;
+        EventManager.OnMonsterEffectDamage += EventManager_OnMonsterEffectDamage;
     }
 
     public override void OnRemove()
     {
-        EventManager.OnMonsterDamage -= EventManager_OnMonsterDamage;
+        EventManager.OnMonsterEffectDamage -= EventManager_OnMonsterEffectDamage;
     }
 
-    private void EventManager_OnMonsterDamage(int ballDamage)
+    private void EventManager_OnMonsterEffectDamage(int ballDamage)
     {
-        if (Random.value < criticalHitPercent)
-        {
-            int crit = Mathf.RoundToInt(((float)ballDamage * .5f));
-            EventManager.Invoke(CustomEvent.MonsterDamage, crit);
-        }
+        if (!hasUpgradeEffectHit()) return;
+
+        Debug.Log("Crit!");
+        int crit = Mathf.RoundToInt(((float)ballDamage * .5f));
+        EventManager.Invoke(CustomEvent.MonsterDamage, crit);
+    }
+
+    public override string ToString()
+    {
+        return "+" + PercentToString() + " Crit";
     }
 }

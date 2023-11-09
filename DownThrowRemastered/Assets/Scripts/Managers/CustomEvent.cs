@@ -13,6 +13,7 @@ public enum CustomEvent
 
     NewMonster,
     MonsterDamage,
+    MonsterEffectDamage,
     MonsterDead,
 
     BallBottoms,

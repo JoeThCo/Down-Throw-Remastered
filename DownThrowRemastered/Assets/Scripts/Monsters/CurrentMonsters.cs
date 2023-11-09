@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class CurrentMonsters
 {
-    List<Monster> monsters = new List<Monster>();
-
+    List<Monster> monsters { get; set; }
     public int Count { get; private set; }
 
     public CurrentMonsters(int count)
@@ -55,12 +54,18 @@ public class CurrentMonsters
 
         GetTopMonster().ChangeHealth(damage);
         CurrentMonsterUI.Instance.UpdateCurrentMonsterUI(GetTopMonster());
-
         EventManager.Invoke(CustomEvent.ScoreChange, damage);
 
         if (!GetTopMonster().isDead())
         {
             StaticSpawner.PlaySFX("monsterDamage");
+        }
+
+        //ENDED HERE!
+        if (!GetTopMonster().isDead())
+        {
+            StaticSpawner.PlaySFX("monsterDamage");
+            EventManager.Invoke(CustomEvent.MonsterEffectDamage, damage);
             return;
         }
 

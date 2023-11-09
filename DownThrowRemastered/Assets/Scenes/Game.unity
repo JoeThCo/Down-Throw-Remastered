@@ -1107,7 +1107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backgroundManager: {fileID: 216843424}
-  useSetSeed: 1
+  useSetSeed: 0
   seed: 0
   gameTransform: {fileID: 2139184259}
   worldMap: {fileID: 5709175175579343013}

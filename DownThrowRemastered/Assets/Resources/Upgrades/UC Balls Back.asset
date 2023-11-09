@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: UC Balls Back
   m_EditorClassIdentifier: 
   ItemRarity: 1
-  ballsBackPercent: 0.025
+  percent: 0.15
