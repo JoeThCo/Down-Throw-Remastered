@@ -16,7 +16,7 @@ public class Bottom : MonoBehaviour
 
     private void EventManager_OnBallBottoms(Ball ball)
     {
-        EventManager.Invoke(CustomEvent.MonsterDamage, ball);
+        EventManager.Invoke(CustomEvent.MonsterDamage, ball.Damage);
         EventManager.Invoke(CustomEvent.PlayerShootEnd);
     }
 

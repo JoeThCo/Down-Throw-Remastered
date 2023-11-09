@@ -5,12 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/Upgrade/BallsBackPercent")]
 public class BallsBackPercent : UpgradeSO
 {
-    [SerializeField] [Range(0f, 1f)] float ballsBackPercent = .5f;
-    public override void Equip()
+    [SerializeField] [Range(0f, 1f)] float ballsBackPercent = 0f;
+    public override void OnEquip()
     {
         EventManager.OnMonsterDead += EventManager_OnMonsterDead; ;
     }
-    public override void DeEquip()
+
+    public override void OnRemove()
     {
         EventManager.OnMonsterDead -= EventManager_OnMonsterDead;
     }

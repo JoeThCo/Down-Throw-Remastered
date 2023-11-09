@@ -69,7 +69,7 @@ public class Item
     {
         foreach (UpgradeSO upgradeSO in Upgrades)
         {
-            upgradeSO.Equip();
+            upgradeSO.OnEquip();
         }
     }
 
@@ -77,7 +77,7 @@ public class Item
     {
         foreach (UpgradeSO upgradeSO in Upgrades)
         {
-            upgradeSO.DeEquip();
+            upgradeSO.OnRemove();
         }
     }
 }

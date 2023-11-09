@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    [HideInInspector] public int damage;
+    public int Damage { get; private set; }
 
     public void ChangeDamage(int change)
     {
-        damage += change;
+        Damage += change;
     }
 }

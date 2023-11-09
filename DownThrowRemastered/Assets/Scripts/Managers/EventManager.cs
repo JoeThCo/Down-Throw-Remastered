@@ -26,7 +26,7 @@ public class EventManager : MonoBehaviour
     public delegate void NewMonster(Monster monster);
     public static event NewMonster OnNewMonster;
 
-    public delegate void MonsterDamage(Ball ball);
+    public delegate void MonsterDamage(int damage);
     public static event MonsterDamage OnMonsterDamage;
 
     public delegate void MonsterDead(Monster monster);
@@ -82,7 +82,7 @@ public class EventManager : MonoBehaviour
                 break;
 
             case CustomEvent.MonsterDamage:
-                OnMonsterDamage?.Invoke((Ball)parameter);
+                OnMonsterDamage?.Invoke(Convert.ToInt32(parameter));
                 break;
 
             case CustomEvent.MonsterDead:
