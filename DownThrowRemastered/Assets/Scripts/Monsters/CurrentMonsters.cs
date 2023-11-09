@@ -61,7 +61,6 @@ public class CurrentMonsters
             StaticSpawner.PlaySFX("monsterDamage");
         }
 
-        //ENDED HERE!
         if (!GetTopMonster().isDead())
         {
             StaticSpawner.PlaySFX("monsterDamage");

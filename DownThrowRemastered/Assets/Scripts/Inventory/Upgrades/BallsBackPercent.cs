@@ -26,6 +26,6 @@ public class BallsBackPercent : PercentUpgradeSO
 
     public override string ToString()
     {
-        return "+" + PercentToString() + " Balls Back";
+        return "+" + PercentToString() + " Balls Back %";
     }
 }

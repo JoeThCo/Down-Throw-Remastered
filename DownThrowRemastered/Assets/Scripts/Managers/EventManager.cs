@@ -5,7 +5,7 @@ using System;
 
 public class EventManager : MonoBehaviour
 {
-    public delegate void PegHit();
+    public delegate void PegHit(Peg peg);
     public static event PegHit OnPegHit;
 
     public delegate void PegDestroy();
@@ -59,7 +59,7 @@ public class EventManager : MonoBehaviour
         {
             //Pegs
             case CustomEvent.PegHit:
-                OnPegHit?.Invoke();
+                OnPegHit?.Invoke((Peg)parameter);
                 break;
 
             case CustomEvent.PegDestroy:

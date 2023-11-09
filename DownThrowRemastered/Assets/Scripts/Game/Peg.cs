@@ -42,6 +42,7 @@ public class Peg : MonoBehaviour
 
     public virtual void OnPegDeath(Ball ball)
     {
+        EventManager.Invoke(CustomEvent.PegHit, this);
         EventManager.Invoke(CustomEvent.ScoreChange, 1);
         StaticSpawner.PlaySFX("pegDeath");
     }
