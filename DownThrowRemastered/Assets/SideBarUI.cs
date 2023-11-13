@@ -4,7 +4,6 @@ using UnityEngine;
 using TMPro;
 public class SideBarUI : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI ballsLeftText;
     [SerializeField] TextMeshProUGUI itemStatsText;
 
     public static SideBarUI Instance;
@@ -13,10 +12,6 @@ public class SideBarUI : MonoBehaviour
     {
         Instance = this;
         UpdateHoverItemText();
-    }
-    public void SetBallsLeft()
-    {
-        ballsLeftText.SetText("Balls Left: " + GameManager.player.Health.ToString());
     }
 
     public void UpdateHoverItemText(Item item)

@@ -7,8 +7,10 @@ public class PegBoard : MonoBehaviour
     [SerializeField] Transform topRight;
     [SerializeField] Transform botLeft;
     [Space(10)]
+    [SerializeField] [Range(0f, 1f)] float damageYInfluence = .25f;
+    [SerializeField] [Range(0f, 1f)] float minDamagePegSpawningRate = .25f;
+    [Space(10)]
     [SerializeField] [Range(0f, 1f)] float pegSpawningRate;
-    [SerializeField] [Range(0f, 1f)] float damagePegSpawningRate;
     [Space(10)]
     [SerializeField] [Range(0f, 1f)] float goldPegSpawningRate;
     [Space(10)]
@@ -114,11 +116,12 @@ public class PegBoard : MonoBehaviour
                 float currentY = (y * scale);
 
                 Vector3 current = (topRight.position - new Vector3(currentX, currentY) + Vector3.right * scale * .5f);
+                float yPercent = ((float)y / (float)cols) - damageYInfluence;
+                yPercent = Mathf.Clamp(yPercent, minDamagePegSpawningRate, 1);
 
-                //rate to spawn any peg
                 if (Random.value < pegSpawningRate)
                 {
-                    if (Random.value < damagePegSpawningRate)
+                    if (Random.value < yPercent)
                     {
                         pegBoard[x, y] = SpawnPeg("Damage", current);
                     }

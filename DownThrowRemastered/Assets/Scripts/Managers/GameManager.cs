@@ -78,7 +78,6 @@ public class GameManager : MonoBehaviour
         currentScore = 0;
 
         scoreUI.SetCurrentScoreText(currentScore);
-        sideBarUI.SetBallsLeft();
         equippedItemsUI.SpawnSlots();
 
         backgroundManager.SetRandomBackground();
@@ -178,7 +177,6 @@ public class GameManager : MonoBehaviour
         WorldMap.CurrentWorldNode.GetComponent<MonsterNode>().OnNodeClear();
         isDownThrowing = false;
 
-        sideBarUI.SetBallsLeft();
         InventoryManager.Instance.AddItem(.25f);
     }
 }

@@ -54,7 +54,7 @@ public class Item
 
     public override string ToString()
     {
-        return Rarity.ToString() + " " + Slot.ToString();
+        return "Nothing";
     }
 
     public void OnEquip()
