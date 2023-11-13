@@ -8,15 +8,17 @@ public class ItemSlotUI : MonoBehaviour
 {
     [SerializeField] Button button;
     [Space(10)]
+    [SerializeField] Transform selectedImage;
+    [Space(10)]
     [SerializeField] Image buttonBackground;
     [SerializeField] Image itemImage;
     public Item Item { get; set; }
     public int Index { get; private set; }
     public ItemSlot EquipSlot { get; private set; }
 
-    public void OnButtonPress()
+    private void Awake()
     {
-        InventoryManager.Instance.OnSelect(this);
+        OnItemDeselect();
     }
 
     public void Init(int index, bool isInteractable = true)
@@ -25,6 +27,11 @@ public class ItemSlotUI : MonoBehaviour
         button.interactable = isInteractable;
 
         SetEquipItemSlot();
+    }
+
+    public void OnButtonPress()
+    {
+        InventoryManager.Instance.OnSelect(this);
     }
 
     void SetEquipItemSlot()
@@ -75,5 +82,15 @@ public class ItemSlotUI : MonoBehaviour
     public void OnHoverExit()
     {
         SideBarUI.Instance.UpdateHoverItemText();
+    }
+
+    public void OnItemSelected()
+    {
+        selectedImage.transform.gameObject.SetActive(transform);
+    }
+
+    public void OnItemDeselect()
+    {
+        selectedImage.transform.gameObject.SetActive(false);
     }
 }

@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Edge
 {
-    public Node a { get; }
-    public Node b { get; }
+    public Node A { get; private set; }
+    public Node B { get; private set; }
     public float Weight { get; }
 
-    public Edge(Node a, Node b)
+    public Edge(Node A, Node B)
     {
-        this.a = a;
-        this.b = b;
+        this.A = A;
+        this.B = B;
+
         this.Weight = Random.value;
     }
 }

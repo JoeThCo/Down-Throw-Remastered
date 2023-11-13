@@ -56,9 +56,11 @@ public class InventoryManager : MonoBehaviour
         if (selectedSlot == null)
         {
             selectedSlot = itemSlot;
+            selectedSlot.OnItemSelected();
         }
         else if (selectedSlot == itemSlot)
         {
+            selectedSlot.OnItemDeselect();
             selectedSlot = null;
         }
         else
@@ -77,6 +79,7 @@ public class InventoryManager : MonoBehaviour
             itemSlot.SetItem(selectedSlot.Item);
             selectedSlot.SetItem(tempItem);
 
+            selectedSlot.OnItemDeselect();
             selectedSlot = null;
         }
     }
@@ -85,10 +88,17 @@ public class InventoryManager : MonoBehaviour
     {
         if (a.Item == null || b.Item == null) return true;
 
-        bool sameItemSlot = a.Item.Slot == b?.Item.Slot || b.Item.Slot == a?.Item.Slot;
-        bool crossSame = a.Item.Slot == b?.EquipSlot || b.Item.Slot == a?.EquipSlot;
+        if (a.EquipSlot == ItemSlot.None && b.EquipSlot == ItemSlot.None)
+        {
+            return true;
+        }
+        else 
+        {
+            bool sameItemSlot = a.Item.Slot == b?.Item.Slot || b.Item.Slot == a?.Item.Slot;
+            bool crossSame = a.Item.Slot == b?.EquipSlot || b.Item.Slot == a?.EquipSlot;
 
-        return sameItemSlot && crossSame;
+            return sameItemSlot && crossSame;
+        }
     }
 
     int GetFirstEmpty()

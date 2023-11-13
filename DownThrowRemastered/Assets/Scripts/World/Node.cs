@@ -25,7 +25,7 @@ public class Node
 
         foreach (var edge in Edges)
         {
-            if (edge.a == targetNode || edge.b == targetNode)
+            if (edge.A == targetNode || edge.B == targetNode)
             {
                 return true;
             }
@@ -34,20 +34,22 @@ public class Node
         return false;
     }
 
-    public void ConnectTo(Node node)
+    public void ConnectTo(Node otherNode)
     {
         if (Edges.Count > MAX_CONNECTIONS) return;
-        if (Edges.Any(e => (e.a == this && e.b == node) || (e.a == node && e.b == this)))
-            return; // Skip if already connected
+        if (Edges.Any(e => (e.A == this && e.B == otherNode) || (e.A == otherNode && e.B == this))) return;
 
-        var edge = new Edge(this, node);
+        Edge edge = new Edge(this, otherNode);
         Edges.Add(edge);
-        node.Edges.Add(edge);
+        otherNode.Edges.Add(edge);
     }
 
     public void DisconnectFrom(Edge edge)
     {
-        Edges.Remove(edge);
+        if (Edges.Contains(edge))
+        {
+            Edges.Remove(edge);
+        }
     }
 
     public double DistanceTo(Node other)
@@ -60,10 +62,17 @@ public class Node
         List<Node> neighbors = new List<Node>();
         foreach (var edge in Edges)
         {
-            if (edge.a == this)
-                neighbors.Add(edge.b);
-            else if (edge.b == this)
-                neighbors.Add(edge.a);
+            if (edge.A == this)
+            {
+                neighbors.Add(edge.B);
+                continue;
+            }
+
+            if (edge.B == this)
+            {
+                neighbors.Add(edge.A);
+                continue;
+            }
         }
 
         return neighbors;

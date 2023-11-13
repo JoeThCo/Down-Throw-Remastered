@@ -8,6 +8,7 @@ public class WorldMap : MonoBehaviour
     [SerializeField] [Range(0f, 10f)] float scale = 5f;
     [SerializeField] [Range(0f, 5f)] float distanceCutOffMultiplier = 1.5f;
     [Space(10)]
+    [SerializeField] [Range(0f, 1f)] float monsterSpawnPercent;
     [SerializeField] [Range(0f, 1f)] float removalPercent;
     [Space(10)]
     [SerializeField] Vector2Int dimensions;
@@ -17,7 +18,6 @@ public class WorldMap : MonoBehaviour
     [SerializeField] Transform NodeCanvas;
     [Space(10)]
     public WorldPlayer WorldPlayer;
-
     public static WorldMap Instance;
     public static WorldNode CurrentWorldNode { get; private set; }
 
@@ -47,7 +47,7 @@ public class WorldMap : MonoBehaviour
     {
         ClearMap();
 
-        Graph graph = new Graph();
+        Graph graph = new Graph(monsterSpawnPercent);
 
         graph.MakeNodes(dimensions, offset, scale);
         graph.ConnectToClosestKNeighbors(Node.MAX_CONNECTIONS, scale * distanceCutOffMultiplier);

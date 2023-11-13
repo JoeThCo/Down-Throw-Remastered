@@ -9,7 +9,13 @@ public class Graph
     public List<Edge> Edges { get; } = new List<Edge>();
     public int Start { get; private set; }
     public int End { get; private set; }
-    private const float MONSTER_SPAWN_CHANCE = .5f;
+
+    private float monsterSpawnChance;
+
+    public Graph(float monsterSpawnChance)
+    {
+        this.monsterSpawnChance = monsterSpawnChance;
+    }
 
     void PickStartAndEnd(Vector2Int dimensions)
     {
@@ -46,7 +52,7 @@ public class Graph
             foreach (var neighbor in neighbors)
             {
                 node.ConnectTo(neighbor);
-                if (!Edges.Any(e => e.a == node && e.b == neighbor || e.a == neighbor && e.b == node))
+                if (!Edges.Any(e => e.A == node && e.B == neighbor || e.A == neighbor && e.B == node))
                 {
                     Edges.Add(node.Edges.Last());
                 }
@@ -82,8 +88,8 @@ public class Graph
         Edge edgeToRemove = nonMstEdges[Random.Range(0, nonMstEdges.Count)];
 
         // Remove this edge
-        edgeToRemove.a.DisconnectFrom(edgeToRemove);
-        edgeToRemove.b.DisconnectFrom(edgeToRemove);
+        edgeToRemove.A.DisconnectFrom(edgeToRemove);
+        edgeToRemove.B.DisconnectFrom(edgeToRemove);
         Edges.Remove(edgeToRemove);
     }
 
@@ -98,8 +104,8 @@ public class Graph
 
         foreach (var edge in sortedEdges)
         {
-            int nodeIndexA = Nodes.IndexOf(edge.a);
-            int nodeIndexB = Nodes.IndexOf(edge.b);
+            int nodeIndexA = Nodes.IndexOf(edge.A);
+            int nodeIndexB = Nodes.IndexOf(edge.B);
 
             if (uf.Union(nodeIndexA, nodeIndexB))
             {
@@ -117,7 +123,7 @@ public class Graph
         visited.Add(node);
         foreach (var edge in node.Edges)
         {
-            DFS(edge.a == node ? edge.b : edge.a, visited);
+            DFS(edge.A == node ? edge.B : edge.A, visited);
         }
     }
 
@@ -140,7 +146,7 @@ public class Graph
             EndNode endNode = StaticSpawner.SpawnGame("EndNode", new Vector3(node.Position.x, node.Position.y), parent).GetComponent<EndNode>();
             endNode.Init(node);
         }
-        else if (Random.value < MONSTER_SPAWN_CHANCE)
+        else if (Random.value < monsterSpawnChance)
         {
             MonsterNode monsterNode = StaticSpawner.SpawnGame("MonsterNode", new Vector3(node.Position.x, node.Position.y), parent).GetComponent<MonsterNode>();
             monsterNode.Init(node);

@@ -16,20 +16,12 @@ public class Item
         Upgrades = MakeUpgrades();
     }
 
-    public Item(Rarity rarity)
-    {
-        Slot = Helpers.RandomEnumValue<ItemSlot>(1);
-
-        Rarity = rarity;
-        Upgrades = MakeUpgrades();
-    }
-
     public Item(ItemSlot slot, Rarity rarity)
     {
         Slot = slot;
 
         Rarity = rarity;
-        Upgrades = MakeUpgrades();
+        Upgrades = new List<UpgradeSO>();
     }
 
     List<UpgradeSO> MakeUpgrades()

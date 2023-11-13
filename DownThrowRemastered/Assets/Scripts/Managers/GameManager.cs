@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     CurrentMonsters currentMonsters;
 
     public static int WorldsCleared = 1;
-    private const float WORLD_COMPLETE_INCREMENT = .33f;
+    private const float WORLD_COMPLETE_INCREMENT = .25f;
 
     private int currentScore;
     private int highScore;
@@ -179,6 +179,6 @@ public class GameManager : MonoBehaviour
         isDownThrowing = false;
 
         sideBarUI.SetBallsLeft();
-        InventoryManager.Instance.AddItem(.5f);
+        InventoryManager.Instance.AddItem(.25f);
     }
 }
