@@ -23,13 +23,13 @@ public class AimController : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.OnPlayerShoot += EventManager_onPlayerShoot;
+        EventManager.OnPlayerShootStart += EventManager_onPlayerShoot;
         EventManager.OnBallBottoms += EventManager_OnBallBottoms;
     }
 
     private void OnDisable()
     {
-        EventManager.OnPlayerShoot -= EventManager_onPlayerShoot;
+        EventManager.OnPlayerShootStart -= EventManager_onPlayerShoot;
         EventManager.OnBallBottoms -= EventManager_OnBallBottoms;
     }
 
@@ -83,7 +83,7 @@ public class AimController : MonoBehaviour
 
         if (isCorrectPlayerControlsToShoot())
         {
-            EventManager.Invoke(CustomEvent.PlayerShootStart);
+            EventManager.InvokePlayerShootStart();
         }
     }
 }

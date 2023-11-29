@@ -44,7 +44,7 @@ public class PegBoard : MonoBehaviour
     private void EventManager_OnBallBottoms(Ball ball)
     {
         if (isDamagePegLeft()) return;
-        EventManager.Invoke(CustomEvent.BoardClear);
+        EventManager.InvokeBoardClear();
     }
 
     private void EventManager_OnNewMonster(Monster monster)

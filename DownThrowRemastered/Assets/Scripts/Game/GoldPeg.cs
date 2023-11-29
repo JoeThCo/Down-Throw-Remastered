@@ -15,6 +15,6 @@ public class GoldPeg : Peg
     {
         base.OnPegDeath(ball);
 
-        EventManager.Invoke(CustomEvent.GoldChange, pegWorth);
+        EventManager.InvokeGoldChange(pegWorth);
     }
 }

@@ -42,8 +42,8 @@ public class Peg : MonoBehaviour
 
     public virtual void OnPegDeath(Ball ball)
     {
-        EventManager.Invoke(CustomEvent.PegHit, this);
-        EventManager.Invoke(CustomEvent.ScoreChange, 1);
+        EventManager.InvokeOnPegHit(this);
+        EventManager.InvokeScoreChange(1);
         StaticSpawner.PlaySFX("pegDeath");
     }
 
@@ -63,7 +63,7 @@ public class Peg : MonoBehaviour
         if (isBall(collision.gameObject))
         {
             onPegHit?.Invoke();
-            EventManager.Invoke(CustomEvent.PegHit);
+            EventManager.InvokeOnPegHit(this);
         }
     }
 
@@ -95,7 +95,7 @@ public class Peg : MonoBehaviour
     {
         if (isBall(collision.gameObject) && hasBallTriggeredAndCollided())
         {
-            EventManager.Invoke(CustomEvent.PegDestroy);
+            EventManager.InvokeOnPegDestroy();
 
             Ball ball = collision.gameObject.GetComponent<Ball>();
             onPegDeath?.Invoke(ball);

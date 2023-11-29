@@ -12,7 +12,7 @@ public class CurrentMonsters
         monsters = MakeMonsterList(count);
         NextMonsterUI.Instance.UpdateNextMonsters(this);
 
-        EventManager.Invoke(CustomEvent.NewMonster, GetTopMonster());
+        EventManager.InvokeOnNewMonster(GetTopMonster());
 
         EventManager.OnMonsterDamage += EventManager_OnMonsterDamage;
         SceneManager.sceneUnloaded += SceneManager_sceneUnloaded;
@@ -54,7 +54,7 @@ public class CurrentMonsters
 
         GetTopMonster().ChangeHealth(damage);
         CurrentMonsterUI.Instance.UpdateCurrentMonsterUI(GetTopMonster());
-        EventManager.Invoke(CustomEvent.ScoreChange, damage);
+        EventManager.InvokeScoreChange(damage);
 
         if (!GetTopMonster().isDead())
         {
@@ -64,23 +64,22 @@ public class CurrentMonsters
         if (!GetTopMonster().isDead())
         {
             StaticSpawner.PlaySFX("monsterDamage");
-            EventManager.Invoke(CustomEvent.MonsterEffectDamage, damage);
+            EventManager.InvokeOnMonsterEffectDamage(damage);
             return;
         }
-
-        EventManager.Invoke(CustomEvent.ScoreChange, GetTopMonster().GetMaxHealth() * GameManager.MONSTER_DEFEAT_MULTIPLIER);
+        EventManager.InvokeScoreChange(GetTopMonster().GetMaxHealth() * GameManager.MONSTER_DEFEAT_MULTIPLIER);
         RemoveTopMonster();
 
         if (isAnotherMonster())
         {
             StaticSpawner.PlaySFX("monsterDefeat");
-            EventManager.Invoke(CustomEvent.NewMonster, GetTopMonster());
+            EventManager.InvokeOnNewMonster(GetTopMonster());
             NextMonsterUI.Instance.UpdateNextMonsters(this);
         }
         else
         {
             EventManager.OnMonsterDamage -= EventManager_OnMonsterDamage;
-            EventManager.Invoke(CustomEvent.NodeClear);
+            EventManager.InvokeNodeClear();
         }
     }
 

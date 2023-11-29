@@ -16,7 +16,7 @@ public class InGamePlayer : Being
         EventManager.OnGoldChange += EventManager_OnGoldChange;
 
         EventManager.OnWorldClear += EventManager_OnWorldClear;
-        EventManager.OnPlayerShoot += EventManager_OnPlayerShootStart;
+        EventManager.OnPlayerShootStart += EventManager_OnPlayerShootStart;
         EventManager.OnPlayerShootEnd += EventManager_OnPlayerShootEnd;
 
         EventManager.OnMonsterDead += EventManager_OnMonsterDead;
@@ -26,7 +26,7 @@ public class InGamePlayer : Being
 
     private void SceneManager_sceneUnloaded(Scene arg0)
     {
-        EventManager.OnPlayerShoot -= EventManager_OnPlayerShootStart;
+        EventManager.OnPlayerShootStart -= EventManager_OnPlayerShootStart;
         EventManager.OnPlayerShootEnd -= EventManager_OnPlayerShootEnd;
         EventManager.OnMonsterDead -= EventManager_OnMonsterDead;
 
@@ -48,7 +48,7 @@ public class InGamePlayer : Being
     private void EventManager_OnPlayerShootEnd()
     {
         if (!isDead()) return;
-        EventManager.Invoke(CustomEvent.GameOver);
+        EventManager.InvokeGameOver();
     }
 
     private void EventManager_OnMonsterDead(Monster monster)

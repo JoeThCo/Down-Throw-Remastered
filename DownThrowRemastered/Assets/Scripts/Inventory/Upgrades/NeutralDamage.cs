@@ -18,8 +18,7 @@ public class NeutralDamage : PercentUpgradeSO
     private void EventManager_OnPegHit(Peg peg)
     {
         if (!hasUpgradeEffectHit()) return;
-
-        EventManager.Invoke(CustomEvent.MonsterDamage, 1);
+        EventManager.InvokeOnMonsterDamage(1);
     }
 
     public override string ToString()

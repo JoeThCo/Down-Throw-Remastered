@@ -15,7 +15,7 @@ public class EventManager : MonoBehaviour
     public static event BoardClear OnBoardClear;
 
     public delegate void PlayerShootStart();
-    public static event PlayerShootStart OnPlayerShoot;
+    public static event PlayerShootStart OnPlayerShootStart;
 
     public delegate void PlayerShootEnd();
     public static event PlayerShootEnd OnPlayerShootEnd;
@@ -53,81 +53,83 @@ public class EventManager : MonoBehaviour
     public delegate void GoldChange(int change);
     public static event GoldChange OnGoldChange;
 
-    public static void Invoke(CustomEvent customEvent, object parameter = null)
+    public static void InvokeOnPegHit(Peg peg)
     {
-        switch (customEvent)
-        {
-            //Pegs
-            case CustomEvent.PegHit:
-                OnPegHit?.Invoke((Peg)parameter);
-                break;
+        OnPegHit?.Invoke(peg);
+    }
 
-            case CustomEvent.PegDestroy:
-                OnPegDestroy?.Invoke();
-                break;
+    public static void InvokeOnPegDestroy()
+    {
+        OnPegDestroy?.Invoke();
+    }
 
-            case CustomEvent.BoardClear:
-                OnBoardClear?.Invoke();
-                break;
+    public static void InvokeBoardClear()
+    {
+        OnBoardClear?.Invoke();
+    }
 
-            //Player
-            case CustomEvent.PlayerShootStart:
-                OnPlayerShoot?.Invoke();
-                break;
+    public static void InvokePlayerShootStart()
+    {
+        OnPlayerShootStart?.Invoke();
+    }
 
-            case CustomEvent.PlayerShootEnd:
-                OnPlayerShootEnd?.Invoke();
-                break;
+    public static void InvokePlayerShootEnd()
+    {
+        OnPlayerShootEnd?.Invoke();
+    }
 
-            //Monsters
-            case CustomEvent.NewMonster:
-                OnNewMonster?.Invoke((Monster)parameter);
-                break;
+    public static void InvokeOnNewMonster(Monster monster)
+    {
+        OnNewMonster?.Invoke(monster);
+    }
 
-            case CustomEvent.MonsterDamage:
-                OnMonsterDamage?.Invoke(Convert.ToInt32(parameter));
-                break;
+    public static void InvokeOnMonsterDamage(int damage)
+    {
+        OnMonsterDamage?.Invoke(damage);
+    }
 
-            case CustomEvent.MonsterEffectDamage:
-                OnMonsterEffectDamage?.Invoke(Convert.ToInt32(parameter));
-                break;
+    public static void InvokeOnMonsterEffectDamage(int damage)
+    {
+        OnMonsterEffectDamage?.Invoke(damage);
+    }
 
-            case CustomEvent.MonsterDead:
-                OnMonsterDead?.Invoke((Monster)parameter);
-                break;
+    public static void InvokeOnMonsterDead(Monster monster)
+    {
+        OnMonsterDead?.Invoke(monster);
+    }
 
-            //Other
-            case CustomEvent.BallBottoms:
-                OnBallBottoms?.Invoke((Ball)parameter);
-                break;
+    public static void InvokeBallBottoms(Ball ball)
+    {
+        OnBallBottoms?.Invoke(ball);
+    }
 
-            case CustomEvent.NodeClear:
-                OnNodeClear?.Invoke();
-                break;
+    public static void InvokeNodeClear()
+    {
+        OnNodeClear?.Invoke();
+    }
 
-            case CustomEvent.WorldClear:
-                OnWorldClear?.Invoke();
-                break;
+    public static void InvokeWorldClear()
+    {
+        OnWorldClear?.Invoke();
+    }
 
-            //Game
-            case CustomEvent.ScoreChange:
-                OnScoreChange?.Invoke(Convert.ToInt32(parameter));
-                break;
+    public static void InvokeScoreChange(int change)
+    {
+        OnScoreChange?.Invoke(change);
+    }
 
-            case CustomEvent.GameOver:
-                OnGameOver?.Invoke();
-                break;
+    public static void InvokeGameOver()
+    {
+        OnGameOver?.Invoke();
+    }
 
-            case CustomEvent.YouWin:
-                OnYouWin?.Invoke();
-                break;
+    public static void InvokeYouWin()
+    {
+        OnYouWin?.Invoke();
+    }
 
-            case CustomEvent.GoldChange:
-                OnGoldChange?.Invoke(Convert.ToInt32(parameter));
-                break;
-
-            default:
-                break;
-        }
+    public static void InvokeGoldChange(int change)
+    {
+        OnGoldChange?.Invoke(change);
     }
 }

@@ -16,8 +16,8 @@ public class Bottom : MonoBehaviour
 
     private void EventManager_OnBallBottoms(Ball ball)
     {
-        EventManager.Invoke(CustomEvent.MonsterDamage, ball.Damage);
-        EventManager.Invoke(CustomEvent.PlayerShootEnd);
+        EventManager.InvokeOnMonsterDamage(ball.Damage);
+        EventManager.InvokePlayerShootEnd();
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -25,7 +25,7 @@ public class Bottom : MonoBehaviour
         if (collision.gameObject.CompareTag("Ball"))
         {
             Ball ball = collision.gameObject.GetComponent<Ball>();
-            EventManager.Invoke(CustomEvent.BallBottoms, ball);
+            EventManager.InvokeBallBottoms(ball);
 
             Destroy(collision.gameObject);
         }

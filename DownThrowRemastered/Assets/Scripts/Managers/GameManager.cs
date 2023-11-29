@@ -144,7 +144,7 @@ public class GameManager : MonoBehaviour
 
     private void EventManager_OnWorldClear()
     {
-        EventManager.Invoke(CustomEvent.ScoreChange, 25);
+        EventManager.InvokeScoreChange(25);
         WorldsCleared++;
 
         MenuManager.Instance.DisplayMenu("WorldClear");
@@ -168,7 +168,7 @@ public class GameManager : MonoBehaviour
 
     private void EventManager_OnNodeClear()
     {
-        EventManager.Invoke(CustomEvent.ScoreChange, 5);
+        EventManager.InvokeScoreChange(5);
         StaticSpawner.PlaySFX("areaClear");
 
         MenuManager.Instance.DisplayMenu("NodeClear");

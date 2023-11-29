@@ -21,7 +21,7 @@ public class CritcalHit : PercentUpgradeSO
 
         Debug.Log("Crit!");
         int crit = Mathf.RoundToInt(((float)ballDamage * .5f));
-        EventManager.Invoke(CustomEvent.MonsterDamage, crit);
+        EventManager.InvokeOnMonsterDamage(crit);
     }
 
     public override string ToString()
