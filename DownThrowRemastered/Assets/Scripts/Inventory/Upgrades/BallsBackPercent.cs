@@ -7,7 +7,7 @@ public class BallsBackPercent : PercentUpgradeSO
 {
     public override void OnEquip()
     {
-        EventManager.OnMonsterDead += EventManager_OnMonsterDead; ;
+        EventManager.OnMonsterDead += EventManager_OnMonsterDead;
     }
 
     public override void OnRemove()

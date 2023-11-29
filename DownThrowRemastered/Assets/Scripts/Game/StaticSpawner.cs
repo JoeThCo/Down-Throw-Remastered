@@ -131,6 +131,8 @@ public static class StaticSpawner
     public static UpgradeSO GetUpgradeSO(Rarity rarity)
     {
         UpgradeSO[] filteredResults = allUpgradeSOs.Where(item => item.ItemRarity == rarity).ToArray();
+
+        if (filteredResults.Length <= 0) return null;
         return filteredResults[Random.Range(0, filteredResults.Length)];
     }
 
