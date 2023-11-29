@@ -72,7 +72,7 @@ public class WorldMap : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            SceneManager.LoadScene("WorldMap");
+            SceneManager.LoadScene("Game");
         }
     }
 }

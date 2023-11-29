@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
     public Transform gameTransform;
     [SerializeField] WorldMap worldMap;
     [Space(10)]
-    [SerializeField] SideBarUI sideBarUI;
     [SerializeField] CurrencyUI currencyUI;
     [SerializeField] CurrentMonsterUI currentMonsterUI;
     [SerializeField] GameOverUI gameOverUI;
@@ -62,7 +61,6 @@ public class GameManager : MonoBehaviour
 
         worldMap.Init();
 
-        sideBarUI.Init();
         currencyUI.Init();
         currentMonsterUI.Init();
         gameOverUI.Init();
