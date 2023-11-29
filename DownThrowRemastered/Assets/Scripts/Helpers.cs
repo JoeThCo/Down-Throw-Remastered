@@ -23,10 +23,10 @@ public static class Helpers
         return bnum;
     }
 
-    public static T RandomEnumValue<T>(int endCutOff = 0)
+    public static T BiasEnumValue<T>()
     {
         var values = Enum.GetValues(typeof(T));
-        int random = UnityEngine.Random.Range(0, values.Length - endCutOff);
+        int random = Math.Clamp((int)(GetBiasNumber() * values.Length), 0, values.Length);
         return (T)values.GetValue(random);
     }
 }

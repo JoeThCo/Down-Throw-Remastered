@@ -57,6 +57,8 @@ public class GameManager : MonoBehaviour
     void GameStart()
     {
         QualitySettings.vSyncCount = 1;
+
+        UpgradeManager.Init();
         player = new InGamePlayer(START_PLAYER_BALLS);
 
         worldMap.Init();

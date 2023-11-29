@@ -14,4 +14,9 @@ public class UpgradeSO : ScriptableObject
     {
 
     }
+
+    public virtual void OnUpgradeEffect() 
+    {
+        
+    }
 }
