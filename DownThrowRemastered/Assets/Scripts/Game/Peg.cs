@@ -61,6 +61,12 @@ public class Peg : MonoBehaviour
         EventManager.InvokeOnPegHit(this);
         EventManager.InvokeScoreChange(1);
         StaticSpawner.PlaySFX("pegDeath");
+
+        ParticleSystem breakPart = StaticSpawner.SpawnGame("PegBreak", transform.position).GetComponent<ParticleSystem>();
+
+        ParticleSystem.MainModule main = breakPart.main;
+        Color setColor = GetComponentInChildren<SpriteRenderer>().color;
+        main.startColor = setColor;
     }
 
     void Peg_onPegDeath(Ball ball)
