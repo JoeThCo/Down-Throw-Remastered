@@ -63,6 +63,18 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 72
       objectReference: {fileID: 0}
+    - target: {fileID: 1350021836122398488, guid: 5c5f3c32b139c124a9280be759d1cc79, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: dfbf2bcc2a6de14429c94687c8c5dd97, type: 2}
+    - target: {fileID: 1350021836122398488, guid: 5c5f3c32b139c124a9280be759d1cc79, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1350021836122398488, guid: 5c5f3c32b139c124a9280be759d1cc79, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 3418370959905214405, guid: dfbf2bcc2a6de14429c94687c8c5dd97, type: 2}
     - target: {fileID: 3649680639441534254, guid: 5c5f3c32b139c124a9280be759d1cc79, type: 3}
       propertyPath: m_Color.b
       value: 0.08235291
