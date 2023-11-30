@@ -182,19 +182,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8824579671885292172, guid: ee0a9470fae31a54dadff74f167fd37a, type: 3}
   m_PrefabInstance: {fileID: 9124545582544669375}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-1291101243411999731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 348978023996090419}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bc97265ac951b14bab7ddbeef81c5c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 0
 --- !u!96 &7963790334389318824
 TrailRenderer:
   serializedVersion: 2
@@ -303,6 +290,28 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &-1291101243411999731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348978023996090419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bc97265ac951b14bab7ddbeef81c5c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 8428658379055670623}
+  rb: {fileID: 4010612078692440144}
+  maxBallSpeed: 15
+  maxScale: 1.5
+  maxTime: 0.15
+--- !u!50 &4010612078692440144 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 5262574579820647151, guid: ee0a9470fae31a54dadff74f167fd37a, type: 3}
+  m_PrefabInstance: {fileID: 9124545582544669375}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8428658379055670623 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 745479872319909856, guid: ee0a9470fae31a54dadff74f167fd37a, type: 3}

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AimController : MonoBehaviour
 {
+    [SerializeField] ParticleSystem cannonParticles;
+    [Space(10)]
     [SerializeField] float basePower = 10f;
     [Space(10)]
     [SerializeField] Transform ballParent;
@@ -43,6 +45,7 @@ public class AimController : MonoBehaviour
         Rigidbody2D ball = StaticSpawner.SpawnGame("Ball", firePoint.transform.position, ballParent).GetComponent<Rigidbody2D>();
         ball.velocity = -firePoint.transform.up * (playerPower * basePower);
 
+        cannonParticles.Play();
         StaticSpawner.PlaySFX("playerShoot");
         canShoot = false;
     }

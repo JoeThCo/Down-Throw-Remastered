@@ -72,7 +72,8 @@ public class PegBoard : MonoBehaviour
 
     Peg SpawnPeg(string name, Vector3 position)
     {
-        return StaticSpawner.SpawnGame(name, position, pegParent).GetComponent<Peg>();
+        Peg peg = StaticSpawner.SpawnGame(name, position, pegParent).GetComponent<Peg>();
+        return peg;
     }
 
     bool isPeg(int x, int y)

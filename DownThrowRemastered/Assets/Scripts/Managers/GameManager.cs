@@ -69,13 +69,12 @@ public class GameManager : MonoBehaviour
         backgroundManager.Init();
         nextMonsterUI.Init();
         aimerUI.Init();
+        scoreUI.Init();
 
         AimUI.Instance.SetBallsLeftText(player);
 
         WorldsCleared = 1;
         currentScore = 0;
-
-        scoreUI.SetCurrentScoreText(currentScore);
 
         backgroundManager.SetRandomBackground();
     }

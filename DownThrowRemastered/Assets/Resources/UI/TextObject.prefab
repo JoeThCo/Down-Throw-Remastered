@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 3673235492275020166}
+  scaleJuice: 1.05
+  positionJuice: 0.5
 --- !u!1 &2162714688597251726
 GameObject:
   m_ObjectHideFlags: 0

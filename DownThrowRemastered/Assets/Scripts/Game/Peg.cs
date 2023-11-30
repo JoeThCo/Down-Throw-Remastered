@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PrimeTween;
 
 public class Peg : MonoBehaviour
 {
@@ -11,11 +12,26 @@ public class Peg : MonoBehaviour
     bool hasBallTriggered = false;
     bool hasDeathCalled = false;
 
+    const float BASE_TIME = .1f;
+    const float RANDOM_TIME = .25f;
+
     delegate void PegHit();
     event PegHit onPegHit;
 
     delegate void PegDeath(Ball ball);
     event PegDeath onPegDeath;
+
+    private void Start()
+    {
+        Vector3 scale = transform.localScale;
+        transform.localScale = Vector3.zero;
+        spawnJuice(scale);
+    }
+
+    void spawnJuice(Vector3 scale)
+    {
+        Tween.Scale(transform, Vector3.zero, scale, duration: BASE_TIME + (Random.value * RANDOM_TIME), ease: Ease.Linear);
+    }
 
     private void OnEnable()
     {

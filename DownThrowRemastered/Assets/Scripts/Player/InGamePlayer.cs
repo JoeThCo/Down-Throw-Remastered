@@ -36,8 +36,6 @@ public class InGamePlayer : Being
     private void EventManager_OnGoldChange(int change)
     {
         gold += change;
-
-        CurrencyUI.Instance.SetGoldText();
     }
 
     private void EventManager_OnWorldClear()

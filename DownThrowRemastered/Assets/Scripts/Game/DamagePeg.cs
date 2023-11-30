@@ -21,8 +21,6 @@ public class DamagePeg : Peg
         SetDamage(damage);
     }
 
-    public int GetDamage() { return damage; }
-
     void SetDamage(int damage)
     {
         this.damage = damage;
@@ -40,6 +38,6 @@ public class DamagePeg : Peg
         ball.ChangeDamage(damage);
 
         TextObject textObject = StaticSpawner.SpawnText(transform.position, ball.Damage.ToString(), GameManager.Instance.gameTransform).GetComponent<TextObject>();
-        textObject.SetColor(sprite.color);
+        textObject.Init(ball.Damage.ToString(), Color.red);
     }
 }
